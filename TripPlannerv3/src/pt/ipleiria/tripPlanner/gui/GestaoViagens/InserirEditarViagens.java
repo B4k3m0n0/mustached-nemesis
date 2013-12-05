@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import pt.ipleiria.tripPlanner.gui.GestaoAlojamento.Alojamento;
 import pt.ipleiria.tripPlanner.gui.GestaoEtapas.Etapa;
 import pt.ipleiria.tripPlanner.gui.events.ConfirmarInsercaoViagensEvent;
 import pt.ipleiria.tripPlanner.gui.events.ConfirmarInsercaoViagensListener;
@@ -25,6 +26,7 @@ public class InserirEditarViagens extends javax.swing.JPanel {
     private GestaodeViagens gestaodeViagens;
     private Viagem viagem;
     private LinkedList<Etapa> etapas;
+    private LinkedList<Alojamento> alojamentos;
 
     /**
      * Creates new form InserirEditarViagens
@@ -35,6 +37,7 @@ public class InserirEditarViagens extends javax.swing.JPanel {
         cbTipoViagem.addItem("Caminhada");
         cbTipoViagem.addItem("Bicicleta");
         etapas = new LinkedList<>();
+        alojamentos = new LinkedList<>();
     }
 
     public synchronized void addConfirmarInsercaoViagensListener(ConfirmarInsercaoViagensListener listener) {
@@ -64,12 +67,12 @@ public class InserirEditarViagens extends javax.swing.JPanel {
         lblDesignacao = new javax.swing.JLabel();
         lblEtapas = new javax.swing.JLabel();
         spListaEtapas = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList();
+        lstEtapas = new javax.swing.JList();
         btnAdicionarEtapas = new javax.swing.JButton();
         btnRemoverEtapas = new javax.swing.JButton();
         lblAlojamentos = new javax.swing.JLabel();
         spListaAlojamentos = new javax.swing.JScrollPane();
-        jList3 = new javax.swing.JList();
+        lstAlojamentos = new javax.swing.JList();
         btnAdicionarAlojamentos = new javax.swing.JButton();
         btnRemoverAlojamentos = new javax.swing.JButton();
         btnOk = new javax.swing.JButton();
@@ -86,12 +89,12 @@ public class InserirEditarViagens extends javax.swing.JPanel {
 
         lblEtapas.setText("Etapas");
 
-        jList2.setModel(new javax.swing.AbstractListModel() {
+        lstEtapas.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        spListaEtapas.setViewportView(jList2);
+        spListaEtapas.setViewportView(lstEtapas);
 
         btnAdicionarEtapas.setText("+");
 
@@ -99,12 +102,12 @@ public class InserirEditarViagens extends javax.swing.JPanel {
 
         lblAlojamentos.setText("Alojamentos");
 
-        jList3.setModel(new javax.swing.AbstractListModel() {
+        lstAlojamentos.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        spListaAlojamentos.setViewportView(jList3);
+        spListaAlojamentos.setViewportView(lstAlojamentos);
 
         btnAdicionarAlojamentos.setText("+");
 
@@ -132,19 +135,18 @@ public class InserirEditarViagens extends javax.swing.JPanel {
                         .addComponent(lblDesignacao)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(tfDesignacao))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(lblTipoViagem)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(cbTipoViagem, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(lblAlojamentos)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(spListaAlojamentos))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(lblEtapas)
-                            .addGap(36, 36, 36)
-                            .addComponent(spListaEtapas, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblTipoViagem)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbTipoViagem, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblAlojamentos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(spListaAlojamentos))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblEtapas)
+                        .addGap(36, 36, 36)
+                        .addComponent(spListaEtapas, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnAdicionarEtapas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -199,8 +201,12 @@ public class InserirEditarViagens extends javax.swing.JPanel {
         if (tfDesignacao.getText().isEmpty()) {
             JOptionPane.showMessageDialog(btnOk, "Campo Designação não preenchido");
         } else {
-            for(int i=0; i < jList2.getSelectedValuesList().size(); i++){
-                etapas.add((Etapa) jList2.getSelectedValuesList().get(i));
+            for(int i=0; i < lstEtapas.getSelectedValuesList().size(); i++){
+                etapas.add((Etapa) lstEtapas.getSelectedValuesList().get(i));
+            }
+            
+            for(int i=0; i < lstAlojamentos.getSelectedValuesList().size(); i++){
+                
             }
             
             viagem = new Viagem(tfDesignacao.getText(), etapas, null, cbTipoViagem.getSelectedItem().toString());
@@ -218,12 +224,12 @@ public class InserirEditarViagens extends javax.swing.JPanel {
     private javax.swing.JButton btnRemoverAlojamentos;
     private javax.swing.JButton btnRemoverEtapas;
     private javax.swing.JComboBox cbTipoViagem;
-    private javax.swing.JList jList2;
-    private javax.swing.JList jList3;
     private javax.swing.JLabel lblAlojamentos;
     private javax.swing.JLabel lblDesignacao;
     private javax.swing.JLabel lblEtapas;
     private javax.swing.JLabel lblTipoViagem;
+    private javax.swing.JList lstAlojamentos;
+    private javax.swing.JList lstEtapas;
     private javax.swing.JScrollPane spListaAlojamentos;
     private javax.swing.JScrollPane spListaEtapas;
     private javax.swing.JTextField tfDesignacao;
