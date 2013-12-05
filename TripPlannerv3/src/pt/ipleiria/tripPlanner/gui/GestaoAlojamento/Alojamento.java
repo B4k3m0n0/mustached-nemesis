@@ -11,5 +11,11 @@ package pt.ipleiria.tripPlanner.gui.GestaoAlojamento;
  * @author Ricardo
  */
 public class Alojamento {
+    String designacao;
+
+    public Alojamento(String designacao) {
+        this.designacao = designacao;
+    }
+    
     
 }

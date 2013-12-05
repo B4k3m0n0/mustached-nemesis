@@ -11,5 +11,11 @@ package pt.ipleiria.tripPlanner.gui.GestaoEtapas;
  * @author Ricardo
  */
 public class Etapa {
+    private String localInicio;
+
+    public Etapa(String localInicio) {
+        this.localInicio = localInicio;
+    }
+    
     
 }

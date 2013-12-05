@@ -10,9 +10,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import pt.ipleiria.tripPlanner.gui.GestaoAlojamento.Alojamento;
 import pt.ipleiria.tripPlanner.gui.GestaoEtapas.Etapa;
+import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
 import pt.ipleiria.tripPlanner.gui.events.ConfirmarInsercaoViagensEvent;
 import pt.ipleiria.tripPlanner.gui.events.ConfirmarInsercaoViagensListener;
 
@@ -23,10 +26,9 @@ import pt.ipleiria.tripPlanner.gui.events.ConfirmarInsercaoViagensListener;
 public class InserirEditarViagens extends javax.swing.JPanel {
 
     private List<ConfirmarInsercaoViagensListener> confirmarInsercaoViagensListener;
-    private GestaodeViagens gestaodeViagens;
     private Viagem viagem;
-    private LinkedList<Etapa> etapas;
-    private LinkedList<Alojamento> alojamentos;
+    private LinkedList<Etapa> etapasI;
+    private LinkedList<Alojamento> alojamentosI;
 
     /**
      * Creates new form InserirEditarViagens
@@ -36,8 +38,11 @@ public class InserirEditarViagens extends javax.swing.JPanel {
         this.confirmarInsercaoViagensListener = new ArrayList<>();
         cbTipoViagem.addItem("Caminhada");
         cbTipoViagem.addItem("Bicicleta");
-        etapas = new LinkedList<>();
-        alojamentos = new LinkedList<>();
+        etapasI = new LinkedList<>();
+        alojamentosI = new LinkedList<>();
+        
+        setModel();
+        pEtapas.setVisible(false);
     }
 
     public synchronized void addConfirmarInsercaoViagensListener(ConfirmarInsercaoViagensListener listener) {
@@ -80,6 +85,18 @@ public class InserirEditarViagens extends javax.swing.JPanel {
         tfDesignacao = new javax.swing.JTextField();
         lblTipoViagem = new javax.swing.JLabel();
         cbTipoViagem = new javax.swing.JComboBox();
+        pEtapas = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        lstEtapasP = new javax.swing.JList();
+        jTextField1 = new javax.swing.JTextField();
+        pAlojamentos = new javax.swing.JPanel();
+        jButton9 = new javax.swing.JButton();
+        jButton10 = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jList5 = new javax.swing.JList();
+        jTextField5 = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(640, 480));
@@ -89,24 +106,19 @@ public class InserirEditarViagens extends javax.swing.JPanel {
 
         lblEtapas.setText("Etapas");
 
-        lstEtapas.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         spListaEtapas.setViewportView(lstEtapas);
 
         btnAdicionarEtapas.setText("+");
+        btnAdicionarEtapas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarEtapasActionPerformed(evt);
+            }
+        });
 
         btnRemoverEtapas.setText("-");
 
         lblAlojamentos.setText("Alojamentos");
 
-        lstAlojamentos.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         spListaAlojamentos.setViewportView(lstAlojamentos);
 
         btnAdicionarAlojamentos.setText("+");
@@ -124,42 +136,130 @@ public class InserirEditarViagens extends javax.swing.JPanel {
 
         lblTipoViagem.setText("Tipo Viagem");
 
+        pEtapas.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Etapas"));
+
+        jButton1.setText("Adicionar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Cancelar");
+
+        jScrollPane1.setViewportView(lstEtapasP);
+
+        javax.swing.GroupLayout pEtapasLayout = new javax.swing.GroupLayout(pEtapas);
+        pEtapas.setLayout(pEtapasLayout);
+        pEtapasLayout.setHorizontalGroup(
+            pEtapasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pEtapasLayout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addContainerGap())
+            .addComponent(jTextField1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+        );
+        pEtapasLayout.setVerticalGroup(
+            pEtapasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pEtapasLayout.createSequentialGroup()
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(pEtapasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap())
+        );
+
+        pAlojamentos.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Alojamentos"));
+
+        jButton9.setText("Adicionar");
+
+        jButton10.setText("Cancelar");
+
+        jList5.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane5.setViewportView(jList5);
+
+        javax.swing.GroupLayout pAlojamentosLayout = new javax.swing.GroupLayout(pAlojamentos);
+        pAlojamentos.setLayout(pAlojamentosLayout);
+        pAlojamentosLayout.setHorizontalGroup(
+            pAlojamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTextField5)
+            .addComponent(jScrollPane5)
+            .addGroup(pAlojamentosLayout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addComponent(jButton9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton10)
+                .addContainerGap())
+        );
+        pAlojamentosLayout.setVerticalGroup(
+            pAlojamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pAlojamentosLayout.createSequentialGroup()
+                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(pAlojamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton9)
+                    .addComponent(jButton10))
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblDesignacao)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(tfDesignacao))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblTipoViagem)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbTipoViagem, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblAlojamentos)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(spListaAlojamentos))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblEtapas)
-                        .addGap(36, 36, 36)
-                        .addComponent(spListaEtapas, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnAdicionarEtapas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAdicionarAlojamentos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnRemoverEtapas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnRemoverAlojamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(326, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnOk)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCancelar)
-                .addGap(105, 105, 105))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(spListaEtapas, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnAdicionarEtapas)
+                                    .addComponent(btnRemoverEtapas, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(34, 34, 34)
+                                .addComponent(lblAlojamentos))
+                            .addComponent(pEtapas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(spListaAlojamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnAdicionarAlojamentos)
+                                    .addComponent(btnRemoverAlojamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(pAlojamentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 43, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(lblDesignacao)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tfDesignacao))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(lblTipoViagem)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cbTipoViagem, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnOk)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCancelar))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,42 +279,91 @@ public class InserirEditarViagens extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAdicionarEtapas)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnRemoverEtapas)))
-                .addGap(67, 67, 67)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnRemoverEtapas))
                     .addComponent(lblAlojamentos)
                     .addComponent(spListaAlojamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnAdicionarAlojamentos)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnRemoverAlojamentos)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 146, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnOk)
-                    .addComponent(btnCancelar))
-                .addGap(35, 35, 35))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(pEtapas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(pAlojamentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnOk)
+                            .addComponent(btnCancelar))
+                        .addContainerGap())))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         //Verificacoes
-        if (tfDesignacao.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(btnOk, "Campo Designação não preenchido");
+        if (tfDesignacao.getText().isEmpty() || lstEtapas.getSelectedValuesList().isEmpty()
+                || lstAlojamentos.getSelectedValuesList().isEmpty()) {
+            if (tfDesignacao.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(btnOk, "Campo Designação não preenchido");
+            }
+            if (lstEtapas.getSelectedValuesList().isEmpty()) {
+                JOptionPane.showMessageDialog(btnOk, "Não tem etapas adicionadas");
+            }
+            if (lstAlojamentos.getSelectedValuesList().isEmpty()) {
+                JOptionPane.showMessageDialog(btnOk, "Não tem alojamentos adicionados");
+            }
         } else {
-            for(int i=0; i < lstEtapas.getSelectedValuesList().size(); i++){
-                etapas.add((Etapa) lstEtapas.getSelectedValuesList().get(i));
+            //Adicionar Valores Inseridos
+            for (int i = 0; i < lstEtapas.getSelectedValuesList().size(); i++) {
+                etapasI.add((Etapa) lstEtapas.getSelectedValuesList().get(i));
             }
-            
-            for(int i=0; i < lstAlojamentos.getSelectedValuesList().size(); i++){
-                
+
+            for (int i = 0; i < lstAlojamentos.getSelectedValuesList().size(); i++) {
+                alojamentosI.add((Alojamento) lstAlojamentos.getSelectedValuesList().get(i));
             }
-            
-            viagem = new Viagem(tfDesignacao.getText(), etapas, null, cbTipoViagem.getSelectedItem().toString());
-            gestaodeViagens.addViagem(viagem);
+
+            viagem = new Viagem(tfDesignacao.getText(), etapasI, alojamentosI, cbTipoViagem.getSelectedItem().toString());
+            DadosAplicacao.getInstance().addViagem(viagem);
             this.fireConfirmarInsercaoViagensListener();
         }
     }//GEN-LAST:event_btnOkActionPerformed
 
+    private void btnAdicionarEtapasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarEtapasActionPerformed
+        
+        pEtapas.setVisible(true);
+        /*
+        JList<String> list = new JList<>();
+        DefaultListModel<String> model = new DefaultListModel<>();
+        model.addElement("1");
+        model.addElement("2");
+        list.setModel(model);
+        JOptionPane.showMessageDialog(null, list, "Titulo", JOptionPane.QUESTION_MESSAGE);
+        */
+    }//GEN-LAST:event_btnAdicionarEtapasActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        pEtapas.setVisible(false);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void setModel(){
+        DefaultListModel<Etapa> modelE =  new DefaultListModel<>();
+        for (Etapa e : DadosAplicacao.getInstance().getEtapas()) {
+            modelE.addElement(e);
+        }
+        lstEtapasP.setModel(modelE);
+        
+    /*
+        JList<String> list = new JList<>();
+        DefaultListModel<String> model = new DefaultListModel<>();
+        model.addElement("1");
+        model.addElement("2");
+        list.setModel(model);
+        JOptionPane.showMessageDialog(null, list, "Titulo", JOptionPane.QUESTION_MESSAGE);
+        */
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionarAlojamentos;
@@ -224,12 +373,36 @@ public class InserirEditarViagens extends javax.swing.JPanel {
     private javax.swing.JButton btnRemoverAlojamentos;
     private javax.swing.JButton btnRemoverEtapas;
     private javax.swing.JComboBox cbTipoViagem;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton10;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton9;
+    private javax.swing.JList jList2;
+    private javax.swing.JList jList3;
+    private javax.swing.JList jList5;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField5;
     private javax.swing.JLabel lblAlojamentos;
     private javax.swing.JLabel lblDesignacao;
     private javax.swing.JLabel lblEtapas;
     private javax.swing.JLabel lblTipoViagem;
     private javax.swing.JList lstAlojamentos;
     private javax.swing.JList lstEtapas;
+    private javax.swing.JList lstEtapasP;
+    private javax.swing.JPanel pAlojamentos;
+    private javax.swing.JPanel pEtapas;
     private javax.swing.JScrollPane spListaAlojamentos;
     private javax.swing.JScrollPane spListaEtapas;
     private javax.swing.JTextField tfDesignacao;

@@ -29,7 +29,6 @@ public class GestaodeViagens extends javax.swing.JPanel {
     private List<InserirViagemClicadoListener> inserirViagemClicadoListener;
     private List<VoltarMenuPrincipalListener> voltarMenuPrincipalListener;
     private List<AssociarViagensClicadoListener> associarViagensClicadoListener;
-    private LinkedList<Viagem> viagens;
     /**
      * Creates new form GestãodeCenáriodeAlojamento
      */
@@ -227,10 +226,6 @@ public class GestaodeViagens extends javax.swing.JPanel {
     private void btnAssociarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssociarActionPerformed
         this.fireAssociarViagensClicadoEvent();
     }//GEN-LAST:event_btnAssociarActionPerformed
-    
-    public void addViagem(Viagem viagem){
-        viagens.add(viagem);
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAssociar;
