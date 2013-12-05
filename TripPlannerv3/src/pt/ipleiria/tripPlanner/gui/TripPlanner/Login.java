@@ -1,8 +1,12 @@
 package pt.ipleiria.tripPlanner.gui.TripPlanner;
 
+import com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary;
+import pt.ipleiria.tripPlanner.gui.Models.Entrar;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
+import pt.ipleiria.tripPlanner.gui.Models.Participante;
 import pt.ipleiria.tripPlanner.gui.events.LoginEfetuadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.LoginEfetuadoListener;
 
@@ -149,8 +153,10 @@ public class Login extends javax.swing.JPanel {
     private javax.swing.JTextField tfUsername;
     // End of variables declaration//GEN-END:variables
 
- public void confirmaLogin() {
-        Entrar entrar = new Entrar("joao", "121212");
+    int conta = 1;
+
+    public void confirmaLogin() {
+        // Entrar entrar = new Entrar("joao", "121212");
         lblErros.setText("");
         lblErros.setForeground(Color.red);
         if (pfPassword.getPassword().length <= 0 && tfUsername.getText().isEmpty()) {
@@ -162,12 +168,21 @@ public class Login extends javax.swing.JPanel {
                 if (tfUsername.getText().isEmpty()) {
                     lblErros.setText("Não introduziu o username!");
                 } else {
-                    if(entrar.getUsername().equals("joao") && entrar.getPassword().equals("121212"))
-                    fireLoginEfetuadoEvent();
+                    for (Participante participante : DadosAplicacao.getInstance().getParticipantes()) {
+                        if (tfUsername.getText().equals(participante.getUsername())
+                                && new String(pfPassword.getPassword()).equals(new String(participante.getPassword()))) {
+                            fireLoginEfetuadoEvent();
+                        } else {
+                            if (conta < 3) {
+                                lblErros.setText("Username ou Password errada. Tem mais " + (3-conta) + " tentativas!");
+                            } else {
+                                System.exit(0);
+                            }
+                        } 
+                        conta++;
+                    }
                 }
             }
         }
     }
-
-
 }
