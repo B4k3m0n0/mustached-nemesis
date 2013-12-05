@@ -7,13 +7,13 @@ package pt.ipleiria.tripPlanner.gui.Models;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-<<<<<<< .mine
+
 import pt.ipleiria.tripPlanner.gui.GestaoAlojamento.Alojamento;
 import pt.ipleiria.tripPlanner.gui.GestaoEtapas.Etapa;
 import pt.ipleiria.tripPlanner.gui.GestaoViagens.Viagem;
-=======
+
 import sun.util.calendar.BaseCalendar;
->>>>>>> .r9
+
 
 /**
  *
@@ -43,11 +43,10 @@ public class DadosAplicacao {
     private void adicionarParticipante() {
         
         Calendar dataNascJoao = Calendar.getInstance();
-<<<<<<< .mine
+
         dataNascJoao.setTime(new Date(90, 2, 11));
-=======
-        dataNascJoao.setTime(new Date(90, 1, 11));
->>>>>>> .r9
+
+
         
         ArrayList<String> permissoes;
         permissoes = new ArrayList<>();
@@ -55,13 +54,12 @@ public class DadosAplicacao {
         String pass = "noob";
         
         Participante participante1;
-<<<<<<< .mine
+        participante1 = new Participante("Joao", dataNascJoao, 12175988, "Leiria", 5, true, "jonny0015", pass.toCharArray(), true, permissoes);
+        adicionarParticipante(participante1);
+
         //participante1 = new Participante("Joao", dataNascJoao, 12175988, "Leiria", 5, true, "Jonny0015", "noob", true, permissoes);
-=======
-        participante1 = new Participante("Joao", dataNascJoao, 12175988, "Leiria", 5, true, "Jonny0015", pass.toCharArray(), true, permissoes);
->>>>>>> .r9
     }
-<<<<<<< .mine
+
     
     private void addAlojamento() {       
         Alojamento alojamento1;
@@ -86,10 +84,7 @@ public class DadosAplicacao {
     public ArrayList<Etapa> getEtapas() {
         return etapas;
     }
-    
-    
-=======
-    
+        
     public void adicionarParticipante(Participante p){
         participantes.add(p);
     }
@@ -97,5 +92,4 @@ public class DadosAplicacao {
     public ArrayList<Participante> getParticipantes() {
         return (ArrayList<Participante>) participantes.clone();
     }
->>>>>>> .r9
 }

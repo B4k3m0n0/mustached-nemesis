@@ -23,15 +23,11 @@ public class Participante {
     private char[] password;
     private boolean editor;
     private ArrayList<String> permissoes;
-<<<<<<< .mine
 
-    public Participante(String nome, Calendar dataNasc, int BI, String localidade, int ICF, boolean administrador, String username, Password password, boolean editor, ArrayList<String> permissoes) {
-
-=======
     
     public Participante (String nome, Calendar dataNasc, int BI, String localidade, int ICF, boolean administrador, String username, char[] password, boolean editor, ArrayList<String> permissoes){
         
->>>>>>> .r9
+
         this.nome = nome;
         this.dataNasc = dataNasc;
         this.BI = BI;
@@ -40,16 +36,13 @@ public class Participante {
         this.administrador = administrador;
         this.username = username;
         this.password = password;
-<<<<<<< .mine
 
-        for (int i = 0; i < permissoes.size(); i++) {
-            //this.permissoes.add(permissoes[i]);
-        }
-=======
+
+
         
         for (int i=0; i<permissoes.size(); i++)
             this.permissoes.add(permissoes.get(i));
->>>>>>> .r9
+
     }
 
     public String getNome() {
