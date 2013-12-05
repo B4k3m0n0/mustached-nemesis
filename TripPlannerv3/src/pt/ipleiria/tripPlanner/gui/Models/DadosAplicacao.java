@@ -65,7 +65,7 @@ public class DadosAplicacao {
     private void addAlojamento() {       
         Alojamento alojamento1;
         alojamento1 = new Alojamento("Bom e Barato");
-        alojamentos.add(alojamento1);
+        //alojamentos.add(alojamento1);
     }
 
     public void addViagem(Viagem viagem) {
@@ -75,7 +75,7 @@ public class DadosAplicacao {
     private void addEtapa() {
         Etapa etapa1;
         etapa1 = new Etapa("A");
-        etapas.add(etapa1);
+        //etapas.add(etapa1);
     }
 
     public ArrayList<Viagem> getViagens() {

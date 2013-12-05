@@ -349,7 +349,7 @@ public class InserirEditarViagens extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void setModel(){
-        DefaultListModel<Etapa> modelE =  new DefaultListModel<>();
+       /* DefaultListModel<Etapa> modelE =  new DefaultListModel<>();
         for (Etapa e : DadosAplicacao.getInstance().getEtapas()) {
             modelE.addElement(e);
         }

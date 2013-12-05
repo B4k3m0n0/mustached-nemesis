@@ -1,7 +1,6 @@
 package pt.ipleiria.tripPlanner.gui.TripPlanner;
 
 import com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary;
-import pt.ipleiria.tripPlanner.gui.Models.Entrar;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
@@ -173,11 +172,11 @@ public class Login extends javax.swing.JPanel {
                             fireLoginEfetuadoEvent();
                         } else {
                             if (conta < 3) {
-                                lblErros.setText("Username ou Password errada. Tem mais " + (3-conta) + " tentativas!");
+                                lblErros.setText("Username ou Password errada. Tem mais " + (3 - conta) + " tentativas!");
                             } else {
                                 System.exit(0);
                             }
-                        } 
+                        }
                         conta++;
                     }
                 }
