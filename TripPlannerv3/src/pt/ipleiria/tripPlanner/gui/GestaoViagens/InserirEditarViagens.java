@@ -41,7 +41,7 @@ public class InserirEditarViagens extends javax.swing.JPanel {
         etapasI = new LinkedList<>();
         alojamentosI = new LinkedList<>();
         
-        setModel();
+//        setModel();
         pEtapas.setVisible(false);
     }
 

@@ -24,9 +24,9 @@ public class Participante {
     private boolean editor;
     private ArrayList<String> permissoes;
 
-    
-    public Participante (String nome, Calendar dataNasc, int BI, String localidade, int ICF, boolean administrador, String username, char[] password, boolean editor, ArrayList<String> permissoes){
-        
+
+    public Participante(String nome, Calendar dataNasc, int BI, String localidade, int ICF, boolean administrador, String username, char[] password, boolean editor, ArrayList<String> permissoes) {
+
 
         this.nome = nome;
         this.dataNasc = dataNasc;
@@ -37,12 +37,9 @@ public class Participante {
         this.username = username;
         this.password = password;
 
-
-
-        
-        for (int i=0; i<permissoes.size(); i++)
+        for (int i = 0; i < permissoes.size(); i++) {
             this.permissoes.add(permissoes.get(i));
-
+        }
     }
 
     public String getNome() {
@@ -124,5 +121,4 @@ public class Participante {
     public void setPermissoes(ArrayList<String> permissoes) {
         this.permissoes = permissoes;
     }
-
 }

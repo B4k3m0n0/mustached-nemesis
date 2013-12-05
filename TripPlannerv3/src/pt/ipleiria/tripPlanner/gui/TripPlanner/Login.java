@@ -156,7 +156,6 @@ public class Login extends javax.swing.JPanel {
     int conta = 1;
 
     public void confirmaLogin() {
-        // Entrar entrar = new Entrar("joao", "121212");
         lblErros.setText("");
         lblErros.setForeground(Color.red);
         if (pfPassword.getPassword().length <= 0 && tfUsername.getText().isEmpty()) {
