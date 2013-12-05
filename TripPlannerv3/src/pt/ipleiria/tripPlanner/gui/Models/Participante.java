@@ -4,10 +4,8 @@
  */
 package pt.ipleiria.tripPlanner.gui.Models;
 
-import com.toedter.calendar.JCalendar;
 import java.util.ArrayList;
 import java.util.Calendar;
-import sun.security.util.Password;
 
 /**
  *
@@ -16,17 +14,17 @@ import sun.security.util.Password;
 public class Participante {
     
     private String nome;
-    private JCalendar dataNasc;
+    private Calendar dataNasc;
     private int BI;
     private String localidade;
     private int ICF;
     private boolean administrador;
     private String username;
-    private Password password;
+    private char[] password;
     private boolean editor;
     private ArrayList<String> permissoes;
     
-    public Participante (String nome, JCalendar dataNasc, int BI, String localidade, int ICF, boolean administrador, String username, Password password, boolean editor, ArrayList<String> permissoes){
+    public Participante (String nome, Calendar dataNasc, int BI, String localidade, int ICF, boolean administrador, String username, char[] password, boolean editor, ArrayList<String> permissoes){
         
         this.nome = nome;
         this.dataNasc = dataNasc;
@@ -38,14 +36,14 @@ public class Participante {
         this.password = password;
         
         for (int i=0; i<permissoes.size(); i++)
-            this.permissoes.add(permissoes[i]);
+            this.permissoes.add(permissoes.get(i));
     }
 
     public String getNome() {
         return nome;
     }
 
-    public JCalendar getDataNasc() {
+    public Calendar getDataNasc() {
         return dataNasc;
     }
 
@@ -69,7 +67,7 @@ public class Participante {
         return username;
     }
 
-    public Password getPassword() {
+    public char[] getPassword() {
         return password;
     }
 
@@ -85,7 +83,7 @@ public class Participante {
         this.nome = nome;
     }
 
-    public void setDataNasc(JCalendar dataNasc) {
+    public void setDataNasc(Calendar dataNasc) {
         this.dataNasc = dataNasc;
     }
 
@@ -109,7 +107,7 @@ public class Participante {
         this.username = username;
     }
 
-    public void setPassword(Password password) {
+    public void setPassword(char[] password) {
         this.password = password;
     }
 

@@ -7,6 +7,7 @@ package pt.ipleiria.tripPlanner.gui.Models;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import sun.util.calendar.BaseCalendar;
 
 /**
  *
@@ -19,11 +20,11 @@ public class DadosAplicacao {
         return instance;
     }
     
-    private ArrayList<Participante> participante;
+    private ArrayList<Participante> participantes;
     //private ArrayList<Viagem> viagem;
     
     private DadosAplicacao() {
-        participante = new ArrayList<>();
+        participantes = new ArrayList<>();
         
         
         adicionarParticipante();
@@ -32,12 +33,22 @@ public class DadosAplicacao {
     private void adicionarParticipante() {
         
         Calendar dataNascJoao = Calendar.getInstance();
-        dataNascJoao.setTime(Date(90, 2, 11));
+        dataNascJoao.setTime(new Date(90, 1, 11));
         
         ArrayList<String> permissoes;
         permissoes = new ArrayList<>();
         
+        String pass = "noob";
+        
         Participante participante1;
-        participante1 = new Participante("Joao", dataNascJoao, 12175988, "Leiria", 5, true, "Jonny0015", "noob", true, permissoes);
+        participante1 = new Participante("Joao", dataNascJoao, 12175988, "Leiria", 5, true, "Jonny0015", pass.toCharArray(), true, permissoes);
+    }
+    
+    public void adicionarParticipante(Participante p){
+        participantes.add(p);
+    }
+    
+    public ArrayList<Participante> getParticipantes() {
+        return (ArrayList<Participante>) participantes.clone();
     }
 }
