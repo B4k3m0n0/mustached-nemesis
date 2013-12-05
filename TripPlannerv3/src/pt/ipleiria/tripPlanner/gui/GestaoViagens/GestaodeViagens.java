@@ -227,7 +227,10 @@ public class GestaodeViagens extends javax.swing.JPanel {
     private void btnAssociarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssociarActionPerformed
         this.fireAssociarViagensClicadoEvent();
     }//GEN-LAST:event_btnAssociarActionPerformed
-
+    
+    public void addViagem(Viagem viagem){
+        viagens.add(viagem);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAssociar;

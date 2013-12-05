@@ -6,8 +6,12 @@
 package pt.ipleiria.tripPlanner.gui.GestaoViagens;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import pt.ipleiria.tripPlanner.gui.GestaoEtapas.Etapa;
 import pt.ipleiria.tripPlanner.gui.events.ConfirmarInsercaoViagensEvent;
 import pt.ipleiria.tripPlanner.gui.events.ConfirmarInsercaoViagensListener;
 
@@ -18,6 +22,9 @@ import pt.ipleiria.tripPlanner.gui.events.ConfirmarInsercaoViagensListener;
 public class InserirEditarViagens extends javax.swing.JPanel {
 
     private List<ConfirmarInsercaoViagensListener> confirmarInsercaoViagensListener;
+    private GestaodeViagens gestaodeViagens;
+    private Viagem viagem;
+    private LinkedList<Etapa> etapas;
 
     /**
      * Creates new form InserirEditarViagens
@@ -25,6 +32,9 @@ public class InserirEditarViagens extends javax.swing.JPanel {
     public InserirEditarViagens() {
         initComponents();
         this.confirmarInsercaoViagensListener = new ArrayList<>();
+        cbTipoViagem.addItem("Caminhada");
+        cbTipoViagem.addItem("Bicicleta");
+        etapas = new LinkedList<>();
     }
 
     public synchronized void addConfirmarInsercaoViagensListener(ConfirmarInsercaoViagensListener listener) {
@@ -111,39 +121,36 @@ public class InserirEditarViagens extends javax.swing.JPanel {
 
         lblTipoViagem.setText("Tipo Viagem");
 
-        cbTipoViagem.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblDesignacao)
-                        .addGap(18, 18, 18)
-                        .addComponent(tfDesignacao, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblTipoViagem)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cbTipoViagem, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblAlojamentos)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(spListaAlojamentos))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblEtapas)
-                                .addGap(36, 36, 36)
-                                .addComponent(spListaEtapas, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnAdicionarEtapas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnAdicionarAlojamentos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnRemoverEtapas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnRemoverAlojamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tfDesignacao))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(lblTipoViagem)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(cbTipoViagem, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(lblAlojamentos)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(spListaAlojamentos))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(lblEtapas)
+                            .addGap(36, 36, 36)
+                            .addComponent(spListaEtapas, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnAdicionarEtapas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAdicionarAlojamentos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRemoverEtapas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRemoverAlojamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(326, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -188,9 +195,16 @@ public class InserirEditarViagens extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
+        //Verificacoes
         if (tfDesignacao.getText().isEmpty()) {
             JOptionPane.showMessageDialog(btnOk, "Campo Designação não preenchido");
         } else {
+            for(int i=0; i < jList2.getSelectedValuesList().size(); i++){
+                etapas.add((Etapa) jList2.getSelectedValuesList().get(i));
+            }
+            
+            viagem = new Viagem(tfDesignacao.getText(), etapas, null, cbTipoViagem.getSelectedItem().toString());
+            gestaodeViagens.addViagem(viagem);
             this.fireConfirmarInsercaoViagensListener();
         }
     }//GEN-LAST:event_btnOkActionPerformed

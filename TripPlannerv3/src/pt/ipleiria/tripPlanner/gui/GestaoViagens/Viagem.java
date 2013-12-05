@@ -19,11 +19,11 @@ public class Viagem {
     LinkedList<Etapa> etapas;
     LinkedList<Alojamento> alojamentos;
 
-    public Viagem(String designacao, LinkedList<Etapa> etapas, LinkedList<Alojamento> alojamentos) {
+    public Viagem(String designacao, LinkedList<Etapa> etapas, LinkedList<Alojamento> alojamentos, String tipoViagem) {
         this.designacao = designacao;
         this.etapas = etapas;
         this.alojamentos = alojamentos;
-    }
+    }  
 
     public String getDesignacao() {
         return designacao;
