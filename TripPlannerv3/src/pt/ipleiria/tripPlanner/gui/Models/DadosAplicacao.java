@@ -56,7 +56,15 @@ public class DadosAplicacao {
 
         participante1 = new Participante("Joao", dataNascJoao, 12175988, "Leiria", 5, true, "jonny0015", pass.toCharArray(), true, permissoes);
         adicionarParticipante(participante1);
+<<<<<<< .mine
+        participantes.add(participante1);
+        //participante1 = new Participante("Joao", dataNascJoao, 12175988, "Leiria", 5, true, "Jonny0015", "noob", true, permissoes);
+    }
+
+    
+=======
     }    
+>>>>>>> .r16
     private void addAlojamento() {       
         Alojamento alojamento1;
         alojamento1 = new Alojamento("Bom e Barato");
