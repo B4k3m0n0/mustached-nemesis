@@ -24,9 +24,7 @@ public class Participante {
     private boolean editor;
     private ArrayList<String> permissoes;
 
-
     public Participante(String nome, Calendar dataNasc, int BI, String localidade, int ICF, boolean administrador, String username, char[] password, boolean editor, ArrayList<String> permissoes) {
-
 
         this.nome = nome;
         this.dataNasc = dataNasc;

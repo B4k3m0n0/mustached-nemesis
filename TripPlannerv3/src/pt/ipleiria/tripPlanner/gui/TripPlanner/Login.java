@@ -169,7 +169,9 @@ public class Login extends javax.swing.JPanel {
                     for (Participante participante : DadosAplicacao.getInstance().getParticipantes()) {
                         if (tfUsername.getText().equals(participante.getUsername())
                                 && new String(pfPassword.getPassword()).equals(new String(participante.getPassword()))) {
+                            DadosAplicacao.getInstance().setLogado(participante);                   
                             fireLoginEfetuadoEvent();
+                            mudarNome();
                         } else {
                             if (conta < 3) {
                                 lblErros.setText("Username ou Password errada. Tem mais " + (3 - conta) + " tentativas!");
@@ -182,5 +184,10 @@ public class Login extends javax.swing.JPanel {
                 }
             }
         }
+    }
+
+    public void mudarNome() {
+        tfUsername.setText("");
+        pfPassword.setText("");
     }
 }

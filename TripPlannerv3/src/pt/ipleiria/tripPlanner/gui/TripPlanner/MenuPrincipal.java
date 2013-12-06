@@ -2,6 +2,8 @@ package pt.ipleiria.tripPlanner.gui.TripPlanner;
 
 import java.util.ArrayList;
 import java.util.List;
+import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
+import pt.ipleiria.tripPlanner.gui.Models.Participante;
 import pt.ipleiria.tripPlanner.gui.events.AlojamentoClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.AlojamentoClicadoListener;
 import pt.ipleiria.tripPlanner.gui.events.EtapasClicadoEvent;
@@ -10,6 +12,8 @@ import pt.ipleiria.tripPlanner.gui.events.MenuCenariosClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.MenuCenariosClicadoListener;
 import pt.ipleiria.tripPlanner.gui.events.ParticipantesClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.ParticipantesClicadoListener;
+import pt.ipleiria.tripPlanner.gui.events.TerminarSessaoClicadoEvent;
+import pt.ipleiria.tripPlanner.gui.events.TerminarSessaoClicadoListener;
 import pt.ipleiria.tripPlanner.gui.events.ViagensClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.ViagensClicadoListener;
 
@@ -17,7 +21,6 @@ import pt.ipleiria.tripPlanner.gui.events.ViagensClicadoListener;
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Ricardo
@@ -29,65 +32,68 @@ public class MenuPrincipal extends javax.swing.JPanel {
     private List<ViagensClicadoListener> viagensClicadoListener;
     private List<EtapasClicadoListener> etapasClicadoListener;
     private List<MenuCenariosClicadoListener> menuCenariosClicadoListener;
+    private List<TerminarSessaoClicadoListener> terminarSessaoClicadoListener;
+
     /**
      * Creates new form MenuPrincipal
      */
     public MenuPrincipal() {
         initComponents();
-        
+
         this.participantesClicadoListener = new ArrayList<>();
         this.alojamentoClicadoListener = new ArrayList<>();
         this.viagensClicadoListener = new ArrayList<>();
         this.etapasClicadoListener = new ArrayList<>();
         this.menuCenariosClicadoListener = new ArrayList<>();
+        this.terminarSessaoClicadoListener = new ArrayList<>();
     }
-    
-     public synchronized void addParticipantesClicadoListener(ParticipantesClicadoListener listener){
+
+    public synchronized void addParticipantesClicadoListener(ParticipantesClicadoListener listener) {
         this.participantesClicadoListener.add(listener);
     }
-    
-    public synchronized void removeParticipantesClicadoListener(ParticipantesClicadoListener listener){
+
+    public synchronized void removeParticipantesClicadoListener(ParticipantesClicadoListener listener) {
         this.participantesClicadoListener.remove(listener);
     }
 
-    protected synchronized void fireParticipantesClicadoEvent(){
-        for(ParticipantesClicadoListener listener : this.participantesClicadoListener){
-        ParticipantesClicadoEvent evento = new ParticipantesClicadoEvent(this);
-        listener.participantesClicado(evento);
+    protected synchronized void fireParticipantesClicadoEvent() {
+        for (ParticipantesClicadoListener listener : this.participantesClicadoListener) {
+            ParticipantesClicadoEvent evento = new ParticipantesClicadoEvent(this);
+            listener.participantesClicado(evento);
         }
     }
 
-    public synchronized void addAlojamentoClicadoListener(AlojamentoClicadoListener listener){
+    public synchronized void addAlojamentoClicadoListener(AlojamentoClicadoListener listener) {
         this.alojamentoClicadoListener.add(listener);
     }
-    
-    public synchronized void removeAlojamentoClicadoListener(AlojamentoClicadoListener listener){
+
+    public synchronized void removeAlojamentoClicadoListener(AlojamentoClicadoListener listener) {
         this.alojamentoClicadoListener.remove(listener);
     }
 
-    protected synchronized void fireAlojamentoClicadoEvent(){
-        for(AlojamentoClicadoListener listener : this.alojamentoClicadoListener){
-        AlojamentoClicadoEvent evento = new AlojamentoClicadoEvent(this);
-        listener.alojamentosClicado(evento);
+    protected synchronized void fireAlojamentoClicadoEvent() {
+        for (AlojamentoClicadoListener listener : this.alojamentoClicadoListener) {
+            AlojamentoClicadoEvent evento = new AlojamentoClicadoEvent(this);
+            listener.alojamentosClicado(evento);
         }
     }
-    
-       public synchronized void addViagensListener(ViagensClicadoListener listener){
+
+    public synchronized void addViagensListener(ViagensClicadoListener listener) {
         this.viagensClicadoListener.add(listener);
     }
-    
-    public synchronized void removeViagensListener(ViagensClicadoListener listener){
+
+    public synchronized void removeViagensListener(ViagensClicadoListener listener) {
         this.viagensClicadoListener.remove(listener);
     }
 
-    protected synchronized void fireViagensClicadoEvent(){
-        for(ViagensClicadoListener listener : this.viagensClicadoListener){
-        ViagensClicadoEvent evento = new ViagensClicadoEvent(this);
-        listener.viagensClicado(evento);
+    protected synchronized void fireViagensClicadoEvent() {
+        for (ViagensClicadoListener listener : this.viagensClicadoListener) {
+            ViagensClicadoEvent evento = new ViagensClicadoEvent(this);
+            listener.viagensClicado(evento);
         }
     }
-    
-        public synchronized void addEtapasClicadoListener(EtapasClicadoListener listener) {
+
+    public synchronized void addEtapasClicadoListener(EtapasClicadoListener listener) {
         this.etapasClicadoListener.add(listener);
     }
 
@@ -116,6 +122,23 @@ public class MenuPrincipal extends javax.swing.JPanel {
             listener.menuCenariosClicado(evento);
         }
     }
+
+
+    public synchronized void addTerminarSessaoClicadoListener(TerminarSessaoClicadoListener listener) {
+        this.terminarSessaoClicadoListener.add(listener);
+    }
+
+    public synchronized void removeTerminarSessaoClicadoListener(TerminarSessaoClicadoListener listener) {
+        this.terminarSessaoClicadoListener.remove(listener);
+    }
+
+    protected synchronized void fireTerminarSessaoClicadoEvent() {
+        for (TerminarSessaoClicadoListener listener : this.terminarSessaoClicadoListener) {
+            TerminarSessaoClicadoEvent evento = new TerminarSessaoClicadoEvent(this);
+            listener.terminarSessaoClicado(evento);
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -134,6 +157,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
         btnCenarios = new javax.swing.JButton();
         btnDespesas = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
+        lblWelcome = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(640, 480));
@@ -189,28 +213,35 @@ public class MenuPrincipal extends javax.swing.JPanel {
             }
         });
 
+        lblWelcome.setText("jLabel1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnLocalidades)
-                    .addComponent(btnParticipantes))
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnViagens)
-                    .addComponent(btnDeslocacoes))
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnEtapas)
-                    .addComponent(btnCenarios))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnLogout)
-                    .addComponent(btnAlojamento)
-                    .addComponent(btnDespesas))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnLocalidades)
+                            .addComponent(btnParticipantes))
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnViagens)
+                            .addComponent(btnDeslocacoes))
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnEtapas)
+                            .addComponent(btnCenarios))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnLogout)
+                            .addComponent(btnAlojamento)
+                            .addComponent(btnDespesas)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(182, 182, 182)
+                        .addComponent(lblWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(125, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -228,7 +259,9 @@ public class MenuPrincipal extends javax.swing.JPanel {
                     .addComponent(btnDeslocacoes)
                     .addComponent(btnCenarios)
                     .addComponent(btnDespesas))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
+                .addComponent(lblWelcome)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
                 .addComponent(btnLogout)
                 .addGap(27, 27, 27))
         );
@@ -255,7 +288,9 @@ public class MenuPrincipal extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCenariosActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-        System.exit(0);
+
+        DadosAplicacao.getInstance().setLogado(null);
+        this.fireTerminarSessaoClicadoEvent();
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -268,5 +303,10 @@ public class MenuPrincipal extends javax.swing.JPanel {
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnParticipantes;
     private javax.swing.JButton btnViagens;
+    private javax.swing.JLabel lblWelcome;
     // End of variables declaration//GEN-END:variables
+
+    void atualizar() {
+        lblWelcome.setText("Bem Vindo " + DadosAplicacao.getInstance().getLogado().getNome());
+    }
 }

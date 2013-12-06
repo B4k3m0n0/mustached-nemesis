@@ -52,34 +52,9 @@
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
       <SubComponents>
         <Component class="pt.ipleiria.tripPlanner.gui.TripPlanner.Login" name="login">
-          <Properties>
-            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[32767, 32767]"/>
-            </Property>
-            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[0, 0]"/>
-            </Property>
-            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[0, 0]"/>
-            </Property>
-          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
               <CardConstraints cardName="login"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="pt.ipleiria.tripPlanner.gui.TripPlanner.MenuCenarios" name="menuCenarios">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-              <CardConstraints cardName="menuCenarios"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="pt.ipleiria.tripPlanner.gui.TripPlanner.DadosAcesso" name="dadosAcesso">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-              <CardConstraints cardName="dadosAcesso"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -90,122 +65,17 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="pt.ipleiria.tripPlanner.gui.GestaoViagens.AssociarViagens" name="associarViagens">
+        <Component class="pt.ipleiria.tripPlanner.gui.TripPlanner.MenuCenarios" name="menuCenarios">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-              <CardConstraints cardName="associarViagens"/>
+              <CardConstraints cardName="card3"/>
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="pt.ipleiria.tripPlanner.gui.GestaoViagens.GestaodeViagens" name="gestaodeViagens">
+        <Component class="pt.ipleiria.tripPlanner.gui.TripPlanner.DadosAcesso" name="dadosAcesso1">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-              <CardConstraints cardName="gestaodeViagens"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="pt.ipleiria.tripPlanner.gui.GestaoViagens.InserirEditarViagens" name="inserirEditarViagens">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-              <CardConstraints cardName="inserirEditarViagens"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="pt.ipleiria.tripPlanner.gui.GestaoAlojamento.GestaodeAlojamentos" name="gestaodeAlojamentos">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-              <CardConstraints cardName="gestaodeAlojamentos"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="pt.ipleiria.tripPlanner.gui.GestaoEtapas.AssociarEtapas" name="associarEtapas">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-              <CardConstraints cardName="associarEtapas"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="pt.ipleiria.tripPlanner.gui.participantes.MenuParticipantes" name="menuParticipantes">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-              <CardConstraints cardName="menuParticipantes"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="pt.ipleiria.tripPlanner.gui.participantes.InserirEditarParticipante" name="inserirEditarParticipante">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-              <CardConstraints cardName="inserirEditarParticipante"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="pt.ipleiria.tripPlanner.gui.participantes.MostrarParticipante" name="mostrarParticipante">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-              <CardConstraints cardName="mostrarParticipante"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="pt.ipleiria.tripPlanner.gui.cenario.GestaodeCenariodeAlojamento" name="gestaodeCenariodeAlojamento">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-              <CardConstraints cardName="gestaodeCenariodeAlojamento"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="pt.ipleiria.tripPlanner.gui.cenario.CriarEditarCenarioAlojamento" name="criarEditarCenarioAlojamento">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-              <CardConstraints cardName="criarEditarCenarioAlojamento"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="pt.ipleiria.tripPlanner.gui.cenario.MostrarCenarioAlojamento" name="mostrarCenarioAlojamento">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-              <CardConstraints cardName="mostrarCenarioAlojamento"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="pt.ipleiria.tripPlanner.gui.GestaoEtapas.VisualizarEtapa" name="visualizarEtapa">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-              <CardConstraints cardName="visualizarEtapa"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="pt.ipleiria.tripPlanner.gui.GestaoEtapas.InserirEditarEtapa" name="inserirEditarEtapa">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-              <CardConstraints cardName="inserirEditarEtapa"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="pt.ipleiria.tripPlanner.gui.GestaoEtapas.GestaodeEtapas" name="gestaodeEtapas">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-              <CardConstraints cardName="gestaodeEtapas"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="pt.ipleiria.tripPlanner.gui.GestaoAlojamento.MostrarAlojamento" name="mostrarAlojamento">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-              <CardConstraints cardName="mostrarAlojamento"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="pt.ipleiria.tripPlanner.gui.GestaoAlojamento.CriarEditarAlojamento" name="criarEditarAlojamento">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-              <CardConstraints cardName="criarEditarAlojamento"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="pt.ipleiria.tripPlanner.gui.cenario.CompararCenarioAlojamento" name="compararCenarioAlojamento">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-              <CardConstraints cardName="compararCenarioAlojamento"/>
+              <CardConstraints cardName="card5"/>
             </Constraint>
           </Constraints>
         </Component>

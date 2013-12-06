@@ -57,6 +57,8 @@ import pt.ipleiria.tripPlanner.gui.events.OkVisualizarEtapasClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.OkVisualizarEtapasClicadoListener;
 import pt.ipleiria.tripPlanner.gui.events.ParticipantesClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.ParticipantesClicadoListener;
+import pt.ipleiria.tripPlanner.gui.events.TerminarSessaoClicadoEvent;
+import pt.ipleiria.tripPlanner.gui.events.TerminarSessaoClicadoListener;
 import pt.ipleiria.tripPlanner.gui.events.ViagensClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.ViagensClicadoListener;
 import pt.ipleiria.tripPlanner.gui.events.VisualizarAlojamentoClicadoEvent;
@@ -86,7 +88,7 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
         AssociarEtapasClicadoListener, OkInserirEtapasClicadoListener, OkVisualizarEtapasClicadoListener,
         OkAssociarEtapasClicadoListener, GestaoCenarioAlojamentoClicadoListener, MenuCenariosClicadoListener,
         InserirCenarioAlojamentoClicadoListener, EditarCenarioAlojamentoClicadoListener, OkInserirCenarioAlojamentoClicadoListener,
-        OkEditarCenarioAlojamentoClicadoListener, VoltarGestaoCenarioAlojamentoClicadoListener, ConfirmarClicadoAlojamentoListener, VoltarMenuCenariosClicadoListener {
+        OkEditarCenarioAlojamentoClicadoListener, VoltarGestaoCenarioAlojamentoClicadoListener, ConfirmarClicadoAlojamentoListener, VoltarMenuCenariosClicadoListener, TerminarSessaoClicadoListener {
 
     /**
      * Creates new form TripPlanner
@@ -96,46 +98,46 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
         this.login.addLoginEfetuadoListener(this);
         this.menuPrincipal.addParticipantesClicadoListener(this);
         this.menuPrincipal.addAlojamentoClicadoListener(this);
-        this.menuParticipantes.addInserirParticipantesClicadoListener(this);
-        this.menuParticipantes.addEditarParticipantesClicadoListener(this);
-        this.menuParticipantes.addVisualizarParticipantesClicadoListener(this);
-        this.inserirEditarParticipante.addConfirmarClicadoListener(this);
-        this.mostrarParticipante.addConfirmarClicadoListener(this);
-        this.gestaodeAlojamentos.addCriarEditarAlojamentoClicadoListener(this);
-        this.gestaodeAlojamentos.addVisualizarAlojamentoClicadoListener(this);
-        this.gestaodeCenariodeAlojamento.addVisualizarCenarioAlojamentoClicadoListener(this);
-        this.gestaodeCenariodeAlojamento.addCompararCenarioAlojamentoClicadoListener(this);
+//        this.menuParticipantes.addInserirParticipantesClicadoListener(this);
+//        this.menuParticipantes.addEditarParticipantesClicadoListener(this);
+//        this.menuParticipantes.addVisualizarParticipantesClicadoListener(this);
+//        this.inserirEditarParticipante.addConfirmarClicadoListener(this);
+//        this.mostrarParticipante.addConfirmarClicadoListener(this);
+//        this.gestaodeAlojamentos.addCriarEditarAlojamentoClicadoListener(this);
+//        this.gestaodeAlojamentos.addVisualizarAlojamentoClicadoListener(this);
+//        this.gestaodeCenariodeAlojamento.addVisualizarCenarioAlojamentoClicadoListener(this);
+//        this.gestaodeCenariodeAlojamento.addCompararCenarioAlojamentoClicadoListener(this);
         this.menuPrincipal.addViagensListener(this);
-        this.gestaodeViagens.addInserirViagemClicadoListener(this);
-        this.inserirEditarViagens.addConfirmarInsercaoViagensListener(this);
-        this.gestaodeViagens.addVoltarMenuPrincipalListener(this);
-        this.gestaodeViagens.addAssociarViagensClicadoListener(this);
-        this.associarViagens.addConfirmarAssociacaoViagensListener(this);
-        this.menuParticipantes.addVoltarMenuPrincipalListener(this);
-        this.gestaodeCenariodeAlojamento.addVoltarMenuCenariosClicadoListener(this);
+//        this.gestaodeViagens.addInserirViagemClicadoListener(this);
+//        this.inserirEditarViagens.addConfirmarInsercaoViagensListener(this);
+//        this.gestaodeViagens.addVoltarMenuPrincipalListener(this);
+//        this.gestaodeViagens.addAssociarViagensClicadoListener(this);
+//        this.associarViagens.addConfirmarAssociacaoViagensListener(this);
+//        this.menuParticipantes.addVoltarMenuPrincipalListener(this);
+//        this.gestaodeCenariodeAlojamento.addVoltarMenuCenariosClicadoListener(this);
         this.menuPrincipal.addEtapasClicadoListener(this);
-        this.gestaodeEtapas.addInserirEtapasClicadoListener(this);
-        this.gestaodeEtapas.addEditarEtapasClicadoListener(this);
-        this.gestaodeEtapas.addVisualizarEtapasClicadoListener(this);
-        this.gestaodeEtapas.addAssociarEtapasClicadoListener(this);
-        this.inserirEditarEtapa.addOkInserirEtapasClicadoListener(this);
-        this.visualizarEtapa.addOkVisualizarEtapasClicadoListener(this);
-        this.associarEtapas.addOkAssociarEtapasClicadoListener(this);
+//        this.gestaodeEtapas.addInserirEtapasClicadoListener(this);
+//        this.gestaodeEtapas.addEditarEtapasClicadoListener(this);
+//        this.gestaodeEtapas.addVisualizarEtapasClicadoListener(this);
+//        this.gestaodeEtapas.addAssociarEtapasClicadoListener(this);
+//        this.inserirEditarEtapa.addOkInserirEtapasClicadoListener(this);
+//        this.visualizarEtapa.addOkVisualizarEtapasClicadoListener(this);
+//        this.associarEtapas.addOkAssociarEtapasClicadoListener(this);
         this.menuPrincipal.addMenuCenariosClicadoListener(this);
         this.menuCenarios.addGestaoCenarioAlojamentoClicadoListener(this);
-        this.gestaodeCenariodeAlojamento.addInserirCenarioAlojamentoClicadoListener(this);
-        this.gestaodeCenariodeAlojamento.addEditarCenarioAlojamentoClicadoListener(this);
-        this.criarEditarCenarioAlojamento.addOkInserirCenarioAlojamentoClicadoListener(this);
+//        this.gestaodeCenariodeAlojamento.addInserirCenarioAlojamentoClicadoListener(this);
+//        this.gestaodeCenariodeAlojamento.addEditarCenarioAlojamentoClicadoListener(this);
+//        this.criarEditarCenarioAlojamento.addOkInserirCenarioAlojamentoClicadoListener(this);
         //this.gestaodeCenariodeAlojamento.addVoltarGestaoCenarioAlojamentoClicadoListener(this);
-        this.gestaodeEtapas.addVoltarMenuPrincipalListener(this);
-        this.criarEditarAlojamento.addConfirmarClicadoAlojamentoistener(this);
-        this.mostrarAlojamento.addConfirmarClicadoAlojamentoistener(this);
-        this.gestaodeAlojamentos.addVoltarMenuPrincipalListener(this);
-        this.mostrarCenarioAlojamento.addOkInserirCenarioAlojamentoClicadoListener(this);
-        this.compararCenarioAlojamento.addOkInserirCenarioAlojamentoClicadoListener(this);
+//        this.gestaodeEtapas.addVoltarMenuPrincipalListener(this);
+//        this.criarEditarAlojamento.addConfirmarClicadoAlojamentoistener(this);
+//        this.mostrarAlojamento.addConfirmarClicadoAlojamentoistener(this);
+//        this.gestaodeAlojamentos.addVoltarMenuPrincipalListener(this);
+//        this.mostrarCenarioAlojamento.addOkInserirCenarioAlojamentoClicadoListener(this);
+//        this.compararCenarioAlojamento.addOkInserirCenarioAlojamentoClicadoListener(this);
         this.menuCenarios.addVoltarMenuPrincipalListener(this);
-
-        jPanel1.setPreferredSize(new Dimension(400, 300));
+        this.menuPrincipal.addTerminarSessaoClicadoListener(this);
+       jPanel1.setPreferredSize(new Dimension(400, 300));
         
         Component[] components = jPanel1.getComponents();
         for (Component component : components) {
@@ -160,26 +162,9 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
 
         jPanel1 = new javax.swing.JPanel();
         login = new pt.ipleiria.tripPlanner.gui.TripPlanner.Login();
-        menuCenarios = new pt.ipleiria.tripPlanner.gui.TripPlanner.MenuCenarios();
-        dadosAcesso = new pt.ipleiria.tripPlanner.gui.TripPlanner.DadosAcesso();
         menuPrincipal = new pt.ipleiria.tripPlanner.gui.TripPlanner.MenuPrincipal();
-        associarViagens = new pt.ipleiria.tripPlanner.gui.GestaoViagens.AssociarViagens();
-        gestaodeViagens = new pt.ipleiria.tripPlanner.gui.GestaoViagens.GestaodeViagens();
-        inserirEditarViagens = new pt.ipleiria.tripPlanner.gui.GestaoViagens.InserirEditarViagens();
-        gestaodeAlojamentos = new pt.ipleiria.tripPlanner.gui.GestaoAlojamento.GestaodeAlojamentos();
-        associarEtapas = new pt.ipleiria.tripPlanner.gui.GestaoEtapas.AssociarEtapas();
-        menuParticipantes = new pt.ipleiria.tripPlanner.gui.participantes.MenuParticipantes();
-        inserirEditarParticipante = new pt.ipleiria.tripPlanner.gui.participantes.InserirEditarParticipante();
-        mostrarParticipante = new pt.ipleiria.tripPlanner.gui.participantes.MostrarParticipante();
-        gestaodeCenariodeAlojamento = new pt.ipleiria.tripPlanner.gui.cenario.GestaodeCenariodeAlojamento();
-        criarEditarCenarioAlojamento = new pt.ipleiria.tripPlanner.gui.cenario.CriarEditarCenarioAlojamento();
-        mostrarCenarioAlojamento = new pt.ipleiria.tripPlanner.gui.cenario.MostrarCenarioAlojamento();
-        visualizarEtapa = new pt.ipleiria.tripPlanner.gui.GestaoEtapas.VisualizarEtapa();
-        inserirEditarEtapa = new pt.ipleiria.tripPlanner.gui.GestaoEtapas.InserirEditarEtapa();
-        gestaodeEtapas = new pt.ipleiria.tripPlanner.gui.GestaoEtapas.GestaodeEtapas();
-        mostrarAlojamento = new pt.ipleiria.tripPlanner.gui.GestaoAlojamento.MostrarAlojamento();
-        criarEditarAlojamento = new pt.ipleiria.tripPlanner.gui.GestaoAlojamento.CriarEditarAlojamento();
-        compararCenarioAlojamento = new pt.ipleiria.tripPlanner.gui.cenario.CompararCenarioAlojamento();
+        menuCenarios = new pt.ipleiria.tripPlanner.gui.TripPlanner.MenuCenarios();
+        dadosAcesso1 = new pt.ipleiria.tripPlanner.gui.TripPlanner.DadosAcesso();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(640, 480));
@@ -191,31 +176,10 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
         jPanel1.setName(""); // NOI18N
         jPanel1.setPreferredSize(new java.awt.Dimension(640, 480));
         jPanel1.setLayout(new java.awt.CardLayout());
-
-        login.setMaximumSize(new java.awt.Dimension(32767, 32767));
-        login.setMinimumSize(new java.awt.Dimension(0, 0));
-        login.setPreferredSize(new java.awt.Dimension(0, 0));
         jPanel1.add(login, "login");
-        jPanel1.add(menuCenarios, "menuCenarios");
-        jPanel1.add(dadosAcesso, "dadosAcesso");
         jPanel1.add(menuPrincipal, "menuPrincipal");
-        jPanel1.add(associarViagens, "associarViagens");
-        jPanel1.add(gestaodeViagens, "gestaodeViagens");
-        jPanel1.add(inserirEditarViagens, "inserirEditarViagens");
-        jPanel1.add(gestaodeAlojamentos, "gestaodeAlojamentos");
-        jPanel1.add(associarEtapas, "associarEtapas");
-        jPanel1.add(menuParticipantes, "menuParticipantes");
-        jPanel1.add(inserirEditarParticipante, "inserirEditarParticipante");
-        jPanel1.add(mostrarParticipante, "mostrarParticipante");
-        jPanel1.add(gestaodeCenariodeAlojamento, "gestaodeCenariodeAlojamento");
-        jPanel1.add(criarEditarCenarioAlojamento, "criarEditarCenarioAlojamento");
-        jPanel1.add(mostrarCenarioAlojamento, "mostrarCenarioAlojamento");
-        jPanel1.add(visualizarEtapa, "visualizarEtapa");
-        jPanel1.add(inserirEditarEtapa, "inserirEditarEtapa");
-        jPanel1.add(gestaodeEtapas, "gestaodeEtapas");
-        jPanel1.add(mostrarAlojamento, "mostrarAlojamento");
-        jPanel1.add(criarEditarAlojamento, "criarEditarAlojamento");
-        jPanel1.add(compararCenarioAlojamento, "compararCenarioAlojamento");
+        jPanel1.add(menuCenarios, "card3");
+        jPanel1.add(dadosAcesso1, "card5");
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -257,34 +221,18 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private pt.ipleiria.tripPlanner.gui.GestaoEtapas.AssociarEtapas associarEtapas;
-    private pt.ipleiria.tripPlanner.gui.GestaoViagens.AssociarViagens associarViagens;
-    private pt.ipleiria.tripPlanner.gui.cenario.CompararCenarioAlojamento compararCenarioAlojamento;
-    private pt.ipleiria.tripPlanner.gui.GestaoAlojamento.CriarEditarAlojamento criarEditarAlojamento;
-    private pt.ipleiria.tripPlanner.gui.cenario.CriarEditarCenarioAlojamento criarEditarCenarioAlojamento;
-    private pt.ipleiria.tripPlanner.gui.TripPlanner.DadosAcesso dadosAcesso;
-    private pt.ipleiria.tripPlanner.gui.GestaoAlojamento.GestaodeAlojamentos gestaodeAlojamentos;
-    private pt.ipleiria.tripPlanner.gui.cenario.GestaodeCenariodeAlojamento gestaodeCenariodeAlojamento;
-    private pt.ipleiria.tripPlanner.gui.GestaoEtapas.GestaodeEtapas gestaodeEtapas;
-    private pt.ipleiria.tripPlanner.gui.GestaoViagens.GestaodeViagens gestaodeViagens;
-    private pt.ipleiria.tripPlanner.gui.GestaoEtapas.InserirEditarEtapa inserirEditarEtapa;
-    private pt.ipleiria.tripPlanner.gui.participantes.InserirEditarParticipante inserirEditarParticipante;
-    private pt.ipleiria.tripPlanner.gui.GestaoViagens.InserirEditarViagens inserirEditarViagens;
+    private pt.ipleiria.tripPlanner.gui.TripPlanner.DadosAcesso dadosAcesso1;
     private javax.swing.JPanel jPanel1;
     private pt.ipleiria.tripPlanner.gui.TripPlanner.Login login;
     private pt.ipleiria.tripPlanner.gui.TripPlanner.MenuCenarios menuCenarios;
-    private pt.ipleiria.tripPlanner.gui.participantes.MenuParticipantes menuParticipantes;
     private pt.ipleiria.tripPlanner.gui.TripPlanner.MenuPrincipal menuPrincipal;
-    private pt.ipleiria.tripPlanner.gui.GestaoAlojamento.MostrarAlojamento mostrarAlojamento;
-    private pt.ipleiria.tripPlanner.gui.cenario.MostrarCenarioAlojamento mostrarCenarioAlojamento;
-    private pt.ipleiria.tripPlanner.gui.participantes.MostrarParticipante mostrarParticipante;
-    private pt.ipleiria.tripPlanner.gui.GestaoEtapas.VisualizarEtapa visualizarEtapa;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void loginEfetuado(LoginEfetuadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         cl.show(this.jPanel1, "menuPrincipal");
+        menuPrincipal.atualizar();
     }
 
     @Override
@@ -483,5 +431,11 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
     public void voltarMenuCenariosAlojamentoClicado(VoltarMenuCenariosClicadoEvent evt) {
                 CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         cl.show(this.jPanel1, "menuCenarios");
+    }
+
+    @Override
+    public void terminarSessaoClicado(TerminarSessaoClicadoEvent evt) {
+                 CardLayout cl = (CardLayout) this.jPanel1.getLayout();
+        cl.show(this.jPanel1, "login");
     }
 }

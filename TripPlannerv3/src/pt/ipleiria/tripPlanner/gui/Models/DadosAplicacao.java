@@ -31,10 +31,11 @@ public class DadosAplicacao {
     private ArrayList<Viagem> viagens;
     private ArrayList<Etapa> etapas;
     private ArrayList<Alojamento> alojamentos;
+    private Participante logado;
 
     private DadosAplicacao() {
         participantes = new ArrayList<>();
-
+        
         adicionarParticipante();
         addAlojamento();
         addEtapa();
@@ -44,10 +45,7 @@ public class DadosAplicacao {
 
         Calendar dataNascJoao = Calendar.getInstance();
 
-        dataNascJoao.setTime(new Date(90, 2, 11));
-
-
-        
+        dataNascJoao.setTime(new Date(90, 2, 11));        
 
         ArrayList<String> permissoes;
         permissoes = new ArrayList<>();
@@ -58,14 +56,10 @@ public class DadosAplicacao {
 
         participante1 = new Participante("Joao", dataNascJoao, 12175988, "Leiria", 5, true, "jonny0015", pass.toCharArray(), true, permissoes);
         adicionarParticipante(participante1);
-
-        //participante1 = new Participante("Joao", dataNascJoao, 12175988, "Leiria", 5, true, "Jonny0015", "noob", true, permissoes);
-
     }    
     private void addAlojamento() {       
         Alojamento alojamento1;
         alojamento1 = new Alojamento("Bom e Barato");
-        //alojamentos.add(alojamento1);
     }
 
     public void addViagem(Viagem viagem) {
@@ -93,4 +87,13 @@ public class DadosAplicacao {
     public ArrayList<Participante> getParticipantes() {
         return (ArrayList<Participante>) participantes.clone();
     }
+    
+    public void setLogado(Participante participante){
+        this.logado = participante;
+    }
+
+    public Participante getLogado() {
+        return logado;
+    }
+    
 }
