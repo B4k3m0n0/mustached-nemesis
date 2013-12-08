@@ -2,6 +2,8 @@ package pt.ipleiria.tripPlanner.gui.participantes;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultListModel;
+import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
 import pt.ipleiria.tripPlanner.gui.events.EditarParticipantesClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.EditarParticipantesClicadoListener;
 import pt.ipleiria.tripPlanner.gui.events.InserirParticipantesClicadoEvent;
@@ -36,6 +38,8 @@ public class MenuParticipantes extends javax.swing.JPanel {
         this.editarParticipantesClicadoListener = new ArrayList<>();
         this.visualizarParticipantesClicadoListener = new ArrayList<>();
         this.voltarMenuPrincipalListener = new ArrayList<>();
+        
+        actualizarListaParticipantes();
     }
 
     public synchronized void addInserirParticipantesClicadoListener(InserirParticipantesClicadoListener listener){
@@ -251,4 +255,11 @@ public class MenuParticipantes extends javax.swing.JPanel {
     private javax.swing.JScrollPane spListaParticipantes;
     private javax.swing.JTextField tfPesquisar;
     // End of variables declaration//GEN-END:variables
+
+    private void actualizarListaParticipantes() {
+        DadosAplicacao.getInstance().getParticipantes();
+        
+        DefaultListModel<String> model =  new DefaultListModel<>();
+        model = (DefaultListModel<String>)
+    }
 }

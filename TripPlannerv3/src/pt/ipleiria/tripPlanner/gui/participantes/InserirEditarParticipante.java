@@ -2,7 +2,9 @@ package pt.ipleiria.tripPlanner.gui.participantes;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.ListModel;
 import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
 import pt.ipleiria.tripPlanner.gui.Models.Participante;
 import pt.ipleiria.tripPlanner.gui.events.ConfirmarClicadoEvent;
@@ -84,6 +86,8 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
         lstPermissoes = new javax.swing.JList();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
 
@@ -97,6 +101,11 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
         });
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 2, 36)); // NOI18N
         jLabel2.setText("Inserir Participantes");
@@ -253,8 +262,32 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
         jScrollPane1.setViewportView(lstPermissoes);
 
         jButton1.setText(">>");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("<<");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText(">");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("<");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelEditorLayout = new javax.swing.GroupLayout(panelEditor);
         panelEditor.setLayout(panelEditorLayout);
@@ -264,9 +297,11 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelEditorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                .addGroup(panelEditorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -276,15 +311,21 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
             .addGroup(panelEditorLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelEditorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelEditorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane2)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelEditorLayout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jButton1)
+                        .addGroup(panelEditorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane2)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(20, Short.MAX_VALUE))
+                    .addGroup(panelEditorLayout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(jButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton2)
+                        .addGap(36, 36, 36))))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -390,8 +431,8 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
             return;
         }
         
-        for(Participante participantes: DadosAplicacao.getInstance().getParticipantes()){
-            if(tfBilheteIdentidade.getText().equals(participantes.getBI() + "")){
+        for(Participante participante: DadosAplicacao.getInstance().getParticipantes()){
+            if(tfBilheteIdentidade.getText().equals(participante.getBI() + "")){
                 JOptionPane.showMessageDialog(this, "Já existe um participante com o BI introduzido!");
                 return;
             }
@@ -413,6 +454,14 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
             return;
             }
             
+            for(Participante participante: DadosAplicacao.getInstance().getParticipantes()){
+                if(tfUsername.getText().equals(participante.getUsername())){
+                    JOptionPane.showMessageDialog(this, "Já existe um participante com o Username introduzido!");
+                    return;
+                }
+            }
+        
+            
             if(pfPassword.getPassword() == null){
             JOptionPane.showMessageDialog(this, "Introduza uma password!");
             return;
@@ -433,8 +482,10 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
         Participante participante;   
         if(cbAdministrador.isSelected()){
             participante = new Participante(tfNome.getText(), jDateChooser2.getCalendar(), Integer.parseInt(tfBilheteIdentidade.getText()), tfLocalidade.getText(), Integer.parseInt(cbICF.getModel().getElementAt(cbICF.getSelectedIndex()).toString()), true, tfUsername.getText(), pfPassword.getPassword(), editor, (ArrayList<String>)lstPermissoesUtilizador.getSelectedValuesList());
+            DadosAplicacao.getInstance().adicionarParticipante(participante);
         }else{
             participante = new Participante(tfNome.getText(), jDateChooser2.getCalendar(), Integer.parseInt(tfBilheteIdentidade.getText()), tfLocalidade.getText(), Integer.parseInt(cbICF.getModel().getElementAt(cbICF.getSelectedIndex()).toString()), false, tfBilheteIdentidade.getText(), jDateChooser2.getCalendar().toString().toCharArray(), editor, (ArrayList<String>)lstPermissoesUtilizador.getSelectedValuesList());
+            DadosAplicacao.getInstance().adicionarParticipante(participante);
         }
 
         JOptionPane.showMessageDialog(this, "Utilizador Inserido!");
@@ -452,6 +503,72 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
         panelEditor.setEnabled(cbEditor.isEnabled());
     }//GEN-LAST:event_cbEditorActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        DefaultListModel<String> model =  new DefaultListModel<>();
+        model = (DefaultListModel<String>) lstPermissoes.getModel();
+        lstPermissoes.removeAll();
+        if(lstPermissoesUtilizador.getModel().getSize() > 0){
+            for(int i=0; i<=lstPermissoesUtilizador.getModel().getSize(); i++){
+              String permissaoUtilizador = (String) lstPermissoesUtilizador.getModel().getElementAt(i);
+              model.addElement(permissaoUtilizador);
+            }
+            lstPermissoesUtilizador.setModel(model);
+        }else{
+           lstPermissoesUtilizador.setModel(model);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+        DefaultListModel<String> model =  new DefaultListModel<>();
+        model = (DefaultListModel<String>) lstPermissoes.getModel().getElementAt(lstPermissoes.getSelectedIndex());
+        lstPermissoes.remove(lstPermissoes.getSelectedIndex());
+        if(lstPermissoesUtilizador.getModel().getSize() > 0){
+            for(int i=0; i<=lstPermissoesUtilizador.getModel().getSize(); i++){
+              String permissaoUtilizador = (String) lstPermissoesUtilizador.getModel().getElementAt(i);
+              model.addElement(permissaoUtilizador);
+            }
+            lstPermissoesUtilizador.setModel(model);
+        }else{
+           lstPermissoesUtilizador.setModel(model);
+        }
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        DefaultListModel<String> model =  new DefaultListModel<>();
+        model = (DefaultListModel<String>) lstPermissoesUtilizador.getModel().getElementAt(lstPermissoesUtilizador.getSelectedIndex());
+        lstPermissoesUtilizador.remove(lstPermissoesUtilizador.getSelectedIndex());
+        if(lstPermissoes.getModel().getSize() > 0){
+            for(int i=0; i<=lstPermissoes.getModel().getSize(); i++){
+              String permissaoUtilizador = (String) lstPermissoes.getModel().getElementAt(i);
+              model.addElement(permissaoUtilizador);
+            }
+            lstPermissoes.setModel(model);
+        }else{
+           lstPermissoes.setModel(model);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        DefaultListModel<String> model =  new DefaultListModel<>();
+        model = (DefaultListModel<String>) lstPermissoesUtilizador.getModel();
+        lstPermissoesUtilizador.removeAll();
+        if(lstPermissoes.getModel().getSize() > 0){
+            for(int i=0; i<=lstPermissoes.getModel().getSize(); i++){
+              String permissaoUtilizador = (String) lstPermissoes.getModel().getElementAt(i);
+              model.addElement(permissaoUtilizador);
+            }
+            lstPermissoes.setModel(model);
+        }else{
+            lstPermissoes.setModel(model);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+         this.fireConfirmarClicadoEvent();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnOk;
@@ -460,6 +577,8 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
     private javax.swing.JComboBox cbICF;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
