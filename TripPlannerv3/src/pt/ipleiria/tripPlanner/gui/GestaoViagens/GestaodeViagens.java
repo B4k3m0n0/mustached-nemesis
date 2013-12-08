@@ -3,8 +3,10 @@ package pt.ipleiria.tripPlanner.gui.GestaoViagens;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import javax.swing.DefaultListModel;
 import pt.ipleiria.tripPlanner.gui.GestaoEtapas.*;
 import pt.ipleiria.tripPlanner.gui.GestaoLocalidades.*;
+import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
 import pt.ipleiria.tripPlanner.gui.cenario.*;
 import pt.ipleiria.tripPlanner.gui.events.AssociarViagensClicadoListener;
 import pt.ipleiria.tripPlanner.gui.events.AssociarViagensClicadoEvent;
@@ -29,6 +31,9 @@ public class GestaodeViagens extends javax.swing.JPanel {
     private List<InserirViagemClicadoListener> inserirViagemClicadoListener;
     private List<VoltarMenuPrincipalListener> voltarMenuPrincipalListener;
     private List<AssociarViagensClicadoListener> associarViagensClicadoListener;
+    private ArrayList<Viagem> viagensModelList;
+    private DefaultListModel<Viagem> modelV;
+    
     /**
      * Creates new form GestãodeCenáriodeAlojamento
      */
@@ -37,6 +42,12 @@ public class GestaodeViagens extends javax.swing.JPanel {
         this.inserirViagemClicadoListener = new ArrayList<>();
         this.voltarMenuPrincipalListener = new ArrayList<>();
         this.associarViagensClicadoListener = new ArrayList<>();
+        
+        viagensModelList = new ArrayList<>();
+        modelV = new DefaultListModel<>();
+        
+        Lista();
+        
     }
     
       public synchronized void addInserirViagemClicadoListener(InserirViagemClicadoListener listener){
@@ -82,6 +93,24 @@ public class GestaodeViagens extends javax.swing.JPanel {
         listener.associarViagensClicado(evento);
         }
     }
+    
+    private void Lista(){
+        viagensModelList = DadosAplicacao.getInstance().getViagens();
+        modelV.clear();
+        for (Viagem v : viagensModelList) {
+            modelV.addElement(v);
+        }
+        lstViagens.setModel(modelV);
+        
+        /*
+        etapasModelList = DadosAplicacao.getInstance().getEtapas();
+        modelE.clear();
+        for (Etapa e : etapasModelList) {
+            modelE.addElement(e);
+        }
+        lstEtapasP.setModel(modelE);
+        */
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -92,7 +121,7 @@ public class GestaodeViagens extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        lstViagens = new javax.swing.JList();
         btnCriar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
@@ -107,12 +136,12 @@ public class GestaodeViagens extends javax.swing.JPanel {
         setMaximumSize(new java.awt.Dimension(640, 480));
         setMinimumSize(new java.awt.Dimension(640, 480));
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
+        lstViagens.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(lstViagens);
 
         btnCriar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pt/ipleiria/tripPlanner/gui/Imagens/Inserir1.png"))); // NOI18N
         btnCriar.addActionListener(new java.awt.event.ActionListener() {
@@ -235,9 +264,9 @@ public class GestaodeViagens extends javax.swing.JPanel {
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblLocalidades;
+    private javax.swing.JList lstViagens;
     private javax.swing.JTextField tfPesquisar;
     // End of variables declaration//GEN-END:variables
 }

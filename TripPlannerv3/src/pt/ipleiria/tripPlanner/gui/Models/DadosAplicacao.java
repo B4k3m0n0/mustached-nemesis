@@ -14,7 +14,6 @@ import pt.ipleiria.tripPlanner.gui.GestaoViagens.Viagem;
 
 import sun.util.calendar.BaseCalendar;
 
-
 /**
  *
  * @author Cristiano
@@ -35,7 +34,11 @@ public class DadosAplicacao {
 
     private DadosAplicacao() {
         participantes = new ArrayList<>();
-        
+
+        etapas = new ArrayList<>();
+        alojamentos = new ArrayList<>();
+        viagens = new ArrayList<>();
+
         adicionarParticipante();
         addAlojamento();
         addEtapa();
@@ -45,29 +48,35 @@ public class DadosAplicacao {
 
         Calendar dataNascJoao = Calendar.getInstance();
 
-        dataNascJoao.setTime(new Date(90, 2, 11));        
+        dataNascJoao.setTime(new Date(90, 2, 11));
 
         ArrayList<String> permissoes;
         permissoes = new ArrayList<>();
 
         String pass = "noob";
+        String pass1 = "a";
 
         Participante participante1;
 
         participante1 = new Participante("Joao", dataNascJoao, 12175988, "Leiria", 5, true, "jonny0015", pass.toCharArray(), true, permissoes);
         adicionarParticipante(participante1);
-<<<<<<< .mine
+
         participantes.add(participante1);
-        //participante1 = new Participante("Joao", dataNascJoao, 12175988, "Leiria", 5, true, "Jonny0015", "noob", true, permissoes);
+        Participante participante2;
+        participante2 = new Participante("a", dataNascJoao, 12175988, "Leiria", 5, true, "a", pass1.toCharArray(), true, permissoes);
+        adicionarParticipante(participante2);
     }
 
     
-=======
-    }    
->>>>>>> .r16
-    private void addAlojamento() {       
+
+
+private void addAlojamento() {       
         Alojamento alojamento1;
         alojamento1 = new Alojamento("Bom e Barato");
+
+        alojamentos.add(alojamento1);
+
+
     }
 
     public void addViagem(Viagem viagem) {
@@ -77,18 +86,22 @@ public class DadosAplicacao {
     private void addEtapa() {
         Etapa etapa1;
         etapa1 = new Etapa("A");
-        //etapas.add(etapa1);
+        etapas.add(etapa1);
     }
 
     public ArrayList<Viagem> getViagens() {
-        return viagens;
+        return (ArrayList<Viagem>) viagens.clone();
     }
 
     public ArrayList<Etapa> getEtapas() {
-        return etapas;
+        return (ArrayList<Etapa>) etapas.clone();
     }
-    
-    public void adicionarParticipante(Participante p){
+
+    public ArrayList<Alojamento> getAlojamentos() {
+        return (ArrayList<Alojamento>) alojamentos.clone();
+    }
+
+    public void adicionarParticipante(Participante p) {
         participantes.add(p);
     }
 
