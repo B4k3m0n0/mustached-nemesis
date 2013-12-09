@@ -25,9 +25,8 @@ public class DadosAcesso extends javax.swing.JPanel {
     private List<TerminarSessaoClicadoListener> terminarSessaoClicadoListener;
     private Participante participante;
     
-    public DadosAcesso(Participante participante) {
+    public DadosAcesso() {
         initComponents();
-        this.participante = participante;
         this.terminarSessaoClicadoListener = new ArrayList<>();
     }
 
@@ -52,6 +51,9 @@ public class DadosAcesso extends javax.swing.JPanel {
         }
     }
     
+    public void receberParticipante(Participante participante){
+        this.participante = participante;
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

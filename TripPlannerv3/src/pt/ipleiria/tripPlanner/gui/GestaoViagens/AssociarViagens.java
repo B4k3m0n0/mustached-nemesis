@@ -87,6 +87,11 @@ public class AssociarViagens extends javax.swing.JPanel {
         spViagens.setViewportView(jList2);
 
         btnAssociar.setText(">>");
+        btnAssociar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAssociarActionPerformed(evt);
+            }
+        });
 
         btnEliminarAssociacao.setText("<<");
 
@@ -162,6 +167,10 @@ public class AssociarViagens extends javax.swing.JPanel {
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
            this.fireConfirmarAssociacaoViagensEvent();
     }//GEN-LAST:event_btnOkActionPerformed
+
+    private void btnAssociarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssociarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAssociarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

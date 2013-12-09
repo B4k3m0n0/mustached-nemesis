@@ -19,15 +19,13 @@ import pt.ipleiria.tripPlanner.gui.events.ConfirmarClicadoListener;
 public class MostrarParticipante extends javax.swing.JPanel {
 
      private List<ConfirmarClicadoListener> confirmarClicadoListener;
-     private Participante participante;
+    private Participante participante;
     /**
      * Creates new form InserirParticipante
      */
-    public MostrarParticipante(Participante participante) {
+    public MostrarParticipante() {
         initComponents();
-        this.participante = participante;
         this.confirmarClicadoListener = new ArrayList<>();
-        preencherCampos();
     }
     
     public synchronized void addConfirmarClicadoListener(ConfirmarClicadoListener listener){
@@ -290,7 +288,8 @@ public class MostrarParticipante extends javax.swing.JPanel {
     private javax.swing.JLabel lblUsername;
     // End of variables declaration//GEN-END:variables
 
-    private void preencherCampos() {
+    private void preencherCampos(Participante participante) {
+        this.participante = participante;
         lblMostrarNome.setText(participante.getNome());
         lblMostarICF.setText(participante.getICF() + "");
         lblMostrarBI.setText(participante.getBI() + "");

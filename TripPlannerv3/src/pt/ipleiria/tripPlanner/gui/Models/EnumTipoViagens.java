@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package pt.ipleiria.tripPlanner.gui.GestaoViagens;
+package pt.ipleiria.tripPlanner.gui.Models;
 
 /**
  *

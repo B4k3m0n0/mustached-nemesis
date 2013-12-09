@@ -123,8 +123,14 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="tfUsername">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="EnterPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JPasswordField" name="pfPassword">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="EnterPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblTripPlanner">
       <Properties>

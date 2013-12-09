@@ -4,6 +4,8 @@ import com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -111,6 +113,18 @@ public class Login extends javax.swing.JPanel {
             }
         });
 
+        tfUsername.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                EnterPressed(evt);
+            }
+        });
+
+        pfPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                EnterPressed(evt);
+            }
+        });
+
         lblTripPlanner.setFont(new java.awt.Font("Times New Roman", 2, 36)); // NOI18N
         lblTripPlanner.setText("Trip Planner");
 
@@ -174,6 +188,12 @@ public class Login extends javax.swing.JPanel {
         confirmaLogin();
     }//GEN-LAST:event_btnLoginActionPerformed
 
+    private void EnterPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EnterPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            btnLogin.doClick();
+        }
+    }//GEN-LAST:event_EnterPressed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogin;
     private javax.swing.JLabel lbPassword;
@@ -205,7 +225,9 @@ public class Login extends javax.swing.JPanel {
                             fireLoginEfetuadoEvent();
                             mudarNome();
                         } else {
-                            if(tfUsername.getText().equals(participante.getBI() + "") && new String(pfPassword.getPassword()).equals(new String(participante.getDataNasc().toString())) && participante.isPrimeiroLogin())  {
+                            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                            String dataNasc = formatter.format(participante.getDataNasc().getTime());
+                            if(tfUsername.getText().equals(participante.getBI() + "") && pfPassword.getPassword().equals(dataNasc) && participante.isPrimeiroLogin())  {
                                 firePrimeiroLoginEfetuadoEvent(participante);
                                 mudarNome();
                             }else{

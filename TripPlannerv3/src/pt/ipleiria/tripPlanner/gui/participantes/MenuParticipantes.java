@@ -1,8 +1,10 @@
 package pt.ipleiria.tripPlanner.gui.participantes;
 
+import pt.ipleiria.tripPlanner.gui.Utils.CellRendererParticipante;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.ListCellRenderer;
 import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
 import pt.ipleiria.tripPlanner.gui.Models.Participante;
 import pt.ipleiria.tripPlanner.gui.events.EditarParticipantesClicadoEvent;
@@ -39,7 +41,7 @@ public class MenuParticipantes extends javax.swing.JPanel {
         this.editarParticipantesClicadoListener = new ArrayList<>();
         this.visualizarParticipantesClicadoListener = new ArrayList<>();
         this.voltarMenuPrincipalListener = new ArrayList<>();
-        
+        lstPesquisa.setCellRenderer((ListCellRenderer) new CellRendererParticipante());
         actualizarListaParticipantes();
     }
 
@@ -81,9 +83,8 @@ public class MenuParticipantes extends javax.swing.JPanel {
         this.visualizarParticipantesClicadoListener.remove(listener);
     }
 
-    protected synchronized void fireVisualizarParticipantesClicadoEvent(){
+    protected synchronized void fireVisualizarParticipantesClicadoEvent(Participante participanteSelecionado){
         for(VisualizarParticipantesClicadoListener listener : this.visualizarParticipantesClicadoListener){
-        Participante participanteSelecionado = (Participante) lstPesquisa.getSelectedValue();
         VisualizarParticipantesClicadoEvent evento = new VisualizarParticipantesClicadoEvent(this, participanteSelecionado);
         listener.visualizarParticipantesClicado(evento);
         }
@@ -131,6 +132,11 @@ public class MenuParticipantes extends javax.swing.JPanel {
         tfPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfPesquisarActionPerformed(evt);
+            }
+        });
+        tfPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                filtro(evt);
             }
         });
 
@@ -236,16 +242,14 @@ public class MenuParticipantes extends javax.swing.JPanel {
                 .addComponent(tfPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
                 .addGap(18, 23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(spListaParticipantes, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(spListaParticipantes, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnVisualizar))
-                .addGap(22, 22, 22))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAdicionar)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -259,7 +263,8 @@ public class MenuParticipantes extends javax.swing.JPanel {
 
     private void btnVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarActionPerformed
         if(lstPesquisa.getSelectedIndex() != -1){
-            this.fireVisualizarParticipantesClicadoEvent();
+            Participante participanteSelecionado = (Participante) lstPesquisa.getSelectedValue();
+            this.fireVisualizarParticipantesClicadoEvent(participanteSelecionado);
         }
         
     }//GEN-LAST:event_btnVisualizarActionPerformed
@@ -271,6 +276,20 @@ public class MenuParticipantes extends javax.swing.JPanel {
     private void tfPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPesquisarActionPerformed
         
     }//GEN-LAST:event_tfPesquisarActionPerformed
+
+    private void filtro(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filtro
+
+        
+        DefaultListModel<Participante> model =  new DefaultListModel<>();
+        model.clear();
+        String filtro = tfPesquisar.getText();
+        for(Participante participante: DadosAplicacao.getInstance().getParticipantes()){
+             if(participante.getNome().contains(filtro))
+                 model.addElement(participante);
+        }
+        
+        lstPesquisa.setModel(model);
+    }//GEN-LAST:event_filtro
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
@@ -288,9 +307,9 @@ public class MenuParticipantes extends javax.swing.JPanel {
 
     private void actualizarListaParticipantes() {
         
-        DefaultListModel<String> model =  new DefaultListModel<>();
+        DefaultListModel<Participante> model =  new DefaultListModel<>();
         for(Participante participante: DadosAplicacao.getInstance().getParticipantes()){
-            model.addElement(participante.toString());
+            model.addElement(participante);
         }
         
         lstPesquisa.setModel(model);

@@ -57,6 +57,8 @@ import pt.ipleiria.tripPlanner.gui.events.OkVisualizarEtapasClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.OkVisualizarEtapasClicadoListener;
 import pt.ipleiria.tripPlanner.gui.events.ParticipantesClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.ParticipantesClicadoListener;
+import pt.ipleiria.tripPlanner.gui.events.PrimeiroLoginEfetuadoEvent;
+import pt.ipleiria.tripPlanner.gui.events.PrimeiroLoginEfetuadoListener;
 import pt.ipleiria.tripPlanner.gui.events.TerminarSessaoClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.TerminarSessaoClicadoListener;
 import pt.ipleiria.tripPlanner.gui.events.ViagensClicadoEvent;
@@ -75,6 +77,7 @@ import pt.ipleiria.tripPlanner.gui.events.VoltarMenuCenariosClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.VoltarMenuCenariosClicadoListener;
 import pt.ipleiria.tripPlanner.gui.events.VoltarMenuPrincipalEvent;
 import pt.ipleiria.tripPlanner.gui.events.VoltarMenuPrincipalListener;
+import pt.ipleiria.tripPlanner.gui.participantes.MostrarParticipante;
 
 /*
  * To change this template, choose Tools | Templates
@@ -88,7 +91,7 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
         AssociarEtapasClicadoListener, OkInserirEtapasClicadoListener, OkVisualizarEtapasClicadoListener,
         OkAssociarEtapasClicadoListener, GestaoCenarioAlojamentoClicadoListener, MenuCenariosClicadoListener,
         InserirCenarioAlojamentoClicadoListener, EditarCenarioAlojamentoClicadoListener, OkInserirCenarioAlojamentoClicadoListener,
-        OkEditarCenarioAlojamentoClicadoListener, VoltarGestaoCenarioAlojamentoClicadoListener, ConfirmarClicadoAlojamentoListener, VoltarMenuCenariosClicadoListener, TerminarSessaoClicadoListener {
+        OkEditarCenarioAlojamentoClicadoListener, VoltarGestaoCenarioAlojamentoClicadoListener, ConfirmarClicadoAlojamentoListener, VoltarMenuCenariosClicadoListener, TerminarSessaoClicadoListener, PrimeiroLoginEfetuadoListener {
 
     /**
      * Creates new form TripPlanner
@@ -137,6 +140,7 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
 //        this.compararCenarioAlojamento.addOkInserirCenarioAlojamentoClicadoListener(this);
         this.menuCenarios.addVoltarMenuPrincipalListener(this);
         this.menuPrincipal.addTerminarSessaoClicadoListener(this);
+        this.dadosAcesso1.addTerminarSessaoClicadoListener(this);
        jPanel1.setPreferredSize(new Dimension(400, 300));
         
         Component[] components = jPanel1.getComponents();
@@ -256,6 +260,7 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
     @Override
     public void visualizarParticipantesClicado(VisualizarParticipantesClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
+        mostrarParticipante.preencherCampos(evt.getParticipante());
         cl.show(this.jPanel1, "mostrarParticipante");
     }
 
@@ -438,4 +443,14 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
                  CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         cl.show(this.jPanel1, "login");
     }
+
+    @Override
+    public void primeiroLoginEfetuado(PrimeiroLoginEfetuadoEvent evento) {
+        
+        CardLayout cl = (CardLayout) this.jPanel1.getLayout();
+        dadosAcesso.receberParticipante(evento.getParticipante());
+        cl.show(this.jPanel1, "primeiroLogin");
+    }
+    
+    
 }

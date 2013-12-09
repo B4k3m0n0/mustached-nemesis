@@ -10,7 +10,6 @@ import java.util.Date;
 
 import pt.ipleiria.tripPlanner.gui.GestaoAlojamento.Alojamento;
 import pt.ipleiria.tripPlanner.gui.GestaoEtapas.Etapa;
-import pt.ipleiria.tripPlanner.gui.GestaoViagens.Viagem;
 
 import sun.util.calendar.BaseCalendar;
 
