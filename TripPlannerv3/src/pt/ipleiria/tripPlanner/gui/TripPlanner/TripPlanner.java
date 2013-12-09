@@ -229,6 +229,8 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
                 ((JPanel) component).setMaximumSize(new Dimension(400, 300)); //o tamanho maximo do painel
             }
         }
+        CardLayout cl = (CardLayout) this.jPanel1.getLayout();
+        cl.show(this.jPanel1, "login");
     }
 
     /**
@@ -241,19 +243,18 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        login1 = new pt.ipleiria.tripPlanner.gui.TripPlanner.Login();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(640, 480));
         setResizable(false);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setMaximumSize(new java.awt.Dimension(640, 480));
         jPanel1.setMinimumSize(new java.awt.Dimension(640, 480));
         jPanel1.setName(""); // NOI18N
+        jPanel1.setOpaque(false);
         jPanel1.setPreferredSize(new java.awt.Dimension(640, 480));
         jPanel1.setLayout(new java.awt.CardLayout());
-        jPanel1.add(login1, "card2");
-
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -295,7 +296,6 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
-    private pt.ipleiria.tripPlanner.gui.TripPlanner.Login login1;
     // End of variables declaration//GEN-END:variables
 
     @Override
