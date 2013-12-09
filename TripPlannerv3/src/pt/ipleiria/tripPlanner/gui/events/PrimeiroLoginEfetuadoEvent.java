@@ -11,15 +11,13 @@ import pt.ipleiria.tripPlanner.gui.Models.Participante;
  *
  * @author Cristiano
  */
-public class VisualizarParticipantesClicadoEvent extends EventObject{
+public class PrimeiroLoginEfetuadoEvent extends EventObject{
     
     Participante participante;
-    public VisualizarParticipantesClicadoEvent(Object source, Participante participante){
+
+    public PrimeiroLoginEfetuadoEvent(Object source, Participante participante){
         super(source);
         this.participante = participante;
     }
     
-    public Participante getParticipante(){
-        return participante;
-    }
 }

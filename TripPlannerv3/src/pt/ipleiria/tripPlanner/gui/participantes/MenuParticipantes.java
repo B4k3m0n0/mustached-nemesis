@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
+import pt.ipleiria.tripPlanner.gui.Models.Participante;
 import pt.ipleiria.tripPlanner.gui.events.EditarParticipantesClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.EditarParticipantesClicadoListener;
 import pt.ipleiria.tripPlanner.gui.events.InserirParticipantesClicadoEvent;
@@ -82,7 +83,8 @@ public class MenuParticipantes extends javax.swing.JPanel {
 
     protected synchronized void fireVisualizarParticipantesClicadoEvent(){
         for(VisualizarParticipantesClicadoListener listener : this.visualizarParticipantesClicadoListener){
-        VisualizarParticipantesClicadoEvent evento = new VisualizarParticipantesClicadoEvent(this);
+        Participante participanteSelecionado = (Participante) lstPesquisa.getSelectedValue();
+        VisualizarParticipantesClicadoEvent evento = new VisualizarParticipantesClicadoEvent(this, participanteSelecionado);
         listener.visualizarParticipantesClicado(evento);
         }
     }
@@ -120,11 +122,19 @@ public class MenuParticipantes extends javax.swing.JPanel {
         btnVoltar = new javax.swing.JButton();
         lblParticipantes = new javax.swing.JLabel();
         lblLocalidades = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
+        tfPesquisar.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         tfPesquisar.setText("Pesquisar");
+        tfPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfPesquisarActionPerformed(evt);
+            }
+        });
 
+        lstPesquisa.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         lstPesquisa.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -133,6 +143,7 @@ public class MenuParticipantes extends javax.swing.JPanel {
         spListaParticipantes.setViewportView(lstPesquisa);
 
         btnVisualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pt/ipleiria/tripPlanner/gui/Imagens/lupa.png"))); // NOI18N
+        btnVisualizar.setToolTipText("Visualizar Participante");
         btnVisualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVisualizarActionPerformed(evt);
@@ -140,6 +151,7 @@ public class MenuParticipantes extends javax.swing.JPanel {
         });
 
         btnAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pt/ipleiria/tripPlanner/gui/Imagens/Inserir1.png"))); // NOI18N
+        btnAdicionar.setToolTipText("Inserir Participante");
         btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdicionarActionPerformed(evt);
@@ -147,8 +159,12 @@ public class MenuParticipantes extends javax.swing.JPanel {
         });
 
         btnRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pt/ipleiria/tripPlanner/gui/Imagens/eliminar1.png"))); // NOI18N
+        btnRemover.setToolTipText("Remover Participante");
+        btnRemover.setEnabled(false);
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pt/ipleiria/tripPlanner/gui/Imagens/editar.png"))); // NOI18N
+        btnEditar.setToolTipText("Editar Participante");
+        btnEditar.setEnabled(false);
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarActionPerformed(evt);
@@ -156,36 +172,27 @@ public class MenuParticipantes extends javax.swing.JPanel {
         });
 
         btnVoltar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pt/ipleiria/tripPlanner/gui/Imagens/back-trans.png"))); // NOI18N
-        btnVoltar.setText("Voltar");
+        btnVoltar.setToolTipText("Voltar Menu Principal");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVoltarActionPerformed(evt);
             }
         });
 
-        lblParticipantes.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        lblParticipantes.setText("Participantes");
+        lblParticipantes.setFont(new java.awt.Font("Times New Roman", 2, 36)); // NOI18N
+        lblParticipantes.setText("Gestão de Participantes");
 
-        lblLocalidades.setText("Participantes");
+        lblLocalidades.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        lblLocalidades.setText("Lista de Participantes:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblParticipantes)
-                .addGap(145, 145, 145))
             .addGroup(layout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(tfPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblLocalidades)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnAdicionar)
@@ -194,36 +201,51 @@ public class MenuParticipantes extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(spListaParticipantes, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnVisualizar)
-                            .addComponent(btnVoltar))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(btnVisualizar)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(lblParticipantes)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(113, 113, 113)
+                .addComponent(lblLocalidades)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(lblParticipantes)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(tfPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblLocalidades)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(tfPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                .addGap(18, 23, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnVisualizar)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(spListaParticipantes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(spListaParticipantes, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnRemover)
-                            .addComponent(btnEditar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(btnAdicionar)
-                                .addComponent(btnVoltar)))
-                        .addGap(22, 22, 22))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(btnVisualizar))
+                .addGap(22, 22, 22))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -236,12 +258,19 @@ public class MenuParticipantes extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarActionPerformed
-        this.fireVisualizarParticipantesClicadoEvent();
+        if(lstPesquisa.getSelectedIndex() != -1){
+            this.fireVisualizarParticipantesClicadoEvent();
+        }
+        
     }//GEN-LAST:event_btnVisualizarActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         this.fireVoltarMenuPrincipalEvent();
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void tfPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPesquisarActionPerformed
+        
+    }//GEN-LAST:event_tfPesquisarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
@@ -249,6 +278,7 @@ public class MenuParticipantes extends javax.swing.JPanel {
     private javax.swing.JButton btnRemover;
     private javax.swing.JButton btnVisualizar;
     private javax.swing.JButton btnVoltar;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblLocalidades;
     private javax.swing.JLabel lblParticipantes;
     private javax.swing.JList lstPesquisa;
@@ -257,9 +287,12 @@ public class MenuParticipantes extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void actualizarListaParticipantes() {
-        DadosAplicacao.getInstance().getParticipantes();
         
         DefaultListModel<String> model =  new DefaultListModel<>();
-        model = (DefaultListModel<String>)
+        for(Participante participante: DadosAplicacao.getInstance().getParticipantes()){
+            model.addElement(participante.toString());
+        }
+        
+        lstPesquisa.setModel(model);
     }
 }

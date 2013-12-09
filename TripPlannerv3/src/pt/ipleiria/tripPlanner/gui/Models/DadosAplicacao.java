@@ -58,12 +58,12 @@ public class DadosAplicacao {
 
         Participante participante1;
 
-        participante1 = new Participante("Joao", dataNascJoao, 12175988, "Leiria", 5, true, "jonny0015", pass.toCharArray(), true, permissoes);
+        participante1 = new Participante("Joao", dataNascJoao, 12175988, "Leiria", 5, true, "jonny0015", pass.toCharArray(), true, permissoes, false);
         adicionarParticipante(participante1);
 
         participantes.add(participante1);
         Participante participante2;
-        participante2 = new Participante("a", dataNascJoao, 12175988, "Leiria", 5, true, "a", pass1.toCharArray(), true, permissoes);
+        participante2 = new Participante("a", dataNascJoao, 12175988, "Leiria", 5, true, "a", pass1.toCharArray(), true, permissoes, false);
         adicionarParticipante(participante2);
     }
 

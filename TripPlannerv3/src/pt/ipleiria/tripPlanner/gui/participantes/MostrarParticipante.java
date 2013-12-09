@@ -2,6 +2,8 @@ package pt.ipleiria.tripPlanner.gui.participantes;
 
 import java.util.ArrayList;
 import java.util.List;
+import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
+import pt.ipleiria.tripPlanner.gui.Models.Participante;
 import pt.ipleiria.tripPlanner.gui.events.ConfirmarClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.ConfirmarClicadoListener;
 
@@ -17,13 +19,15 @@ import pt.ipleiria.tripPlanner.gui.events.ConfirmarClicadoListener;
 public class MostrarParticipante extends javax.swing.JPanel {
 
      private List<ConfirmarClicadoListener> confirmarClicadoListener;
+     private Participante participante;
     /**
      * Creates new form InserirParticipante
      */
-    public MostrarParticipante() {
+    public MostrarParticipante(Participante participante) {
         initComponents();
-        
+        this.participante = participante;
         this.confirmarClicadoListener = new ArrayList<>();
+        preencherCampos();
     }
     
     public synchronized void addConfirmarClicadoListener(ConfirmarClicadoListener listener){
@@ -50,45 +54,31 @@ public class MostrarParticipante extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnOk = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jPanel1 = new javax.swing.JPanel();
         lblNome = new javax.swing.JLabel();
         lblDataNascimento = new javax.swing.JLabel();
         lblBI = new javax.swing.JLabel();
         lblLocalidade = new javax.swing.JLabel();
         lblCondicaoFisica = new javax.swing.JLabel();
         lblAdministrador = new javax.swing.JLabel();
-        lblUsername = new javax.swing.JLabel();
-        lblPassword = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
         cbAdministrador = new javax.swing.JCheckBox();
-        btnOk = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
         lblMostrarNome = new javax.swing.JLabel();
         lblMostrarDtaNascimento = new javax.swing.JLabel();
         lblMostrarBI = new javax.swing.JLabel();
         lblMostrarLocalidade = new javax.swing.JLabel();
+        lblMostarICF = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        lblUsername = new javax.swing.JLabel();
+        lblPassword = new javax.swing.JLabel();
         lblMostrarUsername = new javax.swing.JLabel();
         lblMostrarPassword = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        lblNome.setText("Nome");
-
-        lblDataNascimento.setText("Data de Nascimento");
-
-        lblBI.setText("Bilhete Identidade");
-
-        lblLocalidade.setText("Localidade");
-
-        lblCondicaoFisica.setText("Indice Condicao Fisica");
-
-        lblAdministrador.setText("Administrador");
-
-        lblUsername.setText("Username");
-
-        lblPassword.setText("Password");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
+        btnOk.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         btnOk.setText("Ok");
         btnOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,102 +86,179 @@ public class MostrarParticipante extends javax.swing.JPanel {
             }
         });
 
-        btnCancelar.setText("Cancelar");
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 2, 36)); // NOI18N
+        jLabel1.setText("Visualizar Participante");
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Dados Pessoais"));
+
+        lblNome.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblNome.setText("Nome:");
+
+        lblDataNascimento.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblDataNascimento.setText("Data de Nascimento");
+
+        lblBI.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblBI.setText("Bilhete Identidade");
+
+        lblLocalidade.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblLocalidade.setText("Localidade");
+
+        lblCondicaoFisica.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblCondicaoFisica.setText("Indice Condicao Fisica");
+
+        lblAdministrador.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblAdministrador.setText("Administrador");
+
+        cbAdministrador.setBackground(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblNome)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblMostrarNome, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblBI)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblMostrarBI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblLocalidade)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblMostrarLocalidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblDataNascimento)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblMostrarDtaNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblCondicaoFisica)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblMostarICF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblAdministrador)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbAdministrador)))
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblNome)
+                    .addComponent(lblMostrarNome, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblMostrarDtaNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblDataNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblMostrarBI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblBI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblLocalidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblMostrarLocalidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(15, 15, 15)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCondicaoFisica)
+                    .addComponent(lblMostarICF, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblAdministrador)
+                    .addComponent(cbAdministrador))
+                .addContainerGap())
+        );
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Dados de sistema"));
+        jPanel2.setEnabled(false);
+
+        lblUsername.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblUsername.setText("Username");
+        lblUsername.setEnabled(false);
+
+        lblPassword.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblPassword.setText("Password");
+        lblPassword.setEnabled(false);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblUsername)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblMostrarUsername, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblPassword)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblMostrarPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblUsername)
+                    .addComponent(lblMostrarUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(36, 36, 36))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblMostrarPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnOk))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblBI)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblLocalidade)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblMostrarLocalidade, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 81, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCancelar))
+                        .addGap(56, 56, 56)
+                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblMostrarBI, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblAdministrador)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(cbAdministrador))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblCondicaoFisica)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblUsername)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(lblMostrarUsername, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(lblPassword)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblMostrarPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblNome)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblMostrarNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(lblDataNascimento)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(lblMostrarDtaNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(36, 36, 36)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(35, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(56, 56, 56))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnOk)
+                        .addGap(185, 185, 185))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNome)
-                    .addComponent(lblMostrarNome))
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDataNascimento)
-                    .addComponent(lblMostrarDtaNascimento))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblBI)
-                    .addComponent(lblMostrarBI))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblLocalidade)
-                    .addComponent(lblMostrarLocalidade))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCondicaoFisica)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAdministrador)
-                    .addComponent(cbAdministrador))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblUsername)
-                    .addComponent(lblMostrarUsername))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPassword)
-                    .addComponent(lblMostrarPassword))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnOk)
-                    .addComponent(btnCancelar))
-                .addGap(19, 19, 19))
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(btnOk)
+                .addGap(97, 97, 97))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -200,15 +267,18 @@ public class MostrarParticipante extends javax.swing.JPanel {
     }//GEN-LAST:event_btnOkActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnOk;
     private javax.swing.JCheckBox cbAdministrador;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblAdministrador;
     private javax.swing.JLabel lblBI;
     private javax.swing.JLabel lblCondicaoFisica;
     private javax.swing.JLabel lblDataNascimento;
     private javax.swing.JLabel lblLocalidade;
+    private javax.swing.JLabel lblMostarICF;
     private javax.swing.JLabel lblMostrarBI;
     private javax.swing.JLabel lblMostrarDtaNascimento;
     private javax.swing.JLabel lblMostrarLocalidade;
@@ -219,4 +289,20 @@ public class MostrarParticipante extends javax.swing.JPanel {
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblUsername;
     // End of variables declaration//GEN-END:variables
+
+    private void preencherCampos() {
+        lblMostrarNome.setText(participante.getNome());
+        lblMostarICF.setText(participante.getICF() + "");
+        lblMostrarBI.setText(participante.getBI() + "");
+        lblMostrarDtaNascimento.setText(participante.getDataNasc().toString());
+        lblMostrarLocalidade.setText(participante.getLocalidade());
+        jPanel2.setEnabled(DadosAplicacao.getInstance().getLogado().isAdministrador());
+        lblUsername.setEnabled(DadosAplicacao.getInstance().getLogado().isAdministrador());
+        lblPassword.setEnabled(DadosAplicacao.getInstance().getLogado().isAdministrador());
+        
+        if(DadosAplicacao.getInstance().getLogado().isAdministrador()){
+            lblMostrarUsername.setText(participante.getUsername());
+            lblPassword.setText(participante.getPassword().toString());
+        }
+    }
 }

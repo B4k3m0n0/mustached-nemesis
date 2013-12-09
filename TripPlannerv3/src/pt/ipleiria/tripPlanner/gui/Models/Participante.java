@@ -23,8 +23,9 @@ public class Participante {
     private char[] password;
     private boolean editor;
     private ArrayList<String> permissoes;
+    private boolean primeiroLogin;
 
-    public Participante(String nome, Calendar dataNasc, int BI, String localidade, int ICF, boolean administrador, String username, char[] password, boolean editor, ArrayList<String> permissoes) {
+    public Participante(String nome, Calendar dataNasc, int BI, String localidade, int ICF, boolean administrador, String username, char[] password, boolean editor, ArrayList<String> permissoes, boolean primeiroLogin) {
 
         this.nome = nome;
         this.dataNasc = dataNasc;
@@ -34,10 +35,19 @@ public class Participante {
         this.administrador = administrador;
         this.username = username;
         this.password = password;
+        this.primeiroLogin = primeiroLogin;
 
         for (int i = 0; i < permissoes.size(); i++) {
             this.permissoes.add(permissoes.get(i));
         }
+    }
+
+    public void setPrimeiroLogin(boolean primeiroLogin) {
+        this.primeiroLogin = primeiroLogin;
+    }
+
+    public boolean isPrimeiroLogin() {
+        return primeiroLogin;
     }
 
     public String getNome() {

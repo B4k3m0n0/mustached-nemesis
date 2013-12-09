@@ -1,13 +1,19 @@
 package pt.ipleiria.tripPlanner.gui.TripPlanner;
 
 import com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
 import pt.ipleiria.tripPlanner.gui.Models.Participante;
 import pt.ipleiria.tripPlanner.gui.events.LoginEfetuadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.LoginEfetuadoListener;
+import pt.ipleiria.tripPlanner.gui.events.PrimeiroLoginEfetuadoEvent;
+import pt.ipleiria.tripPlanner.gui.events.PrimeiroLoginEfetuadoListener;
 
 /*
  * To change this template, choose Tools | Templates
@@ -20,6 +26,7 @@ import pt.ipleiria.tripPlanner.gui.events.LoginEfetuadoListener;
 public class Login extends javax.swing.JPanel {
 
     private List<LoginEfetuadoListener> loginEfetuadoListener;
+    private List<PrimeiroLoginEfetuadoListener> primeiroLoginEfetuadoListener;
 
     /**
      * Creates new form Login
@@ -28,6 +35,12 @@ public class Login extends javax.swing.JPanel {
         initComponents();
 
         this.loginEfetuadoListener = new ArrayList<>();
+        this.primeiroLoginEfetuadoListener = new ArrayList<>();
+        
+        setLayout(new BorderLayout());
+	JLabel background=new JLabel(new ImageIcon("C:\\Users\\Cristiano\\Desktop\\Ride-in-Israel_Bike-riders.jpg"));
+	add(background);
+	background.setLayout(new FlowLayout());
     }
 
     public synchronized void addLoginEfetuadoListener(LoginEfetuadoListener listener) {
@@ -44,6 +57,23 @@ public class Login extends javax.swing.JPanel {
             listener.loginEfetuado(evento);
         }
     }
+    
+    public synchronized void addPrimeiroLoginEfetuadoListener(PrimeiroLoginEfetuadoListener listener) {
+        this.primeiroLoginEfetuadoListener.add(listener);
+    }
+
+    public synchronized void removePrimeiroLoginEfetuadoListener(PrimeiroLoginEfetuadoListener listener) {
+        this.primeiroLoginEfetuadoListener.remove(listener);
+    }
+
+    protected synchronized void firePrimeiroLoginEfetuadoEvent(Participante participante) {
+        for (PrimeiroLoginEfetuadoListener listener : this.primeiroLoginEfetuadoListener) {
+            PrimeiroLoginEfetuadoEvent evento = new PrimeiroLoginEfetuadoEvent(this, participante);
+            listener.primeiroLoginEfetuado(evento);
+        }
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -67,10 +97,13 @@ public class Login extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(640, 480));
         setPreferredSize(new java.awt.Dimension(640, 480));
 
-        lbUsername.setText("Username");
+        lbUsername.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lbUsername.setText("Username:");
 
-        lbPassword.setText("Password");
+        lbPassword.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lbPassword.setText("Password:");
 
+        btnLogin.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,7 +111,7 @@ public class Login extends javax.swing.JPanel {
             }
         });
 
-        lblTripPlanner.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lblTripPlanner.setFont(new java.awt.Font("Times New Roman", 2, 36)); // NOI18N
         lblTripPlanner.setText("Trip Planner");
 
         lblErros.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -88,38 +121,37 @@ public class Login extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblTripPlanner)
+                .addGap(217, 217, 217))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(178, 178, 178)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(lbPassword)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lbUsername)
-                                        .addGap(12, 12, 12)
-                                        .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(lblTripPlanner)
-                                    .addGap(54, 54, 54)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(107, 107, 107)
-                                .addComponent(btnLogin))))
+                                .addComponent(lbPassword)
+                                .addGap(18, 18, 18)
+                                .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lbUsername)
+                                .addGap(12, 12, 12)
+                                .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(144, 144, 144)
-                        .addComponent(lblErros, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblErros, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(275, 275, 275)
+                        .addComponent(btnLogin)))
                 .addContainerGap(146, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(156, 156, 156)
+                .addGap(140, 140, 140)
                 .addComponent(lblTripPlanner)
-                .addGap(18, 18, 18)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -132,9 +164,9 @@ public class Login extends javax.swing.JPanel {
                         .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(4, 4, 4)
                 .addComponent(lblErros)
-                .addGap(14, 14, 14)
+                .addGap(32, 32, 32)
                 .addComponent(btnLogin)
-                .addContainerGap(176, Short.MAX_VALUE))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -152,7 +184,7 @@ public class Login extends javax.swing.JPanel {
     private javax.swing.JTextField tfUsername;
     // End of variables declaration//GEN-END:variables
 
-    int conta = 1;
+    int conta = 0;
 
     public void confirmaLogin() {
         lblErros.setText("");
@@ -173,8 +205,12 @@ public class Login extends javax.swing.JPanel {
                             fireLoginEfetuadoEvent();
                             mudarNome();
                         } else {
+                            if(tfUsername.getText().equals(participante.getBI() + "") && new String(pfPassword.getPassword()).equals(new String(participante.getDataNasc().toString())) && participante.isPrimeiroLogin())  {
+                                firePrimeiroLoginEfetuadoEvent(participante);
+                                mudarNome();
+                            }else{
                             if (conta < 3) {
-                                lblErros.setText("Username ou Password errada. Tem mais " + (3 - conta) + " tentativas!");
+                                lblErros.setText("Username ou Password errada. Tem mais " + (3 - conta+1) + " tentativa(s)!");
                             } else {
                                 System.exit(0);
                             }
@@ -183,6 +219,7 @@ public class Login extends javax.swing.JPanel {
                     }
                 }
             }
+        }
         }
     }
 
