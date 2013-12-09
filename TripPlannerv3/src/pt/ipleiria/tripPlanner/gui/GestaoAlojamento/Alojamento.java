@@ -6,16 +6,79 @@
 
 package pt.ipleiria.tripPlanner.gui.GestaoAlojamento;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Ricardo
  */
 public class Alojamento {
-    String designacao;
+    private String designacao;
+    private String longitude;
+    private String latitude;
+    private String tipo;
+    private ArrayList<String> listaQuartos;
+    private String horarioFunc;
+    private String checkin;
+    private String contactos;
+    private String morada;
+    private String observacoes;
 
-    public Alojamento(String designacao) {
+    public Alojamento(String designacao, String longitude, String latitude, String tipo, ArrayList<String> listaQuartos, String horarioFunc, String checkin, String contactos, String morada, String observacoes) {
         this.designacao = designacao;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.tipo = tipo;
+        this.listaQuartos = listaQuartos;
+        this.horarioFunc = horarioFunc;
+        this.checkin = checkin;
+        this.contactos = contactos;
+        this.morada = morada;
+        this.observacoes = observacoes;
     }
+
+    public String getDesignacao() {
+        return designacao;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public ArrayList<String> getListaQuartos() {
+        return listaQuartos;
+    }
+
+    public String getHorarioFunc() {
+        return horarioFunc;
+    }
+
+    public String getCheckin() {
+        return checkin;
+    }
+
+    public String getContactos() {
+        return contactos;
+    }
+
+    public String getMorada() {
+        return morada;
+    }
+
+    public String getObservacoes() {
+        return observacoes;
+    }
+    
+
+
     
     
 }

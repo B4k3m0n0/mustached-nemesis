@@ -10,7 +10,7 @@ import pt.ipleiria.tripPlanner.gui.Models.Participante;
  *
  * @author norberto
  */
-public class CellRendererParticipante extends CellRendererGeneric {
+public class CellRendererParticipante extends Utils.CellRendererGeneric {
 
     protected String getTextToDisplay(Object value) {
 

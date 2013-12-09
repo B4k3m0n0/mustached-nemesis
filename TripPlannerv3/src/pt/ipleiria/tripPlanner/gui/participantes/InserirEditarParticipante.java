@@ -116,6 +116,15 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
             }
         });
 
+        cbEditor.setBackground(new java.awt.Color(255, 255, 255));
+        cbEditor.setText("Editor");
+
+        lstPermissoes.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+
         jLabel2.setFont(new java.awt.Font("Times New Roman", 2, 36)); // NOI18N
         jLabel2.setText("Inserir Participantes");
 
@@ -569,7 +578,7 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
            pfPassword.setText("");
        }
     }//GEN-LAST:event_cbAdministradorActionPerformed
-
+                                       
     private void cbEditorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEditorActionPerformed
         panelEditor.setEnabled(cbEditor.isEnabled());
         DefaultListModel<String> model =  new DefaultListModel<>();

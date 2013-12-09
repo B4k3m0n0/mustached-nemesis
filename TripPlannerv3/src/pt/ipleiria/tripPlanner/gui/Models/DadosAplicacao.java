@@ -9,7 +9,6 @@ import java.util.Calendar;
 import java.util.Date;
 
 import pt.ipleiria.tripPlanner.gui.GestaoAlojamento.Alojamento;
-import pt.ipleiria.tripPlanner.gui.GestaoEtapas.Etapa;
 
 import sun.util.calendar.BaseCalendar;
 
@@ -29,18 +28,18 @@ public class DadosAplicacao {
     private ArrayList<Viagem> viagens;
     private ArrayList<Etapa> etapas;
     private ArrayList<Alojamento> alojamentos;
+    private ArrayList<Localidade> localidades;
     private Participante logado;
+    private ArrayList<Quarto> quartos;
+   
 
     private DadosAplicacao() {
         participantes = new ArrayList<>();
-
         etapas = new ArrayList<>();
         alojamentos = new ArrayList<>();
         viagens = new ArrayList<>();
 
         adicionarParticipante();
-        addAlojamento();
-        addEtapa();
     }
 
     private void adicionarParticipante() {
@@ -60,6 +59,7 @@ public class DadosAplicacao {
         participante1 = new Participante("Joao", dataNascJoao, 12175988, "Leiria", 5, true, "jonny0015", pass.toCharArray(), true, permissoes, false);
         adicionarParticipante(participante1);
 
+
         participantes.add(participante1);
         Participante participante2;
         participante2 = new Participante("a", dataNascJoao, 12175988, "Leiria", 5, true, "a", pass1.toCharArray(), true, permissoes, false);
@@ -69,23 +69,39 @@ public class DadosAplicacao {
     
 
 
-private void addAlojamento() {       
-        Alojamento alojamento1;
-        alojamento1 = new Alojamento("Bom e Barato");
-
-        alojamentos.add(alojamento1);
-
-
+    private void addAlojamento(Alojamento alojamento) {
+       alojamentos.add(alojamento);
     }
 
     public void addViagem(Viagem viagem) {
         viagens.add(viagem);
     }
 
-    private void addEtapa() {
-        Etapa etapa1;
-        etapa1 = new Etapa("A");
-        etapas.add(etapa1);
+    public void addEtapa(Etapa etapa) {
+        etapas.add(etapa);
+    }
+
+
+    public void addLocalidades() {
+        Localidade localidade1;
+        localidade1 = new Localidade("Leiria");
+    }
+    
+    public void addQuarto(Quarto quarto){
+        quartos.add(quarto);
+    }
+
+    public ArrayList<Quarto> getQuartos() {
+        return quartos;
+    }
+    
+
+    public ArrayList<Alojamento> getAlojamentos() {
+        return alojamentos;
+    }
+
+    public ArrayList<Localidade> getLocalidades() {
+        return localidades;
     }
 
     public ArrayList<Viagem> getViagens() {
@@ -96,10 +112,6 @@ private void addAlojamento() {
         return (ArrayList<Etapa>) etapas.clone();
     }
 
-    public ArrayList<Alojamento> getAlojamentos() {
-        return (ArrayList<Alojamento>) alojamentos.clone();
-    }
-
     public void adicionarParticipante(Participante p) {
         participantes.add(p);
     }
@@ -107,13 +119,12 @@ private void addAlojamento() {
     public ArrayList<Participante> getParticipantes() {
         return (ArrayList<Participante>) participantes.clone();
     }
-    
-    public void setLogado(Participante participante){
+
+    public void setLogado(Participante participante) {
         this.logado = participante;
     }
 
     public Participante getLogado() {
         return logado;
     }
-    
 }

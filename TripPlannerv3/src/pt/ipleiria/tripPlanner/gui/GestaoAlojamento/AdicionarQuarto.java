@@ -3,8 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pt.ipleiria.tripPlanner.gui.GestaoAlojamento;
+
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
+import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
+import pt.ipleiria.tripPlanner.gui.Models.Quarto;
+import pt.ipleiria.tripPlanner.gui.events.AlojamentoClicadoEvent;
+import pt.ipleiria.tripPlanner.gui.events.AlojamentoClicadoListener;
+import pt.ipleiria.tripPlanner.gui.events.CancelarAdicionarQuartoClicadoEvent;
+import pt.ipleiria.tripPlanner.gui.events.CancelarAdicionarQuartoClicadoListener;
+import pt.ipleiria.tripPlanner.gui.events.ConfirmarAdicionarQuartoClicadoEvent;
+import pt.ipleiria.tripPlanner.gui.events.ConfirmarAdicionarQuartoClicadoListener;
+import pt.ipleiria.tripPlanner.gui.events.CriarEditarAlojamentoClicadoEvent;
+import pt.ipleiria.tripPlanner.gui.events.CriarEditarAlojamentoClicadoListener;
+import pt.ipleiria.tripPlanner.gui.events.OkInserirEtapasClicadoEvent;
+import pt.ipleiria.tripPlanner.gui.events.OkInserirEtapasClicadoListener;
 
 /**
  *
@@ -12,11 +27,47 @@ package pt.ipleiria.tripPlanner.gui.GestaoAlojamento;
  */
 public class AdicionarQuarto extends javax.swing.JPanel {
 
+    private List<ConfirmarAdicionarQuartoClicadoListener> confirmarAdicionarQuartoClicadoListener;
+    private List<CancelarAdicionarQuartoClicadoListener> cancelarAdicionarQuartoClicadoListener;
+    private Quarto quarto;
+
     /**
      * Creates new form AdicionarQuarto
      */
     public AdicionarQuarto() {
         initComponents();
+        this.confirmarAdicionarQuartoClicadoListener = new ArrayList<>();
+        this.cancelarAdicionarQuartoClicadoListener = new ArrayList<>();
+    }
+
+    public synchronized void addConfirmarAdicionarQuartoClicadoListener(ConfirmarAdicionarQuartoClicadoListener listener) {
+        this.confirmarAdicionarQuartoClicadoListener.add(listener);
+    }
+
+    public synchronized void removeConfirmarAdicionarQuartoClicadoListener(ConfirmarAdicionarQuartoClicadoListener listener) {
+        this.confirmarAdicionarQuartoClicadoListener.remove(listener);
+    }
+
+    protected synchronized void fireConfirmarAdicionarQuartoClicadoEvent() {
+        for (ConfirmarAdicionarQuartoClicadoListener listener : this.confirmarAdicionarQuartoClicadoListener) {
+            ConfirmarAdicionarQuartoClicadoEvent evento = new ConfirmarAdicionarQuartoClicadoEvent(this);
+            listener.confirmarAdicionarQuartoClicado(evento);
+        }
+    }
+
+    public synchronized void addCancelarAdicionarQuartoClicadoListener(CancelarAdicionarQuartoClicadoListener listener) {
+        this.cancelarAdicionarQuartoClicadoListener.add(listener);
+    }
+
+    public synchronized void removeCancelarAdicionarQuartoClicadoListener(CancelarAdicionarQuartoClicadoListener listener) {
+        this.cancelarAdicionarQuartoClicadoListener.remove(listener);
+    }
+
+    protected synchronized void fireCancelarAdicionarQuartoClicadoEvent() {
+        for (CancelarAdicionarQuartoClicadoListener listener : this.cancelarAdicionarQuartoClicadoListener) {
+            CancelarAdicionarQuartoClicadoEvent evento = new CancelarAdicionarQuartoClicadoEvent(this);
+            listener.cancelarAdicionarQuartoClicado(evento);
+        }
     }
 
     /**
@@ -30,25 +81,48 @@ public class AdicionarQuarto extends javax.swing.JPanel {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
-        lblNCamas = new javax.swing.JLabel();
-        tfNCamas = new javax.swing.JTextField();
-        lblTipoCama = new javax.swing.JLabel();
-        rbIndividual = new javax.swing.JRadioButton();
-        rbCasalTwin = new javax.swing.JRadioButton();
-        rbIndividualBliche = new javax.swing.JRadioButton();
-        lblCusto = new javax.swing.JLabel();
-        tfCusto = new javax.swing.JTextField();
-        lblTipoCusto = new javax.swing.JLabel();
-        rbQuarto = new javax.swing.JRadioButton();
-        rbCama = new javax.swing.JRadioButton();
         btnOk = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        rbIndividualBliche = new javax.swing.JRadioButton();
+        lblNCamas = new javax.swing.JLabel();
+        rbIndividual = new javax.swing.JRadioButton();
+        rbCasalTwin = new javax.swing.JRadioButton();
+        tfNCamas = new javax.swing.JTextField();
+        lblTipoCama = new javax.swing.JLabel();
+        lblErrCamas = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        lblTipoCusto = new javax.swing.JLabel();
+        tfCusto = new javax.swing.JTextField();
+        lblCusto = new javax.swing.JLabel();
+        rbQuarto = new javax.swing.JRadioButton();
+        rbCama = new javax.swing.JRadioButton();
+        jLabel1 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        lblNCamas.setText("Nº Camas:");
+        btnOk.setText("Ok");
+        btnOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOkActionPerformed(evt);
+            }
+        });
 
-        lblTipoCama.setText("Tipo Cama:");
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Cama"));
+
+        buttonGroup1.add(rbIndividualBliche);
+        rbIndividualBliche.setText("Individual ou Bliche");
+
+        lblNCamas.setText("*Nº Camas:");
 
         buttonGroup1.add(rbIndividual);
         rbIndividual.setText("Individual");
@@ -56,35 +130,16 @@ public class AdicionarQuarto extends javax.swing.JPanel {
         buttonGroup1.add(rbCasalTwin);
         rbCasalTwin.setText("Casal ou Twin");
 
-        buttonGroup1.add(rbIndividualBliche);
-        rbIndividualBliche.setText("Individual ou Bliche");
+        lblTipoCama.setText("*Tipo Cama:");
 
-        lblCusto.setText("Custo:");
-
-        lblTipoCusto.setText("Tipo Custo:");
-
-        buttonGroup2.add(rbQuarto);
-        rbQuarto.setText("Quarto");
-
-        buttonGroup2.add(rbCama);
-        rbCama.setText("Cama");
-
-        btnOk.setText("Ok");
-
-        btnCancelar.setText("Cancelar");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblNCamas)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfNCamas, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblTipoCama)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(rbIndividual)
@@ -92,48 +147,120 @@ public class AdicionarQuarto extends javax.swing.JPanel {
                         .addComponent(rbCasalTwin)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(rbIndividualBliche))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblNCamas)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblErrCamas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tfNCamas))))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNCamas)
+                    .addComponent(tfNCamas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblErrCamas)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTipoCama)
+                    .addComponent(rbIndividual)
+                    .addComponent(rbCasalTwin)
+                    .addComponent(rbIndividualBliche))
+                .addContainerGap(48, Short.MAX_VALUE))
+        );
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Custo"));
+
+        lblTipoCusto.setText("*Tipo Custo:");
+
+        lblCusto.setText("*Custo:");
+
+        buttonGroup2.add(rbQuarto);
+        rbQuarto.setText("Quarto");
+
+        buttonGroup2.add(rbCama);
+        rbCama.setText("Cama");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lblCusto)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(tfCusto, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lblTipoCusto)
                         .addGap(18, 18, 18)
                         .addComponent(rbQuarto)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(rbCama)))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(160, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCusto)
+                    .addComponent(tfCusto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTipoCusto)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(rbQuarto)
+                        .addComponent(rbCama)))
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 2, 36)); // NOI18N
+        jLabel1.setText("Quarto");
+
+        jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnOk)
-                .addGap(18, 18, 18)
-                .addComponent(btnCancelar)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnOk)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnCancelar))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jSeparator1)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(140, 140, 140))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNCamas)
-                    .addComponent(tfNCamas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTipoCama)
-                    .addComponent(rbIndividual)
-                    .addComponent(rbCasalTwin)
-                    .addComponent(rbIndividualBliche))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCusto)
-                    .addComponent(tfCusto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTipoCusto)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(rbQuarto)
-                        .addComponent(rbCama)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnOk)
                     .addComponent(btnCancelar))
@@ -141,13 +268,26 @@ public class AdicionarQuarto extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
+        this.fireConfirmarAdicionarQuartoClicadoEvent();
+    }//GEN-LAST:event_btnOkActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        this.fireCancelarAdicionarQuartoClicadoEvent();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnOk;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblCusto;
+    private javax.swing.JLabel lblErrCamas;
     private javax.swing.JLabel lblNCamas;
     private javax.swing.JLabel lblTipoCama;
     private javax.swing.JLabel lblTipoCusto;
@@ -159,4 +299,12 @@ public class AdicionarQuarto extends javax.swing.JPanel {
     private javax.swing.JTextField tfCusto;
     private javax.swing.JTextField tfNCamas;
     // End of variables declaration//GEN-END:variables
+
+    public void adicionarQuarto() {
+        lblErrCamas.setText("");
+        lblErrCamas.setForeground(Color.red);
+        DadosAplicacao.getInstance().addQuarto(quarto);
+
+    }
+
 }

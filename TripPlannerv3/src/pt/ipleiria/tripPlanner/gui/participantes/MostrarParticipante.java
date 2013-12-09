@@ -288,7 +288,7 @@ public class MostrarParticipante extends javax.swing.JPanel {
     private javax.swing.JLabel lblUsername;
     // End of variables declaration//GEN-END:variables
 
-    private void preencherCampos(Participante participante) {
+    public void preencherCampos(Participante participante) {
         this.participante = participante;
         lblMostrarNome.setText(participante.getNome());
         lblMostarICF.setText(participante.getICF() + "");

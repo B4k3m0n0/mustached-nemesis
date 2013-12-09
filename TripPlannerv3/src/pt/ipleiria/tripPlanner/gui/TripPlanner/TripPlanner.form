@@ -3,9 +3,6 @@
 <Form version="1.3" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
-    <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[640, 480]"/>
-    </Property>
     <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[640, 480]"/>
     </Property>
@@ -51,31 +48,10 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
       <SubComponents>
-        <Component class="pt.ipleiria.tripPlanner.gui.TripPlanner.Login" name="login">
+        <Component class="pt.ipleiria.tripPlanner.gui.TripPlanner.Login" name="login1">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-              <CardConstraints cardName="login"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="pt.ipleiria.tripPlanner.gui.TripPlanner.MenuPrincipal" name="menuPrincipal">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-              <CardConstraints cardName="menuPrincipal"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="pt.ipleiria.tripPlanner.gui.TripPlanner.MenuCenarios" name="menuCenarios">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-              <CardConstraints cardName="card3"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="pt.ipleiria.tripPlanner.gui.TripPlanner.DadosAcesso" name="dadosAcesso1">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-              <CardConstraints cardName="card5"/>
+              <CardConstraints cardName="card2"/>
             </Constraint>
           </Constraints>
         </Component>

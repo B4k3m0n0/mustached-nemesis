@@ -5,14 +5,29 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.util.List;
 import javax.swing.JPanel;
+import pt.ipleiria.tripPlanner.gui.GestaoAlojamento.AdicionarQuarto;
+import pt.ipleiria.tripPlanner.gui.GestaoAlojamento.CriarEditarAlojamento;
+import pt.ipleiria.tripPlanner.gui.GestaoAlojamento.GestaodeAlojamentos;
+import pt.ipleiria.tripPlanner.gui.GestaoEtapas.GestaodeEtapas;
+import pt.ipleiria.tripPlanner.gui.GestaoEtapas.InserirEditarEtapa;
+import pt.ipleiria.tripPlanner.gui.GestaoViagens.AssociarViagens;
+import pt.ipleiria.tripPlanner.gui.GestaoViagens.GestaodeViagens;
+import pt.ipleiria.tripPlanner.gui.GestaoViagens.InserirEditarViagens;
+import pt.ipleiria.tripPlanner.gui.GestaoViagens.VisualizarViagens;
+import pt.ipleiria.tripPlanner.gui.events.AdicionarQuartoClicadoEvent;
+import pt.ipleiria.tripPlanner.gui.events.AdicionarQuartoClicadoListener;
 import pt.ipleiria.tripPlanner.gui.events.AlojamentoClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.AlojamentoClicadoListener;
 import pt.ipleiria.tripPlanner.gui.events.AssociarEtapasClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.AssociarEtapasClicadoListener;
 import pt.ipleiria.tripPlanner.gui.events.AssociarViagensClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.AssociarViagensClicadoListener;
+import pt.ipleiria.tripPlanner.gui.events.CancelarAdicionarQuartoClicadoEvent;
+import pt.ipleiria.tripPlanner.gui.events.CancelarAdicionarQuartoClicadoListener;
 import pt.ipleiria.tripPlanner.gui.events.CompararCenarioAlojamentoClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.CompararCenarioAlojamentoClicadoListener;
+import pt.ipleiria.tripPlanner.gui.events.ConfirmarAdicionarQuartoClicadoEvent;
+import pt.ipleiria.tripPlanner.gui.events.ConfirmarAdicionarQuartoClicadoListener;
 import pt.ipleiria.tripPlanner.gui.events.ConfirmarAssociacaoViagensEvent;
 import pt.ipleiria.tripPlanner.gui.events.ConfirmarAssociacaoViagensListener;
 import pt.ipleiria.tripPlanner.gui.events.ConfirmarClicadoAlojamentoEvent;
@@ -77,7 +92,11 @@ import pt.ipleiria.tripPlanner.gui.events.VoltarMenuCenariosClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.VoltarMenuCenariosClicadoListener;
 import pt.ipleiria.tripPlanner.gui.events.VoltarMenuPrincipalEvent;
 import pt.ipleiria.tripPlanner.gui.events.VoltarMenuPrincipalListener;
+import pt.ipleiria.tripPlanner.gui.participantes.InserirEditarParticipante;
+import pt.ipleiria.tripPlanner.gui.participantes.MenuParticipantes;
 import pt.ipleiria.tripPlanner.gui.participantes.MostrarParticipante;
+import pt.ipleiria.tripPlanner.gui.participantes.MostrarParticipante;
+
 
 /*
  * To change this template, choose Tools | Templates
@@ -91,66 +110,123 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
         AssociarEtapasClicadoListener, OkInserirEtapasClicadoListener, OkVisualizarEtapasClicadoListener,
         OkAssociarEtapasClicadoListener, GestaoCenarioAlojamentoClicadoListener, MenuCenariosClicadoListener,
         InserirCenarioAlojamentoClicadoListener, EditarCenarioAlojamentoClicadoListener, OkInserirCenarioAlojamentoClicadoListener,
-        OkEditarCenarioAlojamentoClicadoListener, VoltarGestaoCenarioAlojamentoClicadoListener, ConfirmarClicadoAlojamentoListener, VoltarMenuCenariosClicadoListener, TerminarSessaoClicadoListener, PrimeiroLoginEfetuadoListener {
+        OkEditarCenarioAlojamentoClicadoListener, VoltarGestaoCenarioAlojamentoClicadoListener, ConfirmarClicadoAlojamentoListener, VoltarMenuCenariosClicadoListener, TerminarSessaoClicadoListener, AdicionarQuartoClicadoListener, ConfirmarAdicionarQuartoClicadoListener, CancelarAdicionarQuartoClicadoListener, PrimeiroLoginEfetuadoListener {
+
+    private Login login;
+    private MenuCenarios menuCenarios;
+    private CriarEditarAlojamento criarEditarAlojamento;
+    private GestaodeAlojamentos gestaodeAlojamentos;
+    private MenuPrincipal menuPrincipal;
+    private AdicionarQuarto adicionarQuarto;
+    private DadosAcesso dadosAcesso;
+    private MenuParticipantes menuParticipante;
+    private InserirEditarParticipante inserirEditarParticipante;
+    private MostrarParticipante mostrarParticipante;
+    private GestaodeViagens gestaodeViagens;
+    private VisualizarViagens visualizarViagens;
+    private InserirEditarViagens inserirEditarViagens;
+    private AssociarViagens associarViagens;
+    private GestaodeEtapas gestaodeEtapas;
+    private InserirEditarEtapa inserirEditarEtapa;
 
     /**
      * Creates new form TripPlanner
      */
     public TripPlanner() {
         initComponents();
-        this.login.addLoginEfetuadoListener(this);
-        this.menuPrincipal.addParticipantesClicadoListener(this);
-        this.menuPrincipal.addAlojamentoClicadoListener(this);
-//        this.menuParticipantes.addInserirParticipantesClicadoListener(this);
-//        this.menuParticipantes.addEditarParticipantesClicadoListener(this);
-//        this.menuParticipantes.addVisualizarParticipantesClicadoListener(this);
-//        this.inserirEditarParticipante.addConfirmarClicadoListener(this);
-//        this.mostrarParticipante.addConfirmarClicadoListener(this);
-//        this.gestaodeAlojamentos.addCriarEditarAlojamentoClicadoListener(this);
-//        this.gestaodeAlojamentos.addVisualizarAlojamentoClicadoListener(this);
+        login = new Login();
+        jPanel1.add(login, "login");
+        menuCenarios = new MenuCenarios();
+        jPanel1.add(menuCenarios, "menuCenarios");
+        criarEditarAlojamento = new CriarEditarAlojamento();
+        jPanel1.add(criarEditarAlojamento, "criarEditarAlojamento");
+        gestaodeAlojamentos = new GestaodeAlojamentos();
+        jPanel1.add(gestaodeAlojamentos, "gestaodeAlojamentos");
+        menuPrincipal = new MenuPrincipal();
+        jPanel1.add(menuPrincipal, "menuPrincipal");
+        adicionarQuarto = new AdicionarQuarto();
+        jPanel1.add(adicionarQuarto, "adicionarQuarto");
+        dadosAcesso = new DadosAcesso();
+        jPanel1.add(dadosAcesso, "dadosAcesso");
+        menuParticipante = new MenuParticipantes();
+        jPanel1.add(menuParticipante, "menuParticipantes");
+        inserirEditarParticipante = new InserirEditarParticipante();
+        jPanel1.add(inserirEditarParticipante, "inserirEditarParticipante");
+        mostrarParticipante = new MostrarParticipante();
+        jPanel1.add(mostrarParticipante, "mostrarParticipante");
+        gestaodeViagens = new GestaodeViagens();
+        jPanel1.add(gestaodeViagens, "gestaodeViagens");
+        visualizarViagens = new VisualizarViagens();
+        jPanel1.add(visualizarViagens, "visualizarViagens");
+        inserirEditarViagens = new InserirEditarViagens();
+        jPanel1.add(inserirEditarViagens, "inserirEditarViagens");
+        associarViagens = new AssociarViagens();
+        jPanel1.add(associarViagens, "associarViagens");
+        gestaodeEtapas = new GestaodeEtapas();
+        jPanel1.add(gestaodeEtapas, "gestaodeEtapas");
+        inserirEditarEtapa = new InserirEditarEtapa();
+        jPanel1.add(inserirEditarEtapa, "inserirEditarEtapa");
+
+        login.addLoginEfetuadoListener(this);
+        menuPrincipal.addParticipantesClicadoListener(this);
+        menuPrincipal.addAlojamentoClicadoListener(this);
+        menuParticipante.addInserirParticipantesClicadoListener(this);
+        menuParticipante.addEditarParticipantesClicadoListener(this);
+        menuParticipante.addVisualizarParticipantesClicadoListener(this);
+        inserirEditarParticipante.addConfirmarClicadoListener(this);
+        mostrarParticipante.addConfirmarClicadoListener(this);
+        gestaodeAlojamentos.addCriarEditarAlojamentoClicadoListener(this);
+        gestaodeAlojamentos.addVisualizarAlojamentoClicadoListener(this);
 //        this.gestaodeCenariodeAlojamento.addVisualizarCenarioAlojamentoClicadoListener(this);
 //        this.gestaodeCenariodeAlojamento.addCompararCenarioAlojamentoClicadoListener(this);
-        this.menuPrincipal.addViagensListener(this);
-//        this.gestaodeViagens.addInserirViagemClicadoListener(this);
-//        this.inserirEditarViagens.addConfirmarInsercaoViagensListener(this);
-//        this.gestaodeViagens.addVoltarMenuPrincipalListener(this);
+        menuPrincipal.addViagensListener(this);
+        gestaodeViagens.addInserirViagemClicadoListener(this);
+        inserirEditarViagens.addConfirmarInsercaoViagensListener(this);
+        gestaodeViagens.addVoltarMenuPrincipalListener(this);
 //        this.gestaodeViagens.addAssociarViagensClicadoListener(this);
 //        this.associarViagens.addConfirmarAssociacaoViagensListener(this);
-//        this.menuParticipantes.addVoltarMenuPrincipalListener(this);
+        menuParticipante.addVoltarMenuPrincipalListener(this);
 //        this.gestaodeCenariodeAlojamento.addVoltarMenuCenariosClicadoListener(this);
-        this.menuPrincipal.addEtapasClicadoListener(this);
-//        this.gestaodeEtapas.addInserirEtapasClicadoListener(this);
-//        this.gestaodeEtapas.addEditarEtapasClicadoListener(this);
+        menuPrincipal.addEtapasClicadoListener(this);
+        gestaodeEtapas.addInserirEtapasClicadoListener(this);
+        gestaodeEtapas.addEditarEtapasClicadoListener(this);
 //        this.gestaodeEtapas.addVisualizarEtapasClicadoListener(this);
 //        this.gestaodeEtapas.addAssociarEtapasClicadoListener(this);
-//        this.inserirEditarEtapa.addOkInserirEtapasClicadoListener(this);
-//        this.visualizarEtapa.addOkVisualizarEtapasClicadoListener(this);
-//        this.associarEtapas.addOkAssociarEtapasClicadoListener(this);
-        this.menuPrincipal.addMenuCenariosClicadoListener(this);
-        this.menuCenarios.addGestaoCenarioAlojamentoClicadoListener(this);
+        inserirEditarEtapa.addOkInserirEtapasClicadoListener(this);
+//        visualizarEtapa.addOkVisualizarEtapasClicadoListener(this);
+//        associarEtapas.addOkAssociarEtapasClicadoListener(this);
+        menuPrincipal.addMenuCenariosClicadoListener(this);
+        menuCenarios.addGestaoCenarioAlojamentoClicadoListener(this);
 //        this.gestaodeCenariodeAlojamento.addInserirCenarioAlojamentoClicadoListener(this);
 //        this.gestaodeCenariodeAlojamento.addEditarCenarioAlojamentoClicadoListener(this);
 //        this.criarEditarCenarioAlojamento.addOkInserirCenarioAlojamentoClicadoListener(this);
-        //this.gestaodeCenariodeAlojamento.addVoltarGestaoCenarioAlojamentoClicadoListener(this);
-//        this.gestaodeEtapas.addVoltarMenuPrincipalListener(this);
-//        this.criarEditarAlojamento.addConfirmarClicadoAlojamentoistener(this);
+//        this.gestaodeCenariodeAlojamento.addVoltarGestaoCenarioAlojamentoClicadoListener(this);
+        gestaodeEtapas.addVoltarMenuPrincipalListener(this);
+        criarEditarAlojamento.addConfirmarClicadoAlojamentoListener(this);
 //        this.mostrarAlojamento.addConfirmarClicadoAlojamentoistener(this);
-//        this.gestaodeAlojamentos.addVoltarMenuPrincipalListener(this);
+        gestaodeAlojamentos.addVoltarMenuPrincipalListener(this);
 //        this.mostrarCenarioAlojamento.addOkInserirCenarioAlojamentoClicadoListener(this);
 //        this.compararCenarioAlojamento.addOkInserirCenarioAlojamentoClicadoListener(this);
-        this.menuCenarios.addVoltarMenuPrincipalListener(this);
-        this.menuPrincipal.addTerminarSessaoClicadoListener(this);
-        this.dadosAcesso1.addTerminarSessaoClicadoListener(this);
-       jPanel1.setPreferredSize(new Dimension(400, 300));
-        
+
+        menuCenarios.addVoltarMenuPrincipalListener(this);
+        menuPrincipal.addTerminarSessaoClicadoListener(this);
+        criarEditarAlojamento.addAdicionarQuartoClicado(this);
+        adicionarQuarto.addConfirmarAdicionarQuartoClicadoListener(this);
+        adicionarQuarto.addCancelarAdicionarQuartoClicadoListener(this);
+
+        jPanel1.setPreferredSize(new Dimension(400, 300));
+
+        menuCenarios.addVoltarMenuPrincipalListener(this);
+        menuPrincipal.addTerminarSessaoClicadoListener(this);
+        dadosAcesso.addTerminarSessaoClicadoListener(this);
+        jPanel1.setPreferredSize(new Dimension(400, 300));
+
         Component[] components = jPanel1.getComponents();
         for (Component component : components) {
             if (component instanceof JPanel) {
                 ((JPanel) component).setPreferredSize(new Dimension(400, 300)); //tamanho default do panel
                 ((JPanel) component).setMinimumSize(new Dimension(400, 300)); //o tamanho minimo do painel
                 ((JPanel) component).setMaximumSize(new Dimension(400, 300)); //o tamanho maximo do painel
-                
-
             }
         }
     }
@@ -165,13 +241,9 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        login = new pt.ipleiria.tripPlanner.gui.TripPlanner.Login();
-        menuPrincipal = new pt.ipleiria.tripPlanner.gui.TripPlanner.MenuPrincipal();
-        menuCenarios = new pt.ipleiria.tripPlanner.gui.TripPlanner.MenuCenarios();
-        dadosAcesso1 = new pt.ipleiria.tripPlanner.gui.TripPlanner.DadosAcesso();
+        login1 = new pt.ipleiria.tripPlanner.gui.TripPlanner.Login();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(640, 480));
         setMinimumSize(new java.awt.Dimension(640, 480));
         setResizable(false);
 
@@ -180,10 +252,7 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
         jPanel1.setName(""); // NOI18N
         jPanel1.setPreferredSize(new java.awt.Dimension(640, 480));
         jPanel1.setLayout(new java.awt.CardLayout());
-        jPanel1.add(login, "login");
-        jPanel1.add(menuPrincipal, "menuPrincipal");
-        jPanel1.add(menuCenarios, "card3");
-        jPanel1.add(dadosAcesso1, "card5");
+        jPanel1.add(login1, "card2");
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -225,11 +294,8 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private pt.ipleiria.tripPlanner.gui.TripPlanner.DadosAcesso dadosAcesso1;
     private javax.swing.JPanel jPanel1;
-    private pt.ipleiria.tripPlanner.gui.TripPlanner.Login login;
-    private pt.ipleiria.tripPlanner.gui.TripPlanner.MenuCenarios menuCenarios;
-    private pt.ipleiria.tripPlanner.gui.TripPlanner.MenuPrincipal menuPrincipal;
+    private pt.ipleiria.tripPlanner.gui.TripPlanner.Login login1;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -434,23 +500,38 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
 
     @Override
     public void voltarMenuCenariosAlojamentoClicado(VoltarMenuCenariosClicadoEvent evt) {
-                CardLayout cl = (CardLayout) this.jPanel1.getLayout();
+        CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         cl.show(this.jPanel1, "menuCenarios");
     }
 
     @Override
     public void terminarSessaoClicado(TerminarSessaoClicadoEvent evt) {
-                 CardLayout cl = (CardLayout) this.jPanel1.getLayout();
+        CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         cl.show(this.jPanel1, "login");
     }
 
     @Override
-    public void primeiroLoginEfetuado(PrimeiroLoginEfetuadoEvent evento) {
-        
+    public void adicionarQuartoClicado(AdicionarQuartoClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
-        dadosAcesso.receberParticipante(evento.getParticipante());
+        cl.show(this.jPanel1, "adicionarQuarto");
+    }
+
+    @Override
+    public void confirmarAdicionarQuartoClicado(ConfirmarAdicionarQuartoClicadoEvent evt) {
+        CardLayout cl = (CardLayout) this.jPanel1.getLayout();
+        cl.show(this.jPanel1, "criarEditarAlojamento");
+    }
+
+    @Override
+    public void cancelarAdicionarQuartoClicado(CancelarAdicionarQuartoClicadoEvent evt) {
+        CardLayout cl = (CardLayout) this.jPanel1.getLayout();
+        cl.show(this.jPanel1, "criarEditarAlojamento");
+    }
+
+    @Override
+    public void primeiroLoginEfetuado(PrimeiroLoginEfetuadoEvent evento) {
+        CardLayout cl = (CardLayout) this.jPanel1.getLayout();
+        // dadosAcesso.receberParticipante(evento.getParticipante());
         cl.show(this.jPanel1, "primeiroLogin");
     }
-    
-    
 }

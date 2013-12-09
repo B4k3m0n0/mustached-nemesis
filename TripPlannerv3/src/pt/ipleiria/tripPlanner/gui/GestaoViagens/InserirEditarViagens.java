@@ -17,7 +17,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import pt.ipleiria.tripPlanner.gui.GestaoAlojamento.Alojamento;
-import pt.ipleiria.tripPlanner.gui.GestaoEtapas.Etapa;
+import pt.ipleiria.tripPlanner.gui.Models.Etapa;
 import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
 import pt.ipleiria.tripPlanner.gui.events.ConfirmarInsercaoViagensEvent;
 import pt.ipleiria.tripPlanner.gui.events.ConfirmarInsercaoViagensListener;
@@ -30,8 +30,8 @@ public class InserirEditarViagens extends javax.swing.JPanel {
 
     private List<ConfirmarInsercaoViagensListener> confirmarInsercaoViagensListener;
     private Viagem viagem;
-    private LinkedList<Etapa> etapasI;
-    private LinkedList<Alojamento> alojamentosI;
+    private ArrayList<Etapa> etapasI;
+    private ArrayList<Alojamento> alojamentosI;
 
     private ArrayList<Etapa> etapasModelList;
     private ArrayList<Alojamento> alojamentosModelList;
@@ -52,8 +52,8 @@ public class InserirEditarViagens extends javax.swing.JPanel {
         cbTipoViagem.addItem("Caminhada");
         cbTipoViagem.addItem("Bicicleta");
 
-        etapasI = new LinkedList<>();
-        alojamentosI = new LinkedList<>();
+        etapasI = new ArrayList<>();
+        alojamentosI = new ArrayList<>();
 
         etapasModelList = new ArrayList<>();
         alojamentosModelList = new ArrayList<>();

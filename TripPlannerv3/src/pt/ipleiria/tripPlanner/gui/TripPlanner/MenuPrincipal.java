@@ -2,8 +2,8 @@ package pt.ipleiria.tripPlanner.gui.TripPlanner;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
-import pt.ipleiria.tripPlanner.gui.Models.Participante;
 import pt.ipleiria.tripPlanner.gui.events.AlojamentoClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.AlojamentoClicadoListener;
 import pt.ipleiria.tripPlanner.gui.events.EtapasClicadoEvent;
@@ -158,6 +158,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
         btnDespesas = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
         lblWelcome = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(640, 480));
@@ -166,6 +167,8 @@ public class MenuPrincipal extends javax.swing.JPanel {
 
         btnParticipantes.setBackground(new java.awt.Color(255, 255, 255));
         btnParticipantes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pt/ipleiria/tripPlanner/gui/Imagens/utilizador.png"))); // NOI18N
+        btnParticipantes.setToolTipText("Participantes");
+        btnParticipantes.setContentAreaFilled(false);
         btnParticipantes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnParticipantesActionPerformed(evt);
@@ -173,6 +176,8 @@ public class MenuPrincipal extends javax.swing.JPanel {
         });
 
         btnViagens.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pt/ipleiria/tripPlanner/gui/Imagens/viagem.png"))); // NOI18N
+        btnViagens.setToolTipText("Viagens");
+        btnViagens.setContentAreaFilled(false);
         btnViagens.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnViagensActionPerformed(evt);
@@ -180,6 +185,8 @@ public class MenuPrincipal extends javax.swing.JPanel {
         });
 
         btnEtapas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pt/ipleiria/tripPlanner/gui/Imagens/iconRouting.png"))); // NOI18N
+        btnEtapas.setToolTipText("Etapas");
+        btnEtapas.setContentAreaFilled(false);
         btnEtapas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEtapasActionPerformed(evt);
@@ -187,6 +194,8 @@ public class MenuPrincipal extends javax.swing.JPanel {
         });
 
         btnAlojamento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pt/ipleiria/tripPlanner/gui/Imagens/alojamento.png"))); // NOI18N
+        btnAlojamento.setToolTipText("Alojamento");
+        btnAlojamento.setContentAreaFilled(false);
         btnAlojamento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAlojamentoActionPerformed(evt);
@@ -194,10 +203,19 @@ public class MenuPrincipal extends javax.swing.JPanel {
         });
 
         btnLocalidades.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pt/ipleiria/tripPlanner/gui/Imagens/localidades 12.png"))); // NOI18N
+        btnLocalidades.setToolTipText("Localidades");
+        btnLocalidades.setContentAreaFilled(false);
+        btnLocalidades.setEnabled(false);
 
         btnDeslocacoes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pt/ipleiria/tripPlanner/gui/Imagens/deslocacao.png"))); // NOI18N
+        btnDeslocacoes.setToolTipText("Deslocações");
+        btnDeslocacoes.setContentAreaFilled(false);
+        btnDeslocacoes.setEnabled(false);
 
         btnCenarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pt/ipleiria/tripPlanner/gui/Imagens/cenario.png"))); // NOI18N
+        btnCenarios.setToolTipText("Cenários");
+        btnCenarios.setContentAreaFilled(false);
+        btnCenarios.setEnabled(false);
         btnCenarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCenariosActionPerformed(evt);
@@ -205,15 +223,26 @@ public class MenuPrincipal extends javax.swing.JPanel {
         });
 
         btnDespesas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pt/ipleiria/tripPlanner/gui/Imagens/fundoManeio.png"))); // NOI18N
+        btnDespesas.setToolTipText("Despesas");
+        btnDespesas.setContentAreaFilled(false);
+        btnDespesas.setEnabled(false);
 
+        btnLogout.setBackground(new java.awt.Color(255, 255, 255));
         btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pt/ipleiria/tripPlanner/gui/Imagens/TerminarSessao.png"))); // NOI18N
+        btnLogout.setToolTipText("Terminar Sessão");
+        btnLogout.setContentAreaFilled(false);
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLogoutActionPerformed(evt);
             }
         });
 
+        lblWelcome.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         lblWelcome.setText("jLabel1");
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 2, 36)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Trip Planner");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -222,7 +251,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(69, 69, 69)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnLocalidades)
                             .addComponent(btnParticipantes))
@@ -236,18 +265,25 @@ public class MenuPrincipal extends javax.swing.JPanel {
                             .addComponent(btnCenarios))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnLogout)
                             .addComponent(btnAlojamento)
-                            .addComponent(btnDespesas)))
+                            .addComponent(btnDespesas)
+                            .addComponent(btnLogout)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(182, 182, 182)
-                        .addComponent(lblWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(125, Short.MAX_VALUE))
+                        .addGap(191, 191, 191)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(66, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(463, 463, 463)
+                .addComponent(lblWelcome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addContainerGap()
+                .addComponent(lblWelcome)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnParticipantes)
                     .addComponent(btnViagens)
@@ -259,11 +295,9 @@ public class MenuPrincipal extends javax.swing.JPanel {
                     .addComponent(btnDeslocacoes)
                     .addComponent(btnCenarios)
                     .addComponent(btnDespesas))
-                .addGap(26, 26, 26)
-                .addComponent(lblWelcome)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
+                .addGap(61, 61, 61)
                 .addComponent(btnLogout)
-                .addGap(27, 27, 27))
+                .addGap(43, 43, 43))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -288,9 +322,12 @@ public class MenuPrincipal extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCenariosActionPerformed
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-
+        Object[] options = {"Sim", "Não"};
+        int n = JOptionPane.showOptionDialog(getRootPane(), "Tem a certeza que pretende terminar a sessão?", "Sair", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, null);
+        if (n == 0) {
         DadosAplicacao.getInstance().setLogado(null);
         this.fireTerminarSessaoClicadoEvent();
+        }
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -303,6 +340,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnParticipantes;
     private javax.swing.JButton btnViagens;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblWelcome;
     // End of variables declaration//GEN-END:variables
 

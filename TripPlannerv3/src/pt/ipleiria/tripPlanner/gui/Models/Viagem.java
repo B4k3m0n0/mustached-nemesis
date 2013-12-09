@@ -6,9 +6,10 @@
 
 package pt.ipleiria.tripPlanner.gui.Models;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import pt.ipleiria.tripPlanner.gui.GestaoAlojamento.Alojamento;
-import pt.ipleiria.tripPlanner.gui.GestaoEtapas.Etapa;
+import pt.ipleiria.tripPlanner.gui.Models.Etapa;
 
 /**
  *
@@ -16,10 +17,10 @@ import pt.ipleiria.tripPlanner.gui.GestaoEtapas.Etapa;
  */
 public class Viagem {
     String designacao;
-    LinkedList<Etapa> etapas;
-    LinkedList<Alojamento> alojamentos;
+    ArrayList<Etapa> etapas;
+    ArrayList<Alojamento> alojamentos;
 
-    public Viagem(String designacao, LinkedList<Etapa> etapas, LinkedList<Alojamento> alojamentos, String tipoViagem) {
+    public Viagem(String designacao, ArrayList<Etapa> etapas, ArrayList<Alojamento> alojamentos, String tipoViagem) {
         this.designacao = designacao;
         this.etapas = etapas;
         this.alojamentos = alojamentos;

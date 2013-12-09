@@ -1,15 +1,11 @@
 package pt.ipleiria.tripPlanner.gui.TripPlanner;
 
-import com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
 import pt.ipleiria.tripPlanner.gui.Models.Participante;
 import pt.ipleiria.tripPlanner.gui.events.LoginEfetuadoEvent;
@@ -38,11 +34,11 @@ public class Login extends javax.swing.JPanel {
 
         this.loginEfetuadoListener = new ArrayList<>();
         this.primeiroLoginEfetuadoListener = new ArrayList<>();
-        
+
         setLayout(new BorderLayout());
-	JLabel background=new JLabel(new ImageIcon("C:\\Users\\Cristiano\\Desktop\\Ride-in-Israel_Bike-riders.jpg"));
-	add(background);
-	background.setLayout(new FlowLayout());
+//	JLabel background=new JLabel(new ImageIcon("C:\\Users\\Cristiano\\Desktop\\Ride-in-Israel_Bike-riders.jpg"));
+//	add(background);
+//	background.setLayout(new FlowLayout());
     }
 
     public synchronized void addLoginEfetuadoListener(LoginEfetuadoListener listener) {
@@ -59,7 +55,7 @@ public class Login extends javax.swing.JPanel {
             listener.loginEfetuado(evento);
         }
     }
-    
+
     public synchronized void addPrimeiroLoginEfetuadoListener(PrimeiroLoginEfetuadoListener listener) {
         this.primeiroLoginEfetuadoListener.add(listener);
     }
@@ -74,8 +70,6 @@ public class Login extends javax.swing.JPanel {
             listener.primeiroLoginEfetuado(evento);
         }
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -113,6 +107,13 @@ public class Login extends javax.swing.JPanel {
             }
         });
 
+
+        tfUsername.setText("jonny0015");
+
+        pfPassword.setText("noob");
+
+        lblTripPlanner.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+
         tfUsername.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 EnterPressed(evt);
@@ -126,6 +127,7 @@ public class Login extends javax.swing.JPanel {
         });
 
         lblTripPlanner.setFont(new java.awt.Font("Times New Roman", 2, 36)); // NOI18N
+
         lblTripPlanner.setText("Trip Planner");
 
         lblErros.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -189,7 +191,7 @@ public class Login extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void EnterPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EnterPressed
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             btnLogin.doClick();
         }
     }//GEN-LAST:event_EnterPressed
@@ -221,27 +223,27 @@ public class Login extends javax.swing.JPanel {
                     for (Participante participante : DadosAplicacao.getInstance().getParticipantes()) {
                         if (tfUsername.getText().equals(participante.getUsername())
                                 && new String(pfPassword.getPassword()).equals(new String(participante.getPassword()))) {
-                            DadosAplicacao.getInstance().setLogado(participante);                   
+                            DadosAplicacao.getInstance().setLogado(participante);
                             fireLoginEfetuadoEvent();
                             mudarNome();
                         } else {
                             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                             String dataNasc = formatter.format(participante.getDataNasc().getTime());
-                            if(tfUsername.getText().equals(participante.getBI() + "") && pfPassword.getPassword().equals(dataNasc) && participante.isPrimeiroLogin())  {
+                            if (tfUsername.getText().equals(participante.getBI() + "") && pfPassword.getPassword().equals(dataNasc) && participante.isPrimeiroLogin()) {
                                 firePrimeiroLoginEfetuadoEvent(participante);
                                 mudarNome();
-                            }else{
-                            if (conta < 3) {
-                                lblErros.setText("Username ou Password errada. Tem mais " + (3 - conta+1) + " tentativa(s)!");
                             } else {
-                                System.exit(0);
+                                if (conta < 3) {
+                                    lblErros.setText("Username ou Password errada. Tem mais " + (3 - conta + 1) + " tentativa(s)!");
+                                } else {
+                                    System.exit(0);
+                                }
                             }
+                            conta++;
                         }
-                        conta++;
                     }
                 }
             }
-        }
         }
     }
 
