@@ -24,6 +24,7 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
     
 
     private List<ConfirmarClicadoListener> confirmarClicadoListener;
+    private DefaultListModel<String> modelPermissoesUtilizador;
     /**
      * Creates new form InserirParticipante
      */
@@ -31,6 +32,7 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
         initComponents();
         
         this.confirmarClicadoListener = new ArrayList<>();
+ 
     }
     
     public synchronized void addConfirmarClicadoListener(ConfirmarClicadoListener listener){
@@ -606,8 +608,8 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
     }//GEN-LAST:event_cbEditorActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        DefaultListModel<String> model =  new DefaultListModel<>();
-        model = (DefaultListModel<String>) lstPermissoes.getModel();
+
+
         lstPermissoes.removeAll();
         if(lstPermissoesUtilizador.getModel().getSize() > 0){
             for(int i=0; i<=lstPermissoesUtilizador.getModel().getSize(); i++){
@@ -622,20 +624,17 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
-        DefaultListModel<String> model =  new DefaultListModel<>();
-        model.addElement((String) lstPermissoes.getSelectedValue());
+
+        modelPermissoesUtilizador.addElement((String) lstPermissoes.getModel().getElementAt(lstPermissoes.getSelectedIndex()));
         lstPermissoes.remove(lstPermissoes.getSelectedIndex());
-        lstPermissoes.repaint();
         if(lstPermissoesUtilizador.getModel().getSize() > -1){
             for(int i=0; i<=lstPermissoesUtilizador.getModel().getSize(); i++){
               String permissaoUtilizador = (String) lstPermissoesUtilizador.getModel().getElementAt(i);
               model.addElement(permissaoUtilizador);
             }
-            lstPermissoesUtilizador.setModel(model);
-            lstPermissoesUtilizador.repaint();
+            lstPermissoesUtilizador.setModel(modelPermissoesUtilizador);
         }else{
-            lstPermissoesUtilizador.setModel(model);
-            lstPermissoesUtilizador.repaint();
+            lstPermissoesUtilizador.setModel(modelPermissoesUtilizador);
         }
         
     }//GEN-LAST:event_jButton3ActionPerformed

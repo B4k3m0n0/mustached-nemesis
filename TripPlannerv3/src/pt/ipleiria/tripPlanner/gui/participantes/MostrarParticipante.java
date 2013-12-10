@@ -345,7 +345,7 @@ public class MostrarParticipante extends javax.swing.JPanel {
             lblUsername.setEnabled(true);
             lblPassword.setEnabled(true);
             lblMostrarUsername.setText(participante.getUsername());
-            lblMostrarPassword.setText(participante.getPassword().toString());
+            lblMostrarPassword.setText(new String(participante.getPassword()));
         }
     }
 }
