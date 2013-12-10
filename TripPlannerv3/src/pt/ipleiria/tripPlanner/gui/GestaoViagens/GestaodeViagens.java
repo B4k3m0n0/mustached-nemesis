@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.ListCellRenderer;
+import pt.ipleiria.tripPlanner.gui.Models.Alojamento;
 import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
 import pt.ipleiria.tripPlanner.gui.Models.Viagem;
 import pt.ipleiria.tripPlanner.gui.Utils.CellRendererViagem;
@@ -341,4 +342,11 @@ public class GestaodeViagens extends javax.swing.JPanel {
     private javax.swing.JList lstViagens;
     private javax.swing.JTextField tfPesquisar;
     // End of variables declaration//GEN-END:variables
+ public void actualizarListaViagens() {
+        DefaultListModel<Viagem> model = new DefaultListModel<>();
+        for (Viagem viagens : DadosAplicacao.getInstance().getViagens()) {
+            model.addElement(viagens);
+        }
+        lstViagens.setModel(model);
+    }
 }

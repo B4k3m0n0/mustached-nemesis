@@ -298,7 +298,7 @@ public class GestaodeEtapas extends javax.swing.JPanel {
     private javax.swing.JTextField tfPesquisar;
     // End of variables declaration//GEN-END:variables
 
-    private void actualizarListaEtapas() {        
+    public void actualizarListaEtapas() {        
         DefaultListModel<Etapa> model =  new DefaultListModel<>();
         for(Etapa etapa: DadosAplicacao.getInstance().getEtapas()){
             model.addElement(etapa);

@@ -113,7 +113,7 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
         OkAssociarEtapasClicadoListener, GestaoCenarioAlojamentoClicadoListener, MenuCenariosClicadoListener,
         InserirCenarioAlojamentoClicadoListener, EditarCenarioAlojamentoClicadoListener, OkInserirCenarioAlojamentoClicadoListener,
         OkEditarCenarioAlojamentoClicadoListener, VoltarGestaoCenarioAlojamentoClicadoListener, ConfirmarClicadoAlojamentoListener, VoltarMenuCenariosClicadoListener, TerminarSessaoClicadoListener, AdicionarQuartoClicadoListener, ConfirmarAdicionarQuartoClicadoListener, CancelarAdicionarQuartoClicadoListener, PrimeiroLoginEfetuadoListener, VisualizarViagensClicadoListener, CancelarInserirEditarViagensClicadoListener {
-
+    
     private Login login;
     private MenuCenarios menuCenarios;
     private CriarEditarAlojamento criarEditarAlojamento;
@@ -168,7 +168,7 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
         jPanel1.add(gestaodeEtapas, "gestaodeEtapas");
         inserirEditarEtapa = new InserirEditarEtapa();
         jPanel1.add(inserirEditarEtapa, "inserirEditarEtapa");
-
+        
         login.addLoginEfetuadoListener(this);
         login.addPrimeiroLoginEfetuadoListener(this);
         menuPrincipal.addParticipantesClicadoListener(this);
@@ -211,21 +211,21 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
 //        this.mostrarCenarioAlojamento.addOkInserirCenarioAlojamentoClicadoListener(this);
 //        this.compararCenarioAlojamento.addOkInserirCenarioAlojamentoClicadoListener(this);
         gestaodeViagens.addVisualizarViagensClicadoListener(this);
-
+        gestaodeViagens.addAssociarViagensClicadoListener(this);
         menuCenarios.addVoltarMenuPrincipalListener(this);
         menuPrincipal.addTerminarSessaoClicadoListener(this);
         criarEditarAlojamento.addAdicionarQuartoClicado(this);
         adicionarQuarto.addConfirmarAdicionarQuartoClicadoListener(this);
         adicionarQuarto.addCancelarAdicionarQuartoClicadoListener(this);
-
+        
         jPanel1.setPreferredSize(new Dimension(400, 300));
-
+        
         menuCenarios.addVoltarMenuPrincipalListener(this);
         menuPrincipal.addTerminarSessaoClicadoListener(this);
         dadosAcesso.addTerminarSessaoClicadoListener(this);
         inserirEditarViagens.addCancelarInserirEditarViagensClicadoListener(this);
         jPanel1.setPreferredSize(new Dimension(400, 300));
-
+        
         Component[] components = jPanel1.getComponents();
         for (Component component : components) {
             if (component instanceof JPanel) {
@@ -309,230 +309,236 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
         cl.show(this.jPanel1, "menuPrincipal");
         menuPrincipal.atualizar();
     }
-
+    
     @Override
     public void participantesClicado(ParticipantesClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         cl.show(this.jPanel1, "menuParticipantes");
     }
-
+    
     @Override
     public void InserirParticipantesClicado(InserirParticipantesClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         cl.show(this.jPanel1, "inserirEditarParticipante");
     }
-
+    
     @Override
     public void EditarParticipantesClicado(EditarParticipantesClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         cl.show(this.jPanel1, "inserirEditarParticipante");
     }
-
+    
     @Override
     public void visualizarParticipantesClicado(VisualizarParticipantesClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         mostrarParticipante.preencherCampos(evt.getParticipante());
         cl.show(this.jPanel1, "mostrarParticipante");
     }
-
+    
     @Override
     public void confirmarClicado(ConfirmarClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         cl.show(this.jPanel1, "menuParticipantes");
     }
-
+    
     @Override
     public void criarEditarAlojamentoClicado(CriarEditarAlojamentoClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         cl.show(this.jPanel1, "criarEditarAlojamento");
     }
-
+    
     @Override
     public void visualizarAlojamentoClicado(VisualizarAlojamentoClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         cl.show(this.jPanel1, "mostrarAlojamento");
     }
-
+    
     @Override
     public void alojamentosClicado(AlojamentoClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         cl.show(this.jPanel1, "gestaodeAlojamentos");
     }
-
+    
     @Override
     public void visualizarCenarioAlojamentoClicado(VisualizarCenarioAlojamentoClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         cl.show(this.jPanel1, "mostrarCenarioAlojamento");
     }
-
+    
     @Override
     public void compararCenarioAlojamentoClicado(CompararCenarioAlojamentoClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         cl.show(this.jPanel1, "compararCenarioAlojamento");
     }
-
+    
     @Override
     public void viagensClicado(ViagensClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         cl.show(this.jPanel1, "gestaodeViagens");
     }
-
+    
     @Override
     public void inserirViagemClicado(InserirViagemClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
+        inserirEditarViagens.actualizarListaEtapas();
+        inserirEditarViagens.actualizarListaAlojamentos();
         cl.show(this.jPanel1, "inserirEditarViagens");
     }
-
+    
     @Override
     public void confirmarInsercaoViagens(ConfirmarInsercaoViagensEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
+        gestaodeViagens.actualizarListaViagens();
         cl.show(this.jPanel1, "gestaodeViagens");
     }
-
+    
     @Override
     public void voltarMenuPrincipal(VoltarMenuPrincipalEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         cl.show(this.jPanel1, "menuPrincipal");
     }
-
+    
     @Override
     public void associarViagensClicado(AssociarViagensClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         cl.show(this.jPanel1, "associarViagens");
     }
-
+    
     @Override
     public void confirmarAssociacaoViagens(ConfirmarAssociacaoViagensEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         cl.show(this.jPanel1, "gestaodeViagens");
     }
-
+    
     @Override
     public void etapasClicado(EtapasClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         cl.show(this.jPanel1, "gestaodeEtapas");
     }
-
+    
     @Override
     public void inserirEtapasClicado(InserirEtapasClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         cl.show(this.jPanel1, "inserirEditarEtapa");
     }
-
+    
     @Override
     public void editarEtapasClicado(EditarEtapasClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         cl.show(this.jPanel1, "inserirEditarEtapa");
     }
-
+    
     @Override
     public void visualizarEtapasClicado(VisualizarEtapasClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         cl.show(this.jPanel1, "visualizarEtapa");
     }
-
+    
     @Override
     public void associarEtapasClicado(AssociarEtapasClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         cl.show(this.jPanel1, "associarEtapas");
     }
-
+    
     @Override
     public void okInserirEtapasClicado(OkInserirEtapasClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
+        gestaodeEtapas.actualizarListaEtapas();
         cl.show(this.jPanel1, "gestaodeEtapas");
     }
-
+    
     @Override
     public void okVisualizarEtapasClicado(OkVisualizarEtapasClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         cl.show(this.jPanel1, "gestaodeEtapas");
     }
-
+    
     @Override
     public void okAssociarEtapasClicado(OkAssociarEtapasClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         cl.show(this.jPanel1, "gestaodeEtapas");
     }
-
+    
     @Override
     public void gestaoCenarioAlojamentoClicado(GestaoCenarioAlojamentoClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         cl.show(this.jPanel1, "gestaodeCenariodeAlojamento");
     }
-
+    
     @Override
     public void menuCenariosClicado(MenuCenariosClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         cl.show(this.jPanel1, "menuCenarios");
     }
-
+    
     @Override
     public void inserirCenarioAlojamentoClicado(InserirCenarioAlojamentoClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         cl.show(this.jPanel1, "criarEditarCenarioAlojamento");
     }
-
+    
     @Override
     public void editarCenarioAlojamentoClicado(EditarCenarioAlojamentoClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         cl.show(this.jPanel1, "criarEditarCenarioAlojamento");
     }
-
+    
     @Override
     public void okInserirCenarioAlojamentoClicado(OkInserirCenarioAlojamentoClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         cl.show(this.jPanel1, "gestaodeCenariodeAlojamento");
     }
-
+    
     @Override
     public void okEditarCenarioAlojamentoClicado(OkEditarCenarioAlojamentoClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         cl.show(this.jPanel1, "gestaodeCenariodeAlojamento");
     }
-
+    
     @Override
     public void voltarGestaoCenarioAlojamentoClicado(VoltarGestaoCenarioAlojamentoClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         cl.show(this.jPanel1, "menuCenarios");
     }
-
+    
     @Override
     public void confirmarClicadoAlojamento(ConfirmarClicadoAlojamentoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
+        gestaodeAlojamentos.actualizarListaAlojamentos();
         cl.show(this.jPanel1, "gestaodeAlojamentos");
     }
-
+    
     @Override
     public void voltarMenuCenariosAlojamentoClicado(VoltarMenuCenariosClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         cl.show(this.jPanel1, "menuCenarios");
     }
-
+    
     @Override
     public void terminarSessaoClicado(TerminarSessaoClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         cl.show(this.jPanel1, "login");
     }
-
+    
     @Override
     public void adicionarQuartoClicado(AdicionarQuartoClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         cl.show(this.jPanel1, "adicionarQuarto");
     }
-
+    
     @Override
     public void confirmarAdicionarQuartoClicado(ConfirmarAdicionarQuartoClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
+        criarEditarAlojamento.actualizarListaQuartos();
         cl.show(this.jPanel1, "criarEditarAlojamento");
     }
-
+    
     @Override
     public void cancelarAdicionarQuartoClicado(CancelarAdicionarQuartoClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         cl.show(this.jPanel1, "criarEditarAlojamento");
     }
-
+    
     @Override
     public void primeiroLoginEfetuado(PrimeiroLoginEfetuadoEvent evento) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
@@ -551,7 +557,7 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
         visualizarViagens.setDados(evento.getViagem());
         cl.show(this.jPanel1, "visualizarViagens");
     }
-
+    
     @Override
     public void cancelarInserirEditarClicado(CancelarInserirEditarViagensClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();

@@ -5,15 +5,16 @@
  */
 package pt.ipleiria.tripPlanner.gui.GestaoViagens;
 
+import pt.ipleiria.tripPlanner.gui.Models.Alojamento;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.ListCellRenderer;
-import pt.ipleiria.tripPlanner.gui.GestaoAlojamento.Alojamento;
 import pt.ipleiria.tripPlanner.gui.Models.Etapa;
 import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
+import pt.ipleiria.tripPlanner.gui.Models.Localidade;
 import pt.ipleiria.tripPlanner.gui.Models.Viagem;
 import pt.ipleiria.tripPlanner.gui.Utils.CellRendererAlojamento;
 import pt.ipleiria.tripPlanner.gui.Utils.CellRendererEtapa;
@@ -67,11 +68,14 @@ public class InserirEditarViagens extends javax.swing.JPanel {
         modelES = new DefaultListModel<>();
         modelAS = new DefaultListModel<>();
 
-        setModel();
+//        setModel();
         avisos();
 
         lstEtapas.setCellRenderer((ListCellRenderer) new CellRendererEtapa());
+        actualizarListaAlojamentos();
         lstAlojamentos.setCellRenderer((ListCellRenderer) new CellRendererAlojamento());
+        actualizarListaEtapas();
+
         /*
          pEtapas.setPreferredSize(new Dimension(228, 241));
          pEtapas.setVisible(false);
@@ -96,7 +100,7 @@ public class InserirEditarViagens extends javax.swing.JPanel {
             listener.confirmarInsercaoViagens(evento);
         }
     }
-    
+
     public synchronized void addCancelarInserirEditarViagensClicadoListener(CancelarInserirEditarViagensClicadoListener listener) {
         this.cancelarInserirEditarViagensListener.add(listener);
     }
@@ -177,12 +181,10 @@ public class InserirEditarViagens extends javax.swing.JPanel {
             .addGroup(pEtapasLayout.createSequentialGroup()
                 .addComponent(lblEtapas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(spListaEtapas, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(pEtapasLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblAvisoE, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(pEtapasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblAvisoE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(spListaEtapas, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
+                .addGap(0, 51, Short.MAX_VALUE))
         );
         pEtapasLayout.setVerticalGroup(
             pEtapasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,25 +215,21 @@ public class InserirEditarViagens extends javax.swing.JPanel {
             .addGroup(pAlojamentosLayout.createSequentialGroup()
                 .addComponent(lblAlojamentos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(spListaAlojamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pAlojamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblAvisoA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(spListaAlojamentos, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
                 .addGap(0, 47, Short.MAX_VALUE))
-            .addGroup(pAlojamentosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblAvisoA)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pAlojamentosLayout.setVerticalGroup(
             pAlojamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pAlojamentosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pAlojamentosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pAlojamentosLayout.createSequentialGroup()
-                        .addComponent(spListaAlojamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(20, Short.MAX_VALUE))
-                    .addGroup(pAlojamentosLayout.createSequentialGroup()
-                        .addComponent(lblAlojamentos)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblAvisoA))))
+                    .addComponent(spListaAlojamentos, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblAlojamentos))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblAvisoA)
+                .addContainerGap())
         );
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -296,18 +294,18 @@ public class InserirEditarViagens extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(lblDesignacao)
-                            .addGap(18, 18, 18)
-                            .addComponent(tfDesignacao, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addComponent(lblTipoViagem)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(cbTipoViagem, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(lblAvisoD))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(lblTipoViagem)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbTipoViagem, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(lblDesignacao)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblAvisoD, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tfDesignacao, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -363,7 +361,7 @@ public class InserirEditarViagens extends javax.swing.JPanel {
                         .addGap(30, 30, 30)
                         .addComponent(pEtapas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jSeparator2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -375,15 +373,15 @@ public class InserirEditarViagens extends javax.swing.JPanel {
                 || lstAlojamentos.getSelectedValuesList().isEmpty()) {
 
             if (tfDesignacao.getText().isEmpty()) {
-                lblDesignacao.setVisible(true);
+                lblAvisoD.setVisible(true);
             }
 
             if (lstEtapas.getSelectedValuesList().isEmpty()) {
-                lblEtapas.setVisible(true);
+                lblAvisoE.setVisible(true);
             }
 
             if (lstAlojamentos.getSelectedValuesList().isEmpty()) {
-                lblDesignacao.setVisible(true);
+                lblAvisoA.setVisible(true);
             }
 
         } else {
@@ -412,36 +410,36 @@ public class InserirEditarViagens extends javax.swing.JPanel {
         this.fireCancelarInserirEditarViagensClicadoListener();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void setModel() {
-        etapasModelList = DadosAplicacao.getInstance().getEtapas();
-        modelE.clear();
-        for (Etapa e : etapasModelList) {
-            modelE.addElement(e);
-        }
-        lstEtapas.setModel(modelE);
-
-        alojamentosModelList = DadosAplicacao.getInstance().getAlojamentos();
-        modelA.clear();
-        for (Alojamento a : alojamentosModelList) {
-            modelA.addElement(a);
-        }
-        lstAlojamentos.setModel(modelA);
-
-        /* DefaultListModel<Etapa> modelE =  new DefaultListModel<>();
-         for (Etapa e : DadosAplicacao.getInstance().getEtapas()) {
-         modelE.addElement(e);
-         }
-         lstEtapasP.setModel(modelE);
-        
-         /*
-         JList<String> list = new JList<>();
-         DefaultListModel<String> model = new DefaultListModel<>();
-         model.addElement("1");
-         model.addElement("2");
-         list.setModel(model);
-         JOptionPane.showMessageDialog(null, list, "Titulo", JOptionPane.QUESTION_MESSAGE);
-         */
-    }
+//    private void setModel() {
+//        etapasModelList = DadosAplicacao.getInstance().getEtapas();
+//        modelE.clear();
+//        for (Etapa e : etapasModelList) {
+//            modelE.addElement(e);
+//        }
+//        lstEtapas.setModel(modelE);
+//
+//        alojamentosModelList = DadosAplicacao.getInstance().getAlojamentos();
+//        modelA.clear();
+//        for (Alojamento a : alojamentosModelList) {
+//            modelA.addElement(a);
+//        }
+//        lstAlojamentos.setModel(modelA);
+//
+//        /* DefaultListModel<Etapa> modelE =  new DefaultListModel<>();
+//         for (Etapa e : DadosAplicacao.getInstance().getEtapas()) {
+//         modelE.addElement(e);
+//         }
+//         lstEtapasP.setModel(modelE);
+//        
+//         /*
+//         JList<String> list = new JList<>();
+//         DefaultListModel<String> model = new DefaultListModel<>();
+//         model.addElement("1");
+//         model.addElement("2");
+//         list.setModel(model);
+//         JOptionPane.showMessageDialog(null, list, "Titulo", JOptionPane.QUESTION_MESSAGE);
+//         */
+//    }
 
     public int getLstEtapasSize() {
         int t = 0;
@@ -488,5 +486,23 @@ public class InserirEditarViagens extends javax.swing.JPanel {
         lblAvisoA.setVisible(false);
         lblAvisoA.setText("Adicione Alojamentos");
         lblAvisoA.setForeground(Color.red);
+    }
+
+    public void actualizarListaEtapas() {
+        DefaultListModel<Etapa> model = new DefaultListModel<>();
+        for (Etapa etapas : DadosAplicacao.getInstance().getEtapas()) {
+            model.addElement(etapas);
+        }
+
+        lstEtapas.setModel(model);
+    }
+
+    public void actualizarListaAlojamentos() {
+        DefaultListModel<Alojamento> model = new DefaultListModel<>();
+        for (Alojamento alojamentos : DadosAplicacao.getInstance().getAlojamentos()) {
+            model.addElement(alojamentos);
+        }
+
+        lstAlojamentos.setModel(model);
     }
 }

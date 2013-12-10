@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import pt.ipleiria.tripPlanner.gui.GestaoAlojamento.Alojamento;
 
 
 /**
@@ -41,10 +40,10 @@ public class DadosAplicacao {
         quartos = new ArrayList<>();
         localidades = new ArrayList<>();
 
-        adicionarParticipante();
+        criarDadosTeste();
     }
 
-    private void adicionarParticipante() {
+    private void criarDadosTeste() {
 
         Calendar dataNascJoao = Calendar.getInstance();
 
@@ -64,7 +63,7 @@ public class DadosAplicacao {
 
                                     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyy");
                             String dataNasc = formatter.format(dataNascJoao.getTime());
-        participantes.add(participante1);
+//        participantes.add(participante1);
         Participante participante2;
         participante2 = new Participante("ANDRE", dataNascJoao, 14187566, "Leiria", 5, false, "14187566", dataNasc.toCharArray(), true, permissoes, true);
         adicionarParticipante(participante2);
@@ -76,6 +75,9 @@ public class DadosAplicacao {
         viagem1 = new Viagem(pass1, etapas, alojamentos, pass1);
         viagens.add(viagem1);
 //>>>>>>> .r24
+        
+        addLocalidade(new Localidade("Leiria"));
+        
     }
 
     
@@ -94,9 +96,10 @@ public class DadosAplicacao {
     }
 
 
-    public void addLocalidades() {
-        Localidade localidade1;
-        localidade1 = new Localidade("Leiria");
+    public void addLocalidade(Localidade localidade) {
+       
+        
+        localidades.add(localidade);
     }
     
     public void addQuarto(Quarto quarto){

@@ -5,10 +5,10 @@
  */
 package pt.ipleiria.tripPlanner.gui.GestaoViagens;
 
+import pt.ipleiria.tripPlanner.gui.Models.Alojamento;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
-import pt.ipleiria.tripPlanner.gui.GestaoAlojamento.Alojamento;
 import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
 import pt.ipleiria.tripPlanner.gui.Models.Etapa;
 import pt.ipleiria.tripPlanner.gui.Models.Viagem;

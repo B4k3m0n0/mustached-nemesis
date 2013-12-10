@@ -4,7 +4,7 @@
  */
 package pt.ipleiria.tripPlanner.gui.Utils;
 
-import pt.ipleiria.tripPlanner.gui.GestaoAlojamento.Alojamento;
+import pt.ipleiria.tripPlanner.gui.Models.Alojamento;
 import pt.ipleiria.tripPlanner.gui.Models.Etapa;
 import pt.ipleiria.tripPlanner.gui.Models.Participante;
 

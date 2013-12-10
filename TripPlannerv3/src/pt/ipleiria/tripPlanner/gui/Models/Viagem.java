@@ -7,7 +7,6 @@
 package pt.ipleiria.tripPlanner.gui.Models;
 
 import java.util.ArrayList;
-import pt.ipleiria.tripPlanner.gui.GestaoAlojamento.Alojamento;
 
 /**
  *

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package pt.ipleiria.tripPlanner.gui.GestaoAlojamento;
+package pt.ipleiria.tripPlanner.gui.Models;
 
 import java.util.ArrayList;
 import pt.ipleiria.tripPlanner.gui.Models.Quarto;

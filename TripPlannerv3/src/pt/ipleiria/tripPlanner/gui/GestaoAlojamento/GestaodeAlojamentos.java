@@ -1,5 +1,6 @@
 package pt.ipleiria.tripPlanner.gui.GestaoAlojamento;
 
+import pt.ipleiria.tripPlanner.gui.Models.Alojamento;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;

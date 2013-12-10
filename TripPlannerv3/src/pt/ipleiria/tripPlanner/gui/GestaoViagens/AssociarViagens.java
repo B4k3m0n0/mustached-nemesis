@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
 import pt.ipleiria.tripPlanner.gui.Models.Participante;
+import pt.ipleiria.tripPlanner.gui.Utils.CellRendererParticipante;
 import pt.ipleiria.tripPlanner.gui.events.ConfirmarAssociacaoViagensEvent;
 import pt.ipleiria.tripPlanner.gui.events.ConfirmarAssociacaoViagensListener;
 
@@ -36,9 +37,11 @@ public class AssociarViagens extends javax.swing.JPanel {
 
         participantesModelList = new ArrayList<>();
         modelP = new DefaultListModel<>();
+        lstParticipantes.setCellRenderer(new CellRendererParticipante());
 
         associadosModelList = new ArrayList<>();
         modelA = new DefaultListModel<>();
+        lstAssociados.setCellRenderer(new CellRendererParticipante());
 
         setModel();
 
@@ -288,12 +291,14 @@ public class AssociarViagens extends javax.swing.JPanel {
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void btnAssociarUmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssociarUmActionPerformed
-
         if (lstParticipantes.getSelectedValuesList().size() != 1) {
             lblAvisoP.setText("Apenas pode ter um participante selecionado");
         } else {
-            modelA.addElement((Participante) lstParticipantes.getSelectedValue());
-            lstParticipantes.setModel(modelA);
+            Participante p = (Participante) lstParticipantes.getSelectedValue();
+            modelA.addElement(p);
+            modelP.removeElement(p);
+            lstParticipantes.setModel(modelP);
+            lstAssociados.setModel(modelA);
         }
     }//GEN-LAST:event_btnAssociarUmActionPerformed
 
@@ -301,43 +306,69 @@ public class AssociarViagens extends javax.swing.JPanel {
         if (lstParticipantes.getSelectedValuesList().isEmpty()) {
             lblAvisoP.setText("Não tem nenhum participante selecionado");
         } else {
-            associadosModelList = (ArrayList<Participante>) lstParticipantes.getSelectedValuesList();
-            for (Participante p : associadosModelList) {
-                modelP.addElement(p);
+            ArrayList<Participante> part = new ArrayList<>();
+            for (int index : lstParticipantes.getSelectedIndices()) {
+                Participante p = modelP.get(index);
+                modelA.addElement(p);
+                part.add(p);
             }
+
+            for (Participante p : part) {
+                modelP.removeElement(p);
+            }
+
+            lstAssociados.setModel(modelA);
+            lstParticipantes.setModel(modelP);
         }
     }//GEN-LAST:event_btnAssociarVariosActionPerformed
 
     private void btnEliminarAssociacaoUmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarAssociacaoUmActionPerformed
-        if (lstParticipantes.getSelectedValuesList().size() != 1) {
+        if (lstAssociados.getSelectedValuesList().size() != 1) {
             lblAvisoP.setText("Apenas pode ter um participante selecionado");
         } else {
-            modelP.removeElement(lstAssociados.getSelectedValue());
-            lstAssociados.setModel(modelP);
+            Participante p = (Participante) lstAssociados.getSelectedValue();
+            modelA.removeElement(p);
+            modelP.addElement(p);
+            lstParticipantes.setModel(modelP);
+            lstAssociados.setModel(modelA);
         }
     }//GEN-LAST:event_btnEliminarAssociacaoUmActionPerformed
 
     private void btnEliminarAssociacaoVariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarAssociacaoVariosActionPerformed
-        if (lstParticipantes.getSelectedValuesList().isEmpty()) {
+        if (lstAssociados.getSelectedValuesList().isEmpty()) {
             lblAvisoP.setText("Não tem nenhum participante selecionado");
         } else {
-            associadosModelList = (ArrayList<Participante>) lstAssociados.getSelectedValuesList();
-            for (Participante p : associadosModelList) {
+//            associadosModelList = (ArrayList<Participante>) lstAssociados.getSelectedValuesList();
+//            for (Participante p : associadosModelList) {
+//                modelA.removeElement(p);
+//                modelP.addElement(p);
+//            }
+            ArrayList<Participante> part = new ArrayList<>();
+            for (int index : lstAssociados.getSelectedIndices()) {
+                Participante p = modelA.get(index);
+                modelP.addElement(p);
+                part.add(p);
+            }
+
+            for (Participante p : part) {
                 modelA.removeElement(p);
             }
+
             lstAssociados.setModel(modelA);
+            lstParticipantes.setModel(modelP);
         }
     }//GEN-LAST:event_btnEliminarAssociacaoVariosActionPerformed
 
     private void setModel() {
         participantesModelList = DadosAplicacao.getInstance().getParticipantes();
-        modelP.clear();
+        modelP = new DefaultListModel<>();
         for (Participante p : participantesModelList) {
             modelP.addElement(p);
         }
         lstParticipantes.setModel(modelP);
 
-        modelA.clear();
+        modelA = new DefaultListModel<>();
+        lstAssociados.setModel(modelA);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
