@@ -8,10 +8,13 @@ package pt.ipleiria.tripPlanner.gui.GestaoEtapas;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.ListCellRenderer;
 import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
 import pt.ipleiria.tripPlanner.gui.Models.Etapa;
-import pt.ipleiria.tripPlanner.gui.events.InserirEtapasClicadoEvent;
-import pt.ipleiria.tripPlanner.gui.events.InserirEtapasClicadoListener;
+import pt.ipleiria.tripPlanner.gui.Models.Localidade;
+import pt.ipleiria.tripPlanner.gui.Utils.CellRendererParticipante;
 import pt.ipleiria.tripPlanner.gui.events.OkInserirEtapasClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.OkInserirEtapasClicadoListener;
 
@@ -23,12 +26,15 @@ public class InserirEditarEtapa extends javax.swing.JPanel {
 
     private List<OkInserirEtapasClicadoListener> okInserirEtapasClicadoListener;
     private Etapa etapa;
+
     /**
      * Creates new form InserirEtapa
      */
     public InserirEditarEtapa() {
         initComponents();
         this.okInserirEtapasClicadoListener = new ArrayList<>();
+        jList1.setCellRenderer((ListCellRenderer) new CellRendererParticipante());
+        actualizarListaLocalidades();
     }
 
     /**
@@ -53,6 +59,9 @@ public class InserirEditarEtapa extends javax.swing.JPanel {
         lblErroLI = new javax.swing.JLabel();
         lblErroLF = new javax.swing.JLabel();
         lblErroListL = new javax.swing.JLabel();
+        lblDesign = new javax.swing.JLabel();
+        tfDesignacao = new javax.swing.JTextField();
+        lblErrDesign = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         tfAltitudeMaxima = new javax.swing.JTextField();
         tfAltitudeAcumulada = new javax.swing.JTextField();
@@ -100,33 +109,54 @@ public class InserirEditarEtapa extends javax.swing.JPanel {
 
         lblListaLocalidades.setText("*Lista Localidades:");
 
+        lblDesign.setText("*Designação: ");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(lblLocalidadeInicio)
-                .addGap(1, 1, 1)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tfLocalidadeInicio, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                    .addComponent(lblErroLI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(lblLocalidadeFinal)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lblErroLF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tfLocalidadeFinal, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(lblListaLocalidades)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblErroListL, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
+                    .addComponent(lblErroListL, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
                     .addComponent(spListaLocalidades, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(2, 2, 2)
+                .addComponent(lblLocalidadeFinal)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblErroLF, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(tfLocalidadeFinal))
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblLocalidadeInicio)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(lblDesign)))
+                .addGap(1, 1, 1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblErroLI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(tfLocalidadeInicio)
+                            .addComponent(tfDesignacao)
+                            .addComponent(lblErrDesign, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDesign)
+                    .addComponent(tfDesignacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(lblErrDesign)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLocalidadeInicio)
                     .addComponent(tfLocalidadeInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -144,7 +174,7 @@ public class InserirEditarEtapa extends javax.swing.JPanel {
                     .addComponent(spListaLocalidades, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblErroListL)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addGap(21, 21, 21))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -169,23 +199,32 @@ public class InserirEditarEtapa extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblErroAA, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel2Layout.createSequentialGroup()
                             .addComponent(lblAltitudeAcumulada)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(tfAltitudeAcumulada, javax.swing.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(lblAltitudeMinima)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblErroAMin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(tfAltitudeMinima)))
-                        .addComponent(lblErroAMax, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(0, 0, Short.MAX_VALUE))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                            .addComponent(lblAltitudeMaxima)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(tfAltitudeMaxima))))
-                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGap(0, 0, Short.MAX_VALUE)
+                            .addComponent(lblErroAMax, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGap(14, 14, 14)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(lblAltitudeMinima)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel2Layout.createSequentialGroup()
+                                            .addComponent(lblErroAMin, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(0, 0, Short.MAX_VALUE))
+                                        .addComponent(tfAltitudeMinima)))
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(lblAltitudeMaxima)
+                                    .addGap(5, 5, 5)
+                                    .addComponent(tfAltitudeMaxima))))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGap(106, 106, 106)
+                            .addComponent(tfAltitudeAcumulada))))
+                .addGap(4, 4, 4))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,9 +241,9 @@ public class InserirEditarEtapa extends javax.swing.JPanel {
                 .addGap(4, 4, 4)
                 .addComponent(lblErroAMax)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblAltitudeMinima)
-                    .addComponent(tfAltitudeMinima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfAltitudeMinima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblAltitudeMinima))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblErroAMin)
                 .addGap(0, 23, Short.MAX_VALUE))
@@ -262,7 +301,7 @@ public class InserirEditarEtapa extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(305, 305, 305)
                 .addComponent(lblTitulo)
-                .addGap(0, 343, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -303,7 +342,7 @@ public class InserirEditarEtapa extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnOk)
                     .addComponent(btnCancelar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(101, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -312,6 +351,8 @@ public class InserirEditarEtapa extends javax.swing.JPanel {
     }//GEN-LAST:event_tfAltitudeAcumuladaActionPerformed
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
+        lblErrDesign.setText("");
+        lblErrDesign.setForeground(Color.red);
         lblErroLI.setText("");
         lblErroLI.setForeground(Color.red);
         lblErroLF.setText("");
@@ -325,28 +366,60 @@ public class InserirEditarEtapa extends javax.swing.JPanel {
         lblErroAMin.setText("");
         lblErroAMin.setForeground(Color.red);
 
-        if (tfLocalidadeInicio.getText() == null) {
-            lblErroLI.setText("Insira uma Localidade Inical");
+        if (tfDesignacao.getText() == null) {
+            lblErrDesign.setText("Insira uma designação para a Etapa");
+        } else {
+
+            for (Etapa etapa : DadosAplicacao.getInstance().getEtapas()) {
+                if (tfDesignacao.getText().equals(etapa.getDesignacao() + "")) {
+                    lblErrDesign.setText("Insira outra designação porque essa já existe!");
+                    return;
+                }
+            }
+            if (tfLocalidadeInicio.getText() == null) {
+                lblErroLI.setText("Insira uma Localidade Inical");
+            } else {
+                if (tfLocalidadeFinal.getText() == null) {
+                    lblErroLF.setText("Insira uma Localidade Final");
+                } else {
+                    if (jList1.getSelectedIndex() < 0) {
+                        lblErroListL.setText("Selecione um elemento da lista");
+                    } else {
+                        if (tfDistanciaTotal.getText() == null) {
+                            lblErroDT.setText("Insira uma Distância Total");
+                        } else {
+                            if (tfAltitudeMaxima.getText() == null) {
+                                lblErroAMax.setText("Insira uma Altitude Maxima");
+                            } else {
+                                if (tfAltitudeMinima.getText() == null) {
+                                    lblErroAMin.setText("Insira uma Altitude Minima");
+                                }
+                                // Campos todos corretos
+                                if (!tfDesignacao.getText().isEmpty()) {
+                                    if (!tfLocalidadeInicio.getText().isEmpty()) {
+                                        if (!tfLocalidadeFinal.getText().isEmpty()) {
+                                            if (jList1.getSelectedIndex() > 0) {
+                                                if (!tfDistanciaTotal.getText().isEmpty()) {
+                                                    if (!tfAltitudeMaxima.getText().isEmpty()) {
+                                                        if (!tfAltitudeMinima.getText().isEmpty()) {
+//                                    etapa = new Etapa(tfDesignacao.getText(),tfLocalidadeInicio.getText(), tfLocalidadeFinal.getText(), jList1.getSelectedIndex() ,tfDistanciaTotal.getText(),tfAltitudeMaxima, tfAltitudeMinima);
+                                                            DadosAplicacao.getInstance().addEtapa(etapa);
+                                                            JOptionPane.showMessageDialog(this, "Etapa Inserida com Sucesso!", "Inserção Realizada Com Sucesso", JOptionPane.INFORMATION_MESSAGE);
+                                                            this.fireOkInserirEtapasClicadoEvent();
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
-        if (tfLocalidadeFinal.getText() == null) {
-            lblErroLF.setText("Insira uma Localidade Final");
-        }
-        if (jList1.getSelectedIndex() < 0) {
-            lblErroListL.setText("Selecione um elemento da lista");
-        }
-        if (tfDistanciaTotal.getText() == null) {
-            lblErroDT.setText("Insira uma Distância Total");
-        }
-        if (tfAltitudeMaxima.getText() == null) {
-            lblErroAMax.setText("Insira uma Altitude Maxima");
-        }
-        if (tfAltitudeMinima.getText() == null) {
-            lblErroAMin.setText("Insira uma Altitude Minima");
-        }
-        //fazer a lista!!
-     //   etapa = new Etapa(tfLocalidadeInicio.getText(), tfLocalidadeFinal.getText(),  ,tfDistanciaTotal.getText(),tfAltitudeMaxima, tfAltitudeMinima);
-        DadosAplicacao.getInstance().addEtapa(etapa);
-        this.fireOkInserirEtapasClicadoEvent();
+
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void tfDistanciaTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfDistanciaTotalActionPerformed
@@ -380,7 +453,9 @@ public class InserirEditarEtapa extends javax.swing.JPanel {
     private javax.swing.JLabel lblAltitudeAcumulada;
     private javax.swing.JLabel lblAltitudeMaxima;
     private javax.swing.JLabel lblAltitudeMinima;
+    private javax.swing.JLabel lblDesign;
     private javax.swing.JLabel lblDistanciaTotal;
+    private javax.swing.JLabel lblErrDesign;
     private javax.swing.JLabel lblErroAA;
     private javax.swing.JLabel lblErroAMax;
     private javax.swing.JLabel lblErroAMin;
@@ -396,8 +471,18 @@ public class InserirEditarEtapa extends javax.swing.JPanel {
     private javax.swing.JTextField tfAltitudeAcumulada;
     private javax.swing.JTextField tfAltitudeMaxima;
     private javax.swing.JTextField tfAltitudeMinima;
+    private javax.swing.JTextField tfDesignacao;
     private javax.swing.JTextField tfDistanciaTotal;
     private javax.swing.JTextField tfLocalidadeFinal;
     private javax.swing.JTextField tfLocalidadeInicio;
     // End of variables declaration//GEN-END:variables
+ private void actualizarListaLocalidades() {
+        DefaultListModel<Localidade> model = new DefaultListModel<>();
+        for (Localidade localidade : DadosAplicacao.getInstance().getLocalidades()) {
+            model.addElement(localidade);
+        }
+
+        jList1.setModel(model);
+    }
+
 }

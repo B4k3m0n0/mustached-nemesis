@@ -17,6 +17,8 @@ import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
 import pt.ipleiria.tripPlanner.gui.Models.Viagem;
 import pt.ipleiria.tripPlanner.gui.Utils.CellRendererAlojamento;
 import pt.ipleiria.tripPlanner.gui.Utils.CellRendererEtapa;
+import pt.ipleiria.tripPlanner.gui.events.CancelarInserirEditarViagensClicadoEvent;
+import pt.ipleiria.tripPlanner.gui.events.CancelarInserirEditarViagensClicadoListener;
 import pt.ipleiria.tripPlanner.gui.events.ConfirmarInsercaoViagensEvent;
 import pt.ipleiria.tripPlanner.gui.events.ConfirmarInsercaoViagensListener;
 
@@ -27,6 +29,7 @@ import pt.ipleiria.tripPlanner.gui.events.ConfirmarInsercaoViagensListener;
 public class InserirEditarViagens extends javax.swing.JPanel {
 
     private List<ConfirmarInsercaoViagensListener> confirmarInsercaoViagensListener;
+    private List<CancelarInserirEditarViagensClicadoListener> cancelarInserirEditarViagensListener;
     private Viagem viagem;
     private ArrayList<Etapa> etapasI;
     private ArrayList<Alojamento> alojamentosI;
@@ -47,6 +50,7 @@ public class InserirEditarViagens extends javax.swing.JPanel {
     public InserirEditarViagens() {
         initComponents();
         this.confirmarInsercaoViagensListener = new ArrayList<>();
+        this.cancelarInserirEditarViagensListener = new ArrayList<>();
         cbTipoViagem.addItem("Caminhada");
         cbTipoViagem.addItem("Bicicleta");
 
@@ -90,6 +94,21 @@ public class InserirEditarViagens extends javax.swing.JPanel {
         for (ConfirmarInsercaoViagensListener listener : this.confirmarInsercaoViagensListener) {
             ConfirmarInsercaoViagensEvent evento = new ConfirmarInsercaoViagensEvent(this);
             listener.confirmarInsercaoViagens(evento);
+        }
+    }
+    
+    public synchronized void addCancelarInserirEditarViagensClicadoListener(CancelarInserirEditarViagensClicadoListener listener) {
+        this.cancelarInserirEditarViagensListener.add(listener);
+    }
+
+    public synchronized void removeCancelarInserirEditarViagensClicadoListener(CancelarInserirEditarViagensClicadoListener listener) {
+        this.cancelarInserirEditarViagensListener.remove(listener);
+    }
+
+    protected synchronized void fireCancelarInserirEditarViagensClicadoListener() {
+        for (CancelarInserirEditarViagensClicadoListener listener : this.cancelarInserirEditarViagensListener) {
+            CancelarInserirEditarViagensClicadoEvent evento = new CancelarInserirEditarViagensClicadoEvent(this);
+            listener.cancelarInserirEditarClicado(evento);
         }
     }
 
@@ -227,6 +246,11 @@ public class InserirEditarViagens extends javax.swing.JPanel {
 
         btnCancelar.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -383,6 +407,10 @@ public class InserirEditarViagens extends javax.swing.JPanel {
             this.fireConfirmarInsercaoViagensListener();
         }
     }//GEN-LAST:event_btnOkActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        this.fireCancelarInserirEditarViagensClicadoListener();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void setModel() {
         etapasModelList = DadosAplicacao.getInstance().getEtapas();

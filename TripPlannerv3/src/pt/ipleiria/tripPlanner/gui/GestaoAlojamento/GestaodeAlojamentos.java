@@ -2,7 +2,13 @@ package pt.ipleiria.tripPlanner.gui.GestaoAlojamento;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.ListCellRenderer;
 import pt.ipleiria.tripPlanner.gui.GestaoLocalidades.*;
+import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
+import pt.ipleiria.tripPlanner.gui.Models.Quarto;
+import pt.ipleiria.tripPlanner.gui.Utils.CellRendererAlojamento;
+import pt.ipleiria.tripPlanner.gui.Utils.CellRendererQuartos;
 import pt.ipleiria.tripPlanner.gui.cenario.*;
 import pt.ipleiria.tripPlanner.gui.events.CriarEditarAlojamentoClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.CriarEditarAlojamentoClicadoListener;
@@ -35,6 +41,8 @@ public class GestaodeAlojamentos extends javax.swing.JPanel {
         this.criarEditarAlojamentoClicadoListener = new ArrayList<>();
         this.visualizarAlojamentoClicadoListener = new ArrayList<>();
         this.voltarMenuPrincipalListener = new ArrayList<>();
+        jList1.setCellRenderer((ListCellRenderer) new CellRendererAlojamento());
+        actualizarListaAlojamentos();
     }
     
     public synchronized void addCriarEditarAlojamentoClicadoListener(CriarEditarAlojamentoClicadoListener listener){
@@ -131,6 +139,7 @@ public class GestaodeAlojamentos extends javax.swing.JPanel {
         });
 
         jbPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/pt/ipleiria/tripPlanner/gui/Imagens/lupa.png"))); // NOI18N
+        jbPesquisar.setEnabled(false);
         jbPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbPesquisarActionPerformed(evt);
@@ -243,4 +252,12 @@ public class GestaodeAlojamentos extends javax.swing.JPanel {
     private javax.swing.JLabel lblAlojamentos;
     private javax.swing.JTextField tfPesquisar;
     // End of variables declaration//GEN-END:variables
+     public void actualizarListaAlojamentos() {
+        DefaultListModel<Alojamento> model = new DefaultListModel<>();
+        for (Alojamento alojamento : DadosAplicacao.getInstance().getAlojamentos()) {
+            model.addElement(alojamento);
+        }
+        jList1.setModel(model);
+    }
+
 }

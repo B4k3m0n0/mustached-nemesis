@@ -8,13 +8,16 @@ package pt.ipleiria.tripPlanner.gui.GestaoAlojamento;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
-import pt.ipleiria.tripPlanner.gui.TripPlanner.TripPlanner;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import javax.swing.ListCellRenderer;
+import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
+import pt.ipleiria.tripPlanner.gui.Models.Quarto;
+import pt.ipleiria.tripPlanner.gui.Utils.CellRendererQuartos;
 import pt.ipleiria.tripPlanner.gui.events.AdicionarQuartoClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.AdicionarQuartoClicadoListener;
 import pt.ipleiria.tripPlanner.gui.events.ConfirmarClicadoAlojamentoEvent;
 import pt.ipleiria.tripPlanner.gui.events.ConfirmarClicadoAlojamentoListener;
-import pt.ipleiria.tripPlanner.gui.events.ConfirmarClicadoEvent;
-import pt.ipleiria.tripPlanner.gui.events.ConfirmarClicadoListener;
 
 /**
  *
@@ -33,6 +36,8 @@ public class CriarEditarAlojamento extends javax.swing.JPanel {
 
         this.confirmarClicadoAlojamentoListener = new ArrayList<>();
         this.adicionarQuartoClidadoListerner = new ArrayList<>();
+        jList1.setCellRenderer((ListCellRenderer) new CellRendererQuartos());
+        actualizarListaQuartos();
     }
 
     public synchronized void addConfirmarClicadoAlojamentoListener(ConfirmarClicadoAlojamentoListener listener) {
@@ -205,17 +210,16 @@ public class CriarEditarAlojamento extends javax.swing.JPanel {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(lblErrGPS, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(0, 63, Short.MAX_VALUE)))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblDesignacao)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(lblErrD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(tfDesignacao)
-                                .addContainerGap())))))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(tfDesignacao))))
+                .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(lblErrTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -289,19 +293,16 @@ public class CriarEditarAlojamento extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(lblErrHorarioFunc, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lblHorariodeFuncionamento)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(spHorariodeFuncionamento, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lblContactos)))
-                        .addGap(0, 2, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(lblHorariodeFuncionamento)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(spHorariodeFuncionamento, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lblContactos))
+                                .addGap(0, 2, Short.MAX_VALUE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(btnCheckin_out)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -409,7 +410,7 @@ public class CriarEditarAlojamento extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(btnAdicionar))
                     .addComponent(lblErrQuarto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -483,12 +484,13 @@ public class CriarEditarAlojamento extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnOk)
                     .addComponent(btnCancelar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-        this.fireConfirmarClicadoAlojamentoEvent();
+        adicionarAlojamento();
+
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
@@ -568,30 +570,77 @@ public class CriarEditarAlojamento extends javax.swing.JPanel {
         lblErrTipo.setText("");
         lblErrTipo.setForeground(Color.red);
 
-        if (tfDesignacao.getText() == null) {
+        boolean isOk = true;
+        if (tfDesignacao.getText().isEmpty()) {
             lblErrD.setText("Insira uma Designação.");
+            isOk = false;
         }
-        if (tfLongitude.getText() == null && tfLatitude == null) {
+        if (tfLongitude.getText().isEmpty() && tfLatitude.getText().isEmpty()) {
             lblErrGPS.setText("Insira as coordenadas GPS.");
+            isOk = false;
         }
-        if (!rbAlbergue.isSelected() || !rbHostal.isSelected() || !rbHotel.isSelected() || !rbOutros.isSelected() || !rbPensao.isSelected()) {
+        if (!rbAlbergue.isSelected() && !rbHostal.isSelected() && !rbHotel.isSelected() && !rbOutros.isSelected() && !rbPensao.isSelected()) {
             lblErrTipo.setText("Selecione um tipo de alojamento.");
+            isOk = false;
         }
         // QUARTOS!!
-        if (jTextArea1.getText() == null) {
+        if (jList1.getSelectedIndex() < 0) {
+            lblErrQuarto.setText("Escolha um quarto");
+            isOk = false;
+        }
+        if (jTextArea1.getText().isEmpty()) {
             lblErrHorarioFunc.setText("Insira o Horário de Funcionamento.");
+            isOk = false;
         }
-        if(tfCheckin.getText() == null){
+        if (tfCheckin.getText().isEmpty()) {
             lblErrCheckin.setText("Insira Check in.");
+            isOk = false;
+
         }
-        if(tfCheckout.getText() == null){
+        if (tfCheckout.getText().isEmpty()) {
             lblErrCheckout.setText("Insira Check out.");
+            isOk = false;
         }
-        if(tfContactos.getText() == null){
+        if (tfContactos.getText().isEmpty()) {
             lblErrContactos.setText("Insira os Contactos.");
+            isOk = false;
         }
-        if(tfMorada.getText() == null){
+        if (tfMorada.getText().isEmpty()) {
             lblErrMorada.setText("Insira uma Morada.");
+            isOk = false;
         }
+
+        if (isOk) {
+            DefaultListModel<Quarto> model = (DefaultListModel<Quarto>) jList1.getModel();
+            ArrayList<Quarto> quartos = new ArrayList<>();
+            for (int index : jList1.getSelectedIndices()) {
+                Quarto q = model.elementAt(index);
+                quartos.add(q);
+            }
+            String tipo = null;
+            if (rbAlbergue.isSelected()) {
+                tipo = "Albergue";
+            } else if (rbHostal.isSelected()) {
+                tipo = "Hostal";
+            } else if (rbHotel.isSelected()) {
+                tipo = "Hotel";
+            } else if (rbOutros.isSelected()) {
+                tipo = "Outros";
+            } else if (rbPensao.isSelected()) {
+                tipo = "Pensao";
+            }
+            Alojamento alojamento = new Alojamento(tfDesignacao.getText(), tfLongitude.getText(), tfLatitude.getText(), tipo, quartos, jTextArea1.getText(), tfCheckin.getText(), tfCheckout.getText(), tfContactos.getText(), tfMorada.getText());
+            DadosAplicacao.getInstance().addAlojamento(alojamento);
+            JOptionPane.showMessageDialog(this, "Alojamento Inserida com Sucesso!", "Inserção Realizada Com Sucesso", JOptionPane.INFORMATION_MESSAGE);
+            this.fireConfirmarClicadoAlojamentoEvent();
+        }
+    }
+
+    public void actualizarListaQuartos() {
+        DefaultListModel<Quarto> model = new DefaultListModel<>();
+        for (Quarto quarto : DadosAplicacao.getInstance().getQuartos()) {
+            model.addElement(quarto);
+        }
+        jList1.setModel(model);
     }
 }

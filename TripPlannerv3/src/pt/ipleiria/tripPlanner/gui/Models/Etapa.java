@@ -13,6 +13,7 @@ import java.util.ArrayList;
  * @author Ricardo
  */
 public class Etapa {
+    private String designacao;
     private String localInicio;
     private String localidadeFinal;
     private ArrayList<String> listaLocalidades;
@@ -21,7 +22,8 @@ public class Etapa {
     private int altitudeMaxima;
     private int altitudeMinima;
 
-    public Etapa(String localInicio, String localidadeFinal, ArrayList<String> listaLocalidades, int distanciaTotal, int altitudeAcumulada, int altitudeMaxima, int altitudeMinima) {
+    public Etapa(String designacao,String localInicio, String localidadeFinal, ArrayList<String> listaLocalidades, int distanciaTotal, int altitudeAcumulada, int altitudeMaxima, int altitudeMinima) {
+        this.designacao = designacao;
         this.localInicio = localInicio;
         this.localidadeFinal = localidadeFinal;
         this.listaLocalidades = listaLocalidades;
@@ -29,6 +31,10 @@ public class Etapa {
         this.altitudeAcumulada = altitudeAcumulada;
         this.altitudeMaxima = altitudeMaxima;
         this.altitudeMinima = altitudeMinima;
+    }
+
+    public String getDesignacao() {
+        return designacao;
     }
 
     public String getLocalInicio() {

@@ -23,6 +23,8 @@ import pt.ipleiria.tripPlanner.gui.events.AssociarViagensClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.AssociarViagensClicadoListener;
 import pt.ipleiria.tripPlanner.gui.events.CancelarAdicionarQuartoClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.CancelarAdicionarQuartoClicadoListener;
+import pt.ipleiria.tripPlanner.gui.events.CancelarInserirEditarViagensClicadoEvent;
+import pt.ipleiria.tripPlanner.gui.events.CancelarInserirEditarViagensClicadoListener;
 import pt.ipleiria.tripPlanner.gui.events.CompararCenarioAlojamentoClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.CompararCenarioAlojamentoClicadoListener;
 import pt.ipleiria.tripPlanner.gui.events.ConfirmarAdicionarQuartoClicadoEvent;
@@ -110,7 +112,7 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
         AssociarEtapasClicadoListener, OkInserirEtapasClicadoListener, OkVisualizarEtapasClicadoListener,
         OkAssociarEtapasClicadoListener, GestaoCenarioAlojamentoClicadoListener, MenuCenariosClicadoListener,
         InserirCenarioAlojamentoClicadoListener, EditarCenarioAlojamentoClicadoListener, OkInserirCenarioAlojamentoClicadoListener,
-        OkEditarCenarioAlojamentoClicadoListener, VoltarGestaoCenarioAlojamentoClicadoListener, ConfirmarClicadoAlojamentoListener, VoltarMenuCenariosClicadoListener, TerminarSessaoClicadoListener, AdicionarQuartoClicadoListener, ConfirmarAdicionarQuartoClicadoListener, CancelarAdicionarQuartoClicadoListener, PrimeiroLoginEfetuadoListener, VisualizarViagensClicadoListener {
+        OkEditarCenarioAlojamentoClicadoListener, VoltarGestaoCenarioAlojamentoClicadoListener, ConfirmarClicadoAlojamentoListener, VoltarMenuCenariosClicadoListener, TerminarSessaoClicadoListener, AdicionarQuartoClicadoListener, ConfirmarAdicionarQuartoClicadoListener, CancelarAdicionarQuartoClicadoListener, PrimeiroLoginEfetuadoListener, VisualizarViagensClicadoListener, CancelarInserirEditarViagensClicadoListener {
 
     private Login login;
     private MenuCenarios menuCenarios;
@@ -147,7 +149,7 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
         adicionarQuarto = new AdicionarQuarto();
         jPanel1.add(adicionarQuarto, "adicionarQuarto");
         dadosAcesso = new DadosAcesso();
-        jPanel1.add(dadosAcesso, "dadosAcesso");
+        jPanel1.add(dadosAcesso, "primeiroLogin");
         menuParticipante = new MenuParticipantes();
         jPanel1.add(menuParticipante, "menuParticipantes");
         inserirEditarParticipante = new InserirEditarParticipante();
@@ -168,6 +170,7 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
         jPanel1.add(inserirEditarEtapa, "inserirEditarEtapa");
 
         login.addLoginEfetuadoListener(this);
+        login.addPrimeiroLoginEfetuadoListener(this);
         menuPrincipal.addParticipantesClicadoListener(this);
         menuPrincipal.addAlojamentoClicadoListener(this);
         menuParticipante.addInserirParticipantesClicadoListener(this);
@@ -220,6 +223,7 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
         menuCenarios.addVoltarMenuPrincipalListener(this);
         menuPrincipal.addTerminarSessaoClicadoListener(this);
         dadosAcesso.addTerminarSessaoClicadoListener(this);
+        inserirEditarViagens.addCancelarInserirEditarViagensClicadoListener(this);
         jPanel1.setPreferredSize(new Dimension(400, 300));
 
         Component[] components = jPanel1.getComponents();
@@ -230,8 +234,8 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
                 ((JPanel) component).setMaximumSize(new Dimension(400, 300)); //o tamanho maximo do painel
             }
         }
-        CardLayout cl = (CardLayout) this.jPanel1.getLayout();
-        cl.show(this.jPanel1, "login");
+//        CardLayout cl = (CardLayout) this.jPanel1.getLayout();
+//        cl.show(this.jPanel1, "login");
     }
 
     /**
@@ -532,7 +536,7 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
     @Override
     public void primeiroLoginEfetuado(PrimeiroLoginEfetuadoEvent evento) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
-        // dadosAcesso.receberParticipante(evento.getParticipante());
+        dadosAcesso.receberParticipante(evento.getParticipante());
         cl.show(this.jPanel1, "primeiroLogin");
     }
 
@@ -546,5 +550,11 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         visualizarViagens.setDados(evento.getViagem());
         cl.show(this.jPanel1, "visualizarViagens");
+    }
+
+    @Override
+    public void cancelarInserirEditarClicado(CancelarInserirEditarViagensClicadoEvent evt) {
+        CardLayout cl = (CardLayout) this.jPanel1.getLayout();
+        cl.show(this.jPanel1, "gestaodeViagens");
     }
 }

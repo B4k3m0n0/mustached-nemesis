@@ -19,5 +19,9 @@ public class PrimeiroLoginEfetuadoEvent extends EventObject{
         super(source);
         this.participante = participante;
     }
+
+    public Participante getParticipante() {
+        return participante;
+    }
     
 }

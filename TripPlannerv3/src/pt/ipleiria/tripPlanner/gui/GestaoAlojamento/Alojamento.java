@@ -7,6 +7,7 @@
 package pt.ipleiria.tripPlanner.gui.GestaoAlojamento;
 
 import java.util.ArrayList;
+import pt.ipleiria.tripPlanner.gui.Models.Quarto;
 
 /**
  *
@@ -17,14 +18,14 @@ public class Alojamento {
     private String longitude;
     private String latitude;
     private String tipo;
-    private ArrayList<String> listaQuartos;
+    private ArrayList<Quarto> listaQuartos;
     private String horarioFunc;
     private String checkin;
     private String contactos;
     private String morada;
     private String observacoes;
 
-    public Alojamento(String designacao, String longitude, String latitude, String tipo, ArrayList<String> listaQuartos, String horarioFunc, String checkin, String contactos, String morada, String observacoes) {
+    public Alojamento(String designacao, String longitude, String latitude, String tipo, ArrayList<Quarto> listaQuartos, String horarioFunc, String checkin, String contactos, String morada, String observacoes) {
         this.designacao = designacao;
         this.longitude = longitude;
         this.latitude = latitude;
@@ -53,7 +54,7 @@ public class Alojamento {
         return tipo;
     }
 
-    public ArrayList<String> getListaQuartos() {
+    public ArrayList<Quarto> getListaQuartos() {
         return listaQuartos;
     }
 

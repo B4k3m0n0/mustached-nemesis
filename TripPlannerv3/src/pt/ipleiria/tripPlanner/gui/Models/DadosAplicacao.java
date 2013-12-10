@@ -38,6 +38,8 @@ public class DadosAplicacao {
         etapas = new ArrayList<>();
         alojamentos = new ArrayList<>();
         viagens = new ArrayList<>();
+        quartos = new ArrayList<>();
+        localidades = new ArrayList<>();
 
         adicionarParticipante();
     }
@@ -66,20 +68,20 @@ public class DadosAplicacao {
         Participante participante2;
         participante2 = new Participante("ANDRE", dataNascJoao, 14187566, "Leiria", 5, false, "14187566", dataNasc.toCharArray(), true, permissoes, true);
         adicionarParticipante(participante2);
-<<<<<<< .mine
-        System.out.println(dataNasc);
-=======
+//<<<<<<< .mine
+//        System.out.println(dataNasc);
+//=======
         
         Viagem viagem1;
         viagem1 = new Viagem(pass1, etapas, alojamentos, pass1);
         viagens.add(viagem1);
->>>>>>> .r24
+//>>>>>>> .r24
     }
 
     
 
 
-    private void addAlojamento(Alojamento alojamento) {
+    public void addAlojamento(Alojamento alojamento) {
        alojamentos.add(alojamento);
     }
 

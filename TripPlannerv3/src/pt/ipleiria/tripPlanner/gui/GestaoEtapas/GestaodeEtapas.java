@@ -2,8 +2,15 @@ package pt.ipleiria.tripPlanner.gui.GestaoEtapas;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.ListCellRenderer;
 import pt.ipleiria.tripPlanner.gui.GestaoLocalidades.*;
+import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
+import pt.ipleiria.tripPlanner.gui.Models.Etapa;
+import pt.ipleiria.tripPlanner.gui.Models.Participante;
 import pt.ipleiria.tripPlanner.gui.TripPlanner.TripPlanner;
+import pt.ipleiria.tripPlanner.gui.Utils.CellRendererEtapa;
+import pt.ipleiria.tripPlanner.gui.Utils.CellRendererParticipante;
 import pt.ipleiria.tripPlanner.gui.cenario.*;
 import pt.ipleiria.tripPlanner.gui.events.AssociarEtapasClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.AssociarEtapasClicadoListener;
@@ -46,6 +53,8 @@ public class GestaodeEtapas extends javax.swing.JPanel {
         this.visualizarEtapasClicadoListener = new ArrayList<>();
         this.associarEtapasClicadoListener = new ArrayList<>();
         this.voltarMenuPrincipalListener = new ArrayList<>();
+        jList1.setCellRenderer((ListCellRenderer) new CellRendererEtapa());
+        actualizarListaEtapas();
     }
 
     public synchronized void addInserirEtapasClicadoListener(InserirEtapasClicadoListener listener) {
@@ -288,4 +297,13 @@ public class GestaodeEtapas extends javax.swing.JPanel {
     private javax.swing.JLabel lblLocalidades;
     private javax.swing.JTextField tfPesquisar;
     // End of variables declaration//GEN-END:variables
+
+    private void actualizarListaEtapas() {        
+        DefaultListModel<Etapa> model =  new DefaultListModel<>();
+        for(Etapa etapa: DadosAplicacao.getInstance().getEtapas()){
+            model.addElement(etapa);
+        }        
+        jList1.setModel(model);
+    }
+
 }

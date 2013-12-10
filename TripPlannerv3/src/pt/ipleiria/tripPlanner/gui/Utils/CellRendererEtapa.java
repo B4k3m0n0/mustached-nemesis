@@ -5,7 +5,7 @@
 package pt.ipleiria.tripPlanner.gui.Utils;
 
 import pt.ipleiria.tripPlanner.gui.Models.Etapa;
-import pt.ipleiria.tripPlanner.gui.Models.Viagem;
+import pt.ipleiria.tripPlanner.gui.Models.Participante;
 
 /**
  *
@@ -20,7 +20,7 @@ public class CellRendererEtapa extends Utils.CellRendererGeneric {
             Etapa row = (Etapa) value;
 
             // cria a string que sera' exibida na linha da lista
-            String textToDisplay = "<html>" + row.getLocalInicio() + " - " + row.getLocalidadeFinal()+ "</html>";
+            String textToDisplay = "<html>" + row.getDesignacao()+ "</html>";
 
             return textToDisplay;
 

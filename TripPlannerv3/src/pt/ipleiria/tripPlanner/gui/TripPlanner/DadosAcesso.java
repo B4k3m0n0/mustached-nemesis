@@ -184,6 +184,7 @@ public class DadosAcesso extends javax.swing.JPanel {
                 } else {
                     participante.setUsername(tfUsername.getText());
                     participante.setPassword(pfPassword.getPassword());
+                    participante.setPrimeiroLogin(false);
                     JOptionPane.showMessageDialog(this, "Novos dados Introduzidos!");
                     fireTerminarSessaoClicadoEvent();
                 }

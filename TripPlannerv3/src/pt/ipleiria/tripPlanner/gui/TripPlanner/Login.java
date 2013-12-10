@@ -25,6 +25,7 @@ public class Login extends javax.swing.JPanel {
 
     private List<LoginEfetuadoListener> loginEfetuadoListener;
     private List<PrimeiroLoginEfetuadoListener> primeiroLoginEfetuadoListener;
+    private int conta = 0;
 
     /**
      * Creates new form Login
@@ -133,24 +134,28 @@ public class Login extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(178, 178, 178)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(lbPassword)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(pfPassword))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(lbUsername)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(285, 285, 285)
-                .addComponent(btnLogin)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblErros, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(236, 236, 236)
-                .addComponent(lblTripPlanner))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lblErros, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(178, 178, 178)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(lbPassword)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(pfPassword))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(lbUsername)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(236, 236, 236)
+                                .addComponent(lblTripPlanner))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(270, 270, 270)
+                        .addComponent(btnLogin)))
+                .addGap(195, 195, 195))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,14 +170,11 @@ public class Login extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(lblErros))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(btnLogin)))
-                .addContainerGap(160, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblErros, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(138, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -196,8 +198,6 @@ public class Login extends javax.swing.JPanel {
     private javax.swing.JTextField tfUsername;
     // End of variables declaration//GEN-END:variables
 
-    int conta = 0;
-
     public void confirmaLogin() {
         lblErros.setText("");
         lblErros.setForeground(Color.red);
@@ -212,34 +212,43 @@ public class Login extends javax.swing.JPanel {
                 } else {
                     for (Participante participante : DadosAplicacao.getInstance().getParticipantes()) {
                         if (tfUsername.getText().equals(participante.getUsername())
-                                && new String(pfPassword.getPassword()).equals(participante.getPassword().toString()) && !participante.isPrimeiroLogin()) {
+                                && new String(pfPassword.getPassword()).equals(new String(participante.getPassword())) && !participante.isPrimeiroLogin()) {
                             DadosAplicacao.getInstance().setLogado(participante);
                             fireLoginEfetuadoEvent();
                             mudarNome();
-                        } else {
+                        } else if (participante.isPrimeiroLogin()) {
                             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
                             String dataNasc = formatter.format(participante.getDataNasc().getTime());
                             System.out.println(dataNasc);
-                            System.out.println(pfPassword.getPassword().toString().equals(dataNasc));
-                            System.out.println(pfPassword.getPassword().toString());
-                            if (tfUsername.getText().equals(participante.getBI() + "") && pfPassword.getPassword().toString().equals(dataNasc) && participante.isPrimeiroLogin()) {
-                                firePrimeiroLoginEfetuadoEvent(participante);
+                            System.out.println(new String(pfPassword.getPassword()).equals(dataNasc));
+                            System.out.println(new String(pfPassword.getPassword()));
+                            if (tfUsername.getText().equals(participante.getBI() + "") && new String(pfPassword.getPassword()).equals(dataNasc) && participante.isPrimeiroLogin()) {
                                 mudarNome();
+                                firePrimeiroLoginEfetuadoEvent(participante);
+
                             } else {
-                                if (conta < 4) {
-                                    lblErros.setText("Username ou Password errada. Tem mais " + (3 - conta + 1) + " tentativa(s)!");
-                                } else {
-                                    System.exit(0);
-                                }
+//                                if (conta < 4) {
+                                lblErros.setText("Username ou Password errada.");// Tem mais " + (3 - conta + 1) + " tentativa(s)!");
+//                                    conta++;
+//                                } else {
+//                                    System.exit(0);
+//                                }
                             }
-                            conta++;
+                        } else if (tfUsername.getText().equals(participante.getUsername())
+                                && !new String(pfPassword.getPassword()).equals(new String(participante.getPassword()))) {
+//                            if (conta < 4) {
+                            lblErros.setText("Username ou Password errada.");// Tem mais " + (3 - conta + 1) + " tentativa(s)!");
+//                                conta++;
+//                            } else {
+//                                System.exit(0);
+//                            }
                         }
                     }
                 }
             }
         }
     }
-
 
     public void mudarNome() {
         tfUsername.setText("");

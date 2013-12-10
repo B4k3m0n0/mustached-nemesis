@@ -11,19 +11,25 @@ package pt.ipleiria.tripPlanner.gui.Models;
  * @author DELL
  */
 public class Quarto {
-    private int camas;
+    private String designacao;
+    private String camas;
     private String tipoCama;
-    private int custo;
+    private String custo;
     private String tipoCusto;
 
-    public Quarto(int camas, String tipoCama, int custo, String tipoCusto) {
+    public Quarto(String designacao,String camas, String tipoCama, String custo, String tipoCusto) {
+        this.designacao = designacao;
         this.camas = camas;
         this.tipoCama = tipoCama;
         this.custo = custo;
         this.tipoCusto = tipoCusto;
     }
 
-    public int getCamas() {
+    public String getDesignacao() {
+        return designacao;
+    }
+
+    public String getCamas() {
         return camas;
     }
 
@@ -31,7 +37,7 @@ public class Quarto {
         return tipoCama;
     }
 
-    public int getCusto() {
+    public String getCusto() {
         return custo;
     }
 
