@@ -1,0 +1,2 @@
+redimensionar janelas
+botoes ficam a enable quando se tira o check do admin no inserirparticipante
