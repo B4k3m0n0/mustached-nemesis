@@ -14,39 +14,48 @@ import pt.ipleiria.tripPlanner.gui.events.ConfirmarClicadoListener;
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Ricardo
  */
-
 public class InserirEditarParticipante extends javax.swing.JPanel {
-    
 
     private List<ConfirmarClicadoListener> confirmarClicadoListener;
     private DefaultListModel<String> modelPermissoesUtilizador;
+    private DefaultListModel<String> modelPermissoes;
+    private ArrayList<String> permissoesUtilizador;
+
     /**
      * Creates new form InserirParticipante
      */
     public InserirEditarParticipante() {
         initComponents();
-        
+
         this.confirmarClicadoListener = new ArrayList<>();
- 
+        this.modelPermissoesUtilizador = new DefaultListModel<>();
+        this.modelPermissoes = new DefaultListModel<String>();
+        modelPermissoes.addElement("Editar Localidades");
+        modelPermissoes.addElement("Editar Viagens");
+        modelPermissoes.addElement("Editar Etapas");
+        modelPermissoes.addElement("Editar Alojamentos");
+        modelPermissoes.addElement("Editar Participantes");
+        
+        lstPermissoes.setModel(modelPermissoes);
+
     }
-    
-    public synchronized void addConfirmarClicadoListener(ConfirmarClicadoListener listener){
+
+    public synchronized void addConfirmarClicadoListener(ConfirmarClicadoListener listener) {
         this.confirmarClicadoListener.add(listener);
     }
-    
-    public synchronized void removeConfirmarClicadoListener(ConfirmarClicadoListener listener){
+
+    public synchronized void removeConfirmarClicadoListener(ConfirmarClicadoListener listener) {
         this.confirmarClicadoListener.remove(listener);
     }
 
-    protected synchronized void fireConfirmarClicadoEvent(){
-        for(ConfirmarClicadoListener listener : this.confirmarClicadoListener){
-        ConfirmarClicadoEvent evento = new ConfirmarClicadoEvent(this);
-        listener.confirmarClicado(evento);
+    protected synchronized void fireConfirmarClicadoEvent() {
+        for (ConfirmarClicadoListener listener : this.confirmarClicadoListener) {
+            ConfirmarClicadoEvent evento = new ConfirmarClicadoEvent(this);
+            listener.confirmarClicado(evento);
         }
     }
 
@@ -116,15 +125,6 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
             }
-        });
-
-        cbEditor.setBackground(new java.awt.Color(255, 255, 255));
-        cbEditor.setText("Editor");
-
-        lstPermissoes.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
         });
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 2, 36)); // NOI18N
@@ -309,11 +309,6 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
         lstPermissoesUtilizador.setEnabled(false);
         jScrollPane2.setViewportView(lstPermissoesUtilizador);
 
-        lstPermissoes.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Localidades", "Viagens", "Etapas", "Alojamentos", "Participantes" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         lstPermissoes.setEnabled(false);
         jScrollPane1.setViewportView(lstPermissoes);
 
@@ -376,12 +371,9 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
             .addGroup(panelEditorLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelEditorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelEditorLayout.createSequentialGroup()
-                        .addGroup(panelEditorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane2)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblEditorErro))
+                    .addGroup(panelEditorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane2)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelEditorLayout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addComponent(jButton3)
@@ -391,7 +383,9 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
                         .addComponent(jButton4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton2)
-                        .addGap(36, 36, 36))))
+                        .addGap(20, 20, 20)))
+                .addGap(16, 16, 16)
+                .addComponent(lblEditorErro))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -489,99 +483,105 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
 
-       
-        if(tfNome.getText() == null){
+
+        if (tfNome.getText() == null) {
             lblNomeErro.setText("Introduza um nome!");
             return;
         }
-        
-        if(jDateChooser2 == null){
+
+        if (jDateChooser2 == null) {
             lblDataErro.setText("Introduza uma Data de Nascimento!");
             return;
         }
-        
-        if(tfBilheteIdentidade.getText() == null){
+
+        if (tfBilheteIdentidade.getText() == null) {
             lblBIErro.setText("Introduza um BI!");
             return;
         }
-        
-        for(Participante participante: DadosAplicacao.getInstance().getParticipantes()){
-            if(tfBilheteIdentidade.getText().equals(participante.getBI() + "")){
+
+        for (Participante participante : DadosAplicacao.getInstance().getParticipantes()) {
+            if (tfBilheteIdentidade.getText().equals(participante.getBI() + "")) {
                 lblBIErro.setText("BI já existente!");
                 return;
             }
         }
-        
-        if(tfLocalidade.getText() == null){
+
+        if (tfLocalidade.getText() == null) {
             lblLocalidadeErro.setText("Insira uma Localidade!");
             return;
         }
-        
-        if(cbICF.getSelectedIndex()<1){
+
+        if (cbICF.getSelectedIndex() < 1) {
             lblICFErro.setText("Escolha um ");
-            return;      
-        }
-        
-        if(cbAdministrador.isSelected()){
-            if(tfUsername.getText() == null){
-            lblAdminErro.setText("Introduza um username!");
             return;
+        }
+
+        if (cbAdministrador.isSelected()) {
+            if (tfUsername.getText() == null) {
+                lblAdminErro.setText("Introduza um username!");
+                return;
             }
-            
-            for(Participante participante: DadosAplicacao.getInstance().getParticipantes()){
-                if(tfUsername.getText().equals(participante.getUsername())){
+
+            for (Participante participante : DadosAplicacao.getInstance().getParticipantes()) {
+                if (tfUsername.getText().equals(participante.getUsername())) {
                     lblAdminErro.setText("Já existe um participante com o Username introduzido!");
                     return;
                 }
             }
-        
-            
-            if(pfPassword.getPassword() == null){
-            lblAdminErro.setText("Introduza uma password!");
-            return;
+
+
+            if (pfPassword.getPassword() == null) {
+                lblAdminErro.setText("Introduza uma password!");
+                return;
             }
         }
-        
+
         boolean editor = false;
-        
-        if(cbEditor.isSelected()){
-            if(lstPermissoesUtilizador.getSelectedValuesList().isEmpty()){
-            lblEditorErro.setText("Escolha pelo menos uma permissão de editor!");
-            return;
+
+        if (cbEditor.isSelected()) {
+            if (lstPermissoesUtilizador.getModel().getSize() < 0) {
+                lblEditorErro.setText("Escolha pelo menos uma permissão de editor!");
+                return;
             }
-            editor=true;
+            editor = true;
         }
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         String dataNasc = formatter.format(jDateChooser2.getCalendar().getTime());
+
+        Participante participante;
+
+        for (int i = 0; i < lstPermissoesUtilizador.getModel().getSize(); i++) {
+                String permissaoUtilizador = (String) lstPermissoes.getModel().getElementAt(i);
+                permissoesUtilizador.add(permissaoUtilizador);
+            }
         
-        Participante participante;   
-        if(cbAdministrador.isSelected()){
-            participante = new Participante(tfNome.getText(), jDateChooser2.getCalendar(), Integer.parseInt(tfBilheteIdentidade.getText()), tfLocalidade.getText(), Integer.parseInt(cbICF.getModel().getElementAt(cbICF.getSelectedIndex()).toString()), true, tfUsername.getText(), pfPassword.getPassword(), editor, (ArrayList<String>)lstPermissoesUtilizador.getSelectedValuesList(), false);
+        if (cbAdministrador.isSelected()) {
+            participante = new Participante(tfNome.getText(), jDateChooser2.getCalendar(), Integer.parseInt(tfBilheteIdentidade.getText()), tfLocalidade.getText(), Integer.parseInt(cbICF.getModel().getElementAt(cbICF.getSelectedIndex()).toString()), true, tfUsername.getText(), pfPassword.getPassword(), editor, permissoesUtilizador, false);
             DadosAplicacao.getInstance().adicionarParticipante(participante);
-        }else{
-            participante = new Participante(tfNome.getText(), jDateChooser2.getCalendar(), Integer.parseInt(tfBilheteIdentidade.getText()), tfLocalidade.getText(), Integer.parseInt(cbICF.getModel().getElementAt(cbICF.getSelectedIndex()).toString()), false, tfBilheteIdentidade.getText(), dataNasc.toCharArray(), editor, (ArrayList<String>)lstPermissoesUtilizador.getSelectedValuesList(), true);
+        } else {
+            participante = new Participante(tfNome.getText(), jDateChooser2.getCalendar(), Integer.parseInt(tfBilheteIdentidade.getText()), tfLocalidade.getText(), Integer.parseInt(cbICF.getModel().getElementAt(cbICF.getSelectedIndex()).toString()), false, tfBilheteIdentidade.getText(), dataNasc.toCharArray(), editor, permissoesUtilizador, true);
             DadosAplicacao.getInstance().adicionarParticipante(participante);
         }
 
         JOptionPane.showMessageDialog(this, "Utilizador Inserido!");
-        
+
         this.fireConfirmarClicadoEvent();
-        
-        
+
+
     }//GEN-LAST:event_btnOkActionPerformed
 
     private void cbAdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbAdministradorActionPerformed
-       panelAdmin.setEnabled(cbAdministrador.isEnabled());
-       lblPassword.setEnabled(cbAdministrador.isEnabled());
-       lblUsername.setEnabled(cbAdministrador.isEnabled());
-       tfUsername.setEnabled(cbAdministrador.isEnabled());
-       pfPassword.setEnabled(cbAdministrador.isEnabled());
-       if(!cbAdministrador.isEnabled()){
-           tfUsername.setText("");
-           pfPassword.setText("");
-       }
+        panelAdmin.setEnabled(cbAdministrador.isEnabled());
+        lblPassword.setEnabled(cbAdministrador.isEnabled());
+        lblUsername.setEnabled(cbAdministrador.isEnabled());
+        tfUsername.setEnabled(cbAdministrador.isEnabled());
+        pfPassword.setEnabled(cbAdministrador.isEnabled());
+        if (!cbAdministrador.isEnabled()) {
+            tfUsername.setText("");
+            pfPassword.setText("");
+        }
     }//GEN-LAST:event_cbAdministradorActionPerformed
-                                       
+
     private void cbEditorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEditorActionPerformed
         panelEditor.setEnabled(cbEditor.isEnabled());
         jButton1.setEnabled(cbEditor.isEnabled());
@@ -590,89 +590,109 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
         jButton4.setEnabled(cbEditor.isEnabled());
         lstPermissoes.setEnabled(cbEditor.isEnabled());
         lstPermissoesUtilizador.setEnabled(cbEditor.isEnabled());
-        if(lstPermissoesUtilizador.getModel().getSize() > 0){
-        DefaultListModel<String> model;
-        model = (DefaultListModel<String>) lstPermissoesUtilizador.getModel();
-        lstPermissoesUtilizador.removeAll();
-        if(lstPermissoes.getModel().getSize() > 0){
-            for(int i=0; i<=lstPermissoes.getModel().getSize(); i++){
-              String permissaoUtilizador = (String) lstPermissoes.getModel().getElementAt(i);
-              model.addElement(permissaoUtilizador);
+        if (lstPermissoesUtilizador.getModel().getSize() > 0) {
+            DefaultListModel<String> model;
+            model = (DefaultListModel<String>) lstPermissoesUtilizador.getModel();
+            lstPermissoesUtilizador.removeAll();
+            if (lstPermissoes.getModel().getSize() > 0) {
+                for (int i = 0; i <= lstPermissoes.getModel().getSize(); i++) {
+                    String permissaoUtilizador = (String) lstPermissoes.getModel().getElementAt(i);
+                    model.addElement(permissaoUtilizador);
+                }
+                lstPermissoes.setModel(model);
+            } else {
+                lstPermissoes.setModel(model);
             }
-            lstPermissoes.setModel(model);
-        }else{
-            lstPermissoes.setModel(model);
         }
-        }
-        
+
     }//GEN-LAST:event_cbEditorActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-
-        lstPermissoes.removeAll();
-        if(lstPermissoesUtilizador.getModel().getSize() > 0){
-            for(int i=0; i<=lstPermissoesUtilizador.getModel().getSize(); i++){
-              String permissaoUtilizador = (String) lstPermissoesUtilizador.getModel().getElementAt(i);
-              model.addElement(permissaoUtilizador);
+        if (lstPermissoes.getModel().getSize() < 0) {
+            lblEditorErro.setText("Não há mais permissoes para passar!");
+        } else {
+            for (int i = 0; i < lstPermissoes.getModel().getSize(); i++) {
+                String permissaoUtilizador = (String) lstPermissoes.getModel().getElementAt(i);
+                modelPermissoesUtilizador.addElement(permissaoUtilizador);
             }
-            lstPermissoesUtilizador.setModel(model);
-        }else{
-           lstPermissoesUtilizador.setModel(model);
+            modelPermissoes.removeAllElements();
+            lstPermissoes.setModel(modelPermissoes);
+            lstPermissoesUtilizador.setModel(modelPermissoesUtilizador);
         }
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
+        this.modelPermissoes = (DefaultListModel<String>) lstPermissoes.getModel();
 
-        modelPermissoesUtilizador.addElement((String) lstPermissoes.getModel().getElementAt(lstPermissoes.getSelectedIndex()));
-        lstPermissoes.remove(lstPermissoes.getSelectedIndex());
-        if(lstPermissoesUtilizador.getModel().getSize() > -1){
-            for(int i=0; i<=lstPermissoesUtilizador.getModel().getSize(); i++){
-              String permissaoUtilizador = (String) lstPermissoesUtilizador.getModel().getElementAt(i);
-              model.addElement(permissaoUtilizador);
+        if (lstPermissoes.getSelectedValuesList().size() > 1) {
+            lblEditorErro.setText("Apenas pode ter uma permissao selecionada");
+        } else {
+            if (lstPermissoes.getSelectedValuesList().size() < 1) {
+                lblEditorErro.setText("Tem que selecionnar pelo menos uma permissao");
+            } else {
+                int permissaoIndex = lstPermissoes.getSelectedIndex();
+                String permissao = modelPermissoes.remove(permissaoIndex);
+                modelPermissoesUtilizador.addElement(permissao);
+
+                lstPermissoesUtilizador.setModel(modelPermissoesUtilizador);
+                lstPermissoes.setModel(modelPermissoes);
             }
-            lstPermissoesUtilizador.setModel(modelPermissoesUtilizador);
-        }else{
-            lstPermissoesUtilizador.setModel(modelPermissoesUtilizador);
         }
-        
+
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        DefaultListModel<String> model =  new DefaultListModel<>();
-        model = (DefaultListModel<String>) lstPermissoesUtilizador.getModel().getElementAt(lstPermissoesUtilizador.getSelectedIndex());
-        lstPermissoesUtilizador.remove(lstPermissoesUtilizador.getSelectedIndex());
-        if(lstPermissoes.getModel().getSize() > 0){
-            for(int i=0; i<=lstPermissoes.getModel().getSize(); i++){
-              String permissaoUtilizador = (String) lstPermissoes.getModel().getElementAt(i);
-              model.addElement(permissaoUtilizador);
+
+
+        this.modelPermissoesUtilizador = (DefaultListModel<String>) lstPermissoesUtilizador.getModel();
+
+        if (lstPermissoesUtilizador.getSelectedValuesList().size() > 1) {
+            lblEditorErro.setText("Apenas pode ter uma permissao selecionada");
+        } else {
+            if (lstPermissoesUtilizador.getSelectedValuesList().size() < 1) {
+                lblEditorErro.setText("Tem que selecionnar pelo menos uma permissao");
+            } else {
+                int permissaoIndex = lstPermissoesUtilizador.getSelectedIndex();
+                String permissao = modelPermissoesUtilizador.remove(permissaoIndex);
+                modelPermissoes.addElement(permissao);
+
+                lstPermissoes.setModel(modelPermissoes);
+                lstPermissoesUtilizador.setModel(modelPermissoesUtilizador);
             }
-            lstPermissoes.setModel(model);
-        }else{
-            lstPermissoes.setModel(model);
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        DefaultListModel<String> model =  new DefaultListModel<>();
-        model = (DefaultListModel<String>) lstPermissoesUtilizador.getModel();
-        lstPermissoesUtilizador.removeAll();
-        if(lstPermissoes.getModel().getSize() > 0){
-            for(int i=0; i<=lstPermissoes.getModel().getSize(); i++){
-              String permissaoUtilizador = (String) lstPermissoes.getModel().getElementAt(i);
-              model.addElement(permissaoUtilizador);
+
+        if (lstPermissoesUtilizador.getModel().getSize() < 0) {
+            lblEditorErro.setText("Não há mais permissoes para passar!");
+        } else {
+            for (int i = 0; i < lstPermissoesUtilizador.getModel().getSize(); i++) {
+                String permissaoUtilizador = (String) lstPermissoesUtilizador.getModel().getElementAt(i);
+                modelPermissoes.addElement(permissaoUtilizador);
             }
-            lstPermissoes.setModel(model);
-        }else{
-            lstPermissoes.setModel(model);
+            modelPermissoesUtilizador.removeAllElements();
+            lstPermissoes.setModel(modelPermissoes);
+            lstPermissoesUtilizador.setModel(modelPermissoesUtilizador);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-         this.fireConfirmarClicadoEvent();
+       tfBilheteIdentidade.setText("");
+       tfLocalidade.setText("");
+       tfNome.setText("");
+       tfUsername.setText("");
+       cbICF.setSelectedIndex(0);
+       lstPermissoes.removeAll();
+       pfPassword.setText("");
+       jDateChooser2.repaint();
+        this.fireConfirmarClicadoEvent();
+        
     }//GEN-LAST:event_btnCancelarActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnOk;

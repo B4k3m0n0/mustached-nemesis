@@ -134,6 +134,9 @@
       </Events>
     </Component>
     <Component class="javax.swing.JPasswordField" name="pfPassword">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="noob"/>
+      </Properties>
       <Events>
         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="EnterPressed"/>
       </Events>

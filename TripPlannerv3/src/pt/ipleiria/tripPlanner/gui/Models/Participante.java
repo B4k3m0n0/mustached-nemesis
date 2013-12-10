@@ -33,12 +33,15 @@ public class Participante {
         this.localidade = localidade;
         this.ICF = ICF;
         this.administrador = administrador;
+        this.editor = editor;
         this.username = username;
         this.password = password;
         this.primeiroLogin = primeiroLogin;
-
+        
+        if(editor == true){
         for (int i = 0; i < permissoes.size(); i++) {
             this.permissoes.add(permissoes.get(i));
+        }
         }
     }
 

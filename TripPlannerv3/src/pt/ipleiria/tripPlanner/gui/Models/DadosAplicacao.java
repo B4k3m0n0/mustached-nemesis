@@ -51,32 +51,44 @@ public class DadosAplicacao {
 
         ArrayList<String> permissoes;
         permissoes = new ArrayList<>();
+        
+        ArrayList<Localidade> localidade = new ArrayList<>();
+        ArrayList<Quarto> quartos = new ArrayList<>();
+       
+        
+        
 
         String pass = "noob";
         String pass1 = "a";
 
         Participante participante1;
 
-        participante1 = new Participante("godzilla", dataNascJoao, 12175988, "Leiria", 5, true, "jonny0015", pass.toCharArray(), true, permissoes, false);
+        participante1 = new Participante("Rafael", dataNascJoao, 12175988, "Leiria", 5, true, "rafa", pass.toCharArray(), true, permissoes, false);
         adicionarParticipante(participante1);
 
 
                                     SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyy");
                             String dataNasc = formatter.format(dataNascJoao.getTime());
-//        participantes.add(participante1);
+
         Participante participante2;
-        participante2 = new Participante("ANDRE", dataNascJoao, 14187566, "Leiria", 5, false, "14187566", dataNasc.toCharArray(), true, permissoes, true);
+        participante2 = new Participante("Andre", dataNascJoao, 14187566, "Leiria", 5, false, "14187566", dataNasc.toCharArray(), true, permissoes, true);
         adicionarParticipante(participante2);
-//<<<<<<< .mine
-//        System.out.println(dataNasc);
-//=======
+        
         
         Viagem viagem1;
         viagem1 = new Viagem(pass1, etapas, alojamentos, pass1);
         viagens.add(viagem1);
-//>>>>>>> .r24
         
         addLocalidade(new Localidade("Leiria"));
+        localidade.add(new Localidade("Leiria"));
+        
+        Etapa etapa1;
+        etapa1 = new Etapa("Etapa2", "Pombal City", "Leiria", localidade, 30, 1, 1, 1);
+        
+        addQuarto(new Quarto("quarto 1", "2", "Individual", "50", "quarto"));
+        quartos.add(new Quarto("quarto 1", "2", "Individual", "50", "quarto"));
+        Alojamento elojamento1;
+        elojamento1 = new Alojamento("Alojamento 1", "3.1111423", "-1.312421", "Albergue", quartos, "11", "8h", "21", "Rua da brilhantina", "");
         
     }
 

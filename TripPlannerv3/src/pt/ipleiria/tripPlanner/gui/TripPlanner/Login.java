@@ -117,6 +117,7 @@ public class Login extends javax.swing.JPanel {
             }
         });
 
+        pfPassword.setText("noob");
         pfPassword.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 EnterPressed(evt);

@@ -251,7 +251,6 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(640, 480));
-        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setMaximumSize(new java.awt.Dimension(640, 480));
@@ -338,6 +337,7 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
     @Override
     public void confirmarClicado(ConfirmarClicadoEvent evt) {
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
+        menuParticipante.actualizarListaParticipantes();
         cl.show(this.jPanel1, "menuParticipantes");
     }
     
