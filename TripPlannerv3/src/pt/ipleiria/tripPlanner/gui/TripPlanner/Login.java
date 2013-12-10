@@ -115,7 +115,7 @@ public class Login extends javax.swing.JPanel {
             }
         });
 
-        pfPassword.setText("noob");
+        pfPassword.setText("12/04/1992");
         pfPassword.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 EnterPressed(evt);
@@ -212,18 +212,21 @@ public class Login extends javax.swing.JPanel {
                 } else {
                     for (Participante participante : DadosAplicacao.getInstance().getParticipantes()) {
                         if (tfUsername.getText().equals(participante.getUsername())
-                                && new String(pfPassword.getPassword()).equals(new String(participante.getPassword()))) {
+                                && new String(pfPassword.getPassword()).equals(participante.getPassword().toString()) && !participante.isPrimeiroLogin()) {
                             DadosAplicacao.getInstance().setLogado(participante);
                             fireLoginEfetuadoEvent();
                             mudarNome();
                         } else {
-                            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
                             String dataNasc = formatter.format(participante.getDataNasc().getTime());
-                            if (tfUsername.getText().equals(participante.getBI() + "") && pfPassword.getPassword().equals(dataNasc) && participante.isPrimeiroLogin()) {
+                            System.out.println(dataNasc);
+                            System.out.println(pfPassword.getPassword().toString().equals(dataNasc));
+                            System.out.println(pfPassword.getPassword().toString());
+                            if (tfUsername.getText().equals(participante.getBI() + "") && pfPassword.getPassword().toString().equals(dataNasc) && participante.isPrimeiroLogin()) {
                                 firePrimeiroLoginEfetuadoEvent(participante);
                                 mudarNome();
                             } else {
-                                if (conta < 3) {
+                                if (conta < 4) {
                                     lblErros.setText("Username ou Password errada. Tem mais " + (3 - conta + 1) + " tentativa(s)!");
                                 } else {
                                     System.exit(0);
@@ -236,6 +239,7 @@ public class Login extends javax.swing.JPanel {
             }
         }
     }
+
 
     public void mudarNome() {
         tfUsername.setText("");

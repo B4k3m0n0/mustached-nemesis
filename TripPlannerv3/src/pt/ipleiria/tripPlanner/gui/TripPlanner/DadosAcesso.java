@@ -102,7 +102,6 @@ public class DadosAcesso extends javax.swing.JPanel {
         tfUsername.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
 
         pfPassword.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
-        pfPassword.setText("jPasswordField1");
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 2, 36)); // NOI18N
         jLabel4.setText("Trip Planner : Primeiro Login");

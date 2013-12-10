@@ -4,6 +4,7 @@
  */
 package pt.ipleiria.tripPlanner.gui.Models;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -45,7 +46,7 @@ public class DadosAplicacao {
 
         Calendar dataNascJoao = Calendar.getInstance();
 
-        dataNascJoao.setTime(new Date(90, 2, 11));
+        dataNascJoao.setTime(new Date(92, 3, 12));
 
         ArrayList<String> permissoes;
         permissoes = new ArrayList<>();
@@ -55,18 +56,24 @@ public class DadosAplicacao {
 
         Participante participante1;
 
-        participante1 = new Participante("Joao", dataNascJoao, 12175988, "Leiria", 5, true, "jonny0015", pass.toCharArray(), true, permissoes, false);
+        participante1 = new Participante("godzilla", dataNascJoao, 12175988, "Leiria", 5, true, "jonny0015", pass.toCharArray(), true, permissoes, false);
         adicionarParticipante(participante1);
 
 
+                                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyy");
+                            String dataNasc = formatter.format(dataNascJoao.getTime());
         participantes.add(participante1);
         Participante participante2;
-        participante2 = new Participante("a", dataNascJoao, 12175988, "Leiria", 5, true, "a", pass1.toCharArray(), true, permissoes, false);
+        participante2 = new Participante("ANDRE", dataNascJoao, 14187566, "Leiria", 5, false, "14187566", dataNasc.toCharArray(), true, permissoes, true);
         adicionarParticipante(participante2);
+<<<<<<< .mine
+        System.out.println(dataNasc);
+=======
         
         Viagem viagem1;
         viagem1 = new Viagem(pass1, etapas, alojamentos, pass1);
         viagens.add(viagem1);
+>>>>>>> .r24
     }
 
     

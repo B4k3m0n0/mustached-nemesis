@@ -1,5 +1,6 @@
 package pt.ipleiria.tripPlanner.gui.participantes;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -548,14 +549,15 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
             }
             editor=true;
         }
-        
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        String dataNasc = formatter.format(jDateChooser2.getCalendar().getTime());
         
         Participante participante;   
         if(cbAdministrador.isSelected()){
             participante = new Participante(tfNome.getText(), jDateChooser2.getCalendar(), Integer.parseInt(tfBilheteIdentidade.getText()), tfLocalidade.getText(), Integer.parseInt(cbICF.getModel().getElementAt(cbICF.getSelectedIndex()).toString()), true, tfUsername.getText(), pfPassword.getPassword(), editor, (ArrayList<String>)lstPermissoesUtilizador.getSelectedValuesList(), false);
             DadosAplicacao.getInstance().adicionarParticipante(participante);
         }else{
-            participante = new Participante(tfNome.getText(), jDateChooser2.getCalendar(), Integer.parseInt(tfBilheteIdentidade.getText()), tfLocalidade.getText(), Integer.parseInt(cbICF.getModel().getElementAt(cbICF.getSelectedIndex()).toString()), false, tfBilheteIdentidade.getText(), jDateChooser2.getCalendar().toString().toCharArray(), editor, (ArrayList<String>)lstPermissoesUtilizador.getSelectedValuesList(), true);
+            participante = new Participante(tfNome.getText(), jDateChooser2.getCalendar(), Integer.parseInt(tfBilheteIdentidade.getText()), tfLocalidade.getText(), Integer.parseInt(cbICF.getModel().getElementAt(cbICF.getSelectedIndex()).toString()), false, tfBilheteIdentidade.getText(), dataNasc.toCharArray(), editor, (ArrayList<String>)lstPermissoesUtilizador.getSelectedValuesList(), true);
             DadosAplicacao.getInstance().adicionarParticipante(participante);
         }
 
@@ -580,7 +582,14 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
                                        
     private void cbEditorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbEditorActionPerformed
         panelEditor.setEnabled(cbEditor.isEnabled());
-        DefaultListModel<String> model =  new DefaultListModel<>();
+        jButton1.setEnabled(cbEditor.isEnabled());
+        jButton2.setEnabled(cbEditor.isEnabled());
+        jButton3.setEnabled(cbEditor.isEnabled());
+        jButton4.setEnabled(cbEditor.isEnabled());
+        lstPermissoes.setEnabled(cbEditor.isEnabled());
+        lstPermissoesUtilizador.setEnabled(cbEditor.isEnabled());
+        if(lstPermissoesUtilizador.getModel().getSize() > 0){
+        DefaultListModel<String> model;
         model = (DefaultListModel<String>) lstPermissoesUtilizador.getModel();
         lstPermissoesUtilizador.removeAll();
         if(lstPermissoes.getModel().getSize() > 0){
@@ -592,12 +601,8 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
         }else{
             lstPermissoes.setModel(model);
         }
-        jButton1.setEnabled(cbEditor.isEnabled());
-        jButton2.setEnabled(cbEditor.isEnabled());
-        jButton3.setEnabled(cbEditor.isEnabled());
-        jButton4.setEnabled(cbEditor.isEnabled());
-        lstPermissoes.setEnabled(cbEditor.isEnabled());
-        lstPermissoesUtilizador.setEnabled(cbEditor.isEnabled());
+        }
+        
     }//GEN-LAST:event_cbEditorActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -618,16 +623,19 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
         DefaultListModel<String> model =  new DefaultListModel<>();
-        model = (DefaultListModel<String>) lstPermissoes.getModel().getElementAt(lstPermissoes.getSelectedIndex());
+        model.addElement((String) lstPermissoes.getSelectedValue());
         lstPermissoes.remove(lstPermissoes.getSelectedIndex());
-        if(lstPermissoesUtilizador.getModel().getSize() > 0){
+        lstPermissoes.repaint();
+        if(lstPermissoesUtilizador.getModel().getSize() > -1){
             for(int i=0; i<=lstPermissoesUtilizador.getModel().getSize(); i++){
               String permissaoUtilizador = (String) lstPermissoesUtilizador.getModel().getElementAt(i);
               model.addElement(permissaoUtilizador);
             }
             lstPermissoesUtilizador.setModel(model);
+            lstPermissoesUtilizador.repaint();
         }else{
-           lstPermissoesUtilizador.setModel(model);
+            lstPermissoesUtilizador.setModel(model);
+            lstPermissoesUtilizador.repaint();
         }
         
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -643,7 +651,7 @@ public class InserirEditarParticipante extends javax.swing.JPanel {
             }
             lstPermissoes.setModel(model);
         }else{
-           lstPermissoes.setModel(model);
+            lstPermissoes.setModel(model);
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 

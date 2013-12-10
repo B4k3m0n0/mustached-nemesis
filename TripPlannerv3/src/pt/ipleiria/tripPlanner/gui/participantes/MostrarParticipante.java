@@ -1,5 +1,6 @@
 package pt.ipleiria.tripPlanner.gui.participantes;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import pt.ipleiria.tripPlanner.gui.Models.DadosAplicacao;
@@ -19,7 +20,6 @@ import pt.ipleiria.tripPlanner.gui.events.ConfirmarClicadoListener;
 public class MostrarParticipante extends javax.swing.JPanel {
 
      private List<ConfirmarClicadoListener> confirmarClicadoListener;
-    private Participante participante;
     /**
      * Creates new form InserirParticipante
      */
@@ -62,12 +62,14 @@ public class MostrarParticipante extends javax.swing.JPanel {
         lblLocalidade = new javax.swing.JLabel();
         lblCondicaoFisica = new javax.swing.JLabel();
         lblAdministrador = new javax.swing.JLabel();
-        cbAdministrador = new javax.swing.JCheckBox();
         lblMostrarNome = new javax.swing.JLabel();
         lblMostrarDtaNascimento = new javax.swing.JLabel();
         lblMostrarBI = new javax.swing.JLabel();
         lblMostrarLocalidade = new javax.swing.JLabel();
         lblMostarICF = new javax.swing.JLabel();
+        lblMostrarAdmin = new javax.swing.JLabel();
+        lblEditor = new javax.swing.JLabel();
+        lblMostrarEditor = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         lblUsername = new javax.swing.JLabel();
         lblPassword = new javax.swing.JLabel();
@@ -94,21 +96,36 @@ public class MostrarParticipante extends javax.swing.JPanel {
         lblNome.setText("Nome:");
 
         lblDataNascimento.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblDataNascimento.setText("Data de Nascimento");
+        lblDataNascimento.setText("Data de Nascimento:");
 
         lblBI.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblBI.setText("Bilhete Identidade");
+        lblBI.setText("Bilhete Identidade:");
 
         lblLocalidade.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblLocalidade.setText("Localidade");
+        lblLocalidade.setText("Localidade:");
 
         lblCondicaoFisica.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblCondicaoFisica.setText("Indice Condicao Fisica");
+        lblCondicaoFisica.setText("Indice Condicao Fisica:");
 
         lblAdministrador.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblAdministrador.setText("Administrador");
+        lblAdministrador.setText("Administrador:");
 
-        cbAdministrador.setBackground(new java.awt.Color(255, 255, 255));
+        lblMostrarNome.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
+        lblMostrarDtaNascimento.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
+        lblMostrarBI.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
+        lblMostrarLocalidade.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
+        lblMostarICF.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
+        lblMostrarAdmin.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+
+        lblEditor.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        lblEditor.setText("Editor:");
+
+        lblMostrarEditor.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -116,31 +133,36 @@ public class MostrarParticipante extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(lblNome)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lblMostrarNome, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(lblBI)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(lblMostrarBI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(lblLocalidade)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(lblMostrarLocalidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(lblDataNascimento)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(lblMostrarDtaNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(lblCondicaoFisica)
+                            .addGap(18, 18, 18)
+                            .addComponent(lblMostarICF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(lblAdministrador)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(lblMostrarAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblNome)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblMostrarNome, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblBI)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblMostrarBI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblLocalidade)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblMostrarLocalidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblDataNascimento)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblMostrarDtaNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblCondicaoFisica)
+                        .addComponent(lblEditor)
                         .addGap(18, 18, 18)
-                        .addComponent(lblMostarICF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblAdministrador)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbAdministrador)))
+                        .addComponent(lblMostrarEditor, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -149,18 +171,18 @@ public class MostrarParticipante extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblNome)
                     .addComponent(lblMostrarNome, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblMostrarDtaNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblDataNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblDataNascimento))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblMostrarBI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblBI, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblBI))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lblLocalidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblMostrarLocalidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblMostrarLocalidade, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCondicaoFisica)
@@ -168,7 +190,13 @@ public class MostrarParticipante extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblAdministrador)
-                    .addComponent(cbAdministrador))
+                    .addComponent(lblMostrarAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblEditor)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(lblMostrarEditor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -177,11 +205,11 @@ public class MostrarParticipante extends javax.swing.JPanel {
         jPanel2.setEnabled(false);
 
         lblUsername.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblUsername.setText("Username");
+        lblUsername.setText("Username:");
         lblUsername.setEnabled(false);
 
         lblPassword.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
-        lblPassword.setText("Password");
+        lblPassword.setText("Password:");
         lblPassword.setEnabled(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -232,27 +260,27 @@ public class MostrarParticipante extends javax.swing.JPanel {
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(35, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(60, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(56, 56, 56))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnOk)
-                        .addGap(185, 185, 185))))
+                        .addGap(185, 185, 185))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(58, 58, 58))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+                .addContainerGap(17, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addComponent(btnOk)
@@ -266,7 +294,6 @@ public class MostrarParticipante extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOk;
-    private javax.swing.JCheckBox cbAdministrador;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -275,10 +302,13 @@ public class MostrarParticipante extends javax.swing.JPanel {
     private javax.swing.JLabel lblBI;
     private javax.swing.JLabel lblCondicaoFisica;
     private javax.swing.JLabel lblDataNascimento;
+    private javax.swing.JLabel lblEditor;
     private javax.swing.JLabel lblLocalidade;
     private javax.swing.JLabel lblMostarICF;
+    private javax.swing.JLabel lblMostrarAdmin;
     private javax.swing.JLabel lblMostrarBI;
     private javax.swing.JLabel lblMostrarDtaNascimento;
+    private javax.swing.JLabel lblMostrarEditor;
     private javax.swing.JLabel lblMostrarLocalidade;
     private javax.swing.JLabel lblMostrarNome;
     private javax.swing.JLabel lblMostrarPassword;
@@ -289,19 +319,33 @@ public class MostrarParticipante extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     public void preencherCampos(Participante participante) {
-        this.participante = participante;
         lblMostrarNome.setText(participante.getNome());
         lblMostarICF.setText(participante.getICF() + "");
         lblMostrarBI.setText(participante.getBI() + "");
-        lblMostrarDtaNascimento.setText(participante.getDataNasc().toString());
+         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+         String dataNasc = formatter.format(participante.getDataNasc().getTime());
+        lblMostrarDtaNascimento.setText(dataNasc);
         lblMostrarLocalidade.setText(participante.getLocalidade());
-        jPanel2.setEnabled(DadosAplicacao.getInstance().getLogado().isAdministrador());
-        lblUsername.setEnabled(DadosAplicacao.getInstance().getLogado().isAdministrador());
-        lblPassword.setEnabled(DadosAplicacao.getInstance().getLogado().isAdministrador());
+        
+        if(participante.isAdministrador()){
+            lblMostrarAdmin.setText("Sim");
+        }else{
+            lblMostrarAdmin.setText("Não");
+        }
+        
+        if(participante.isEditor()){
+            lblMostrarEditor.setText("Sim");
+        }else{
+            lblMostrarEditor.setText("Não");
+        }
+        
         
         if(DadosAplicacao.getInstance().getLogado().isAdministrador()){
+            jPanel2.setEnabled(true);
+            lblUsername.setEnabled(true);
+            lblPassword.setEnabled(true);
             lblMostrarUsername.setText(participante.getUsername());
-            lblPassword.setText(participante.getPassword().toString());
+            lblMostrarPassword.setText(participante.getPassword().toString());
         }
     }
 }
