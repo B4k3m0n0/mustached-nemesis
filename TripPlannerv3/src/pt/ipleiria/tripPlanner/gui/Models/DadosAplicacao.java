@@ -10,7 +10,6 @@ import java.util.Date;
 
 import pt.ipleiria.tripPlanner.gui.GestaoAlojamento.Alojamento;
 
-import sun.util.calendar.BaseCalendar;
 
 /**
  *
@@ -64,6 +63,10 @@ public class DadosAplicacao {
         Participante participante2;
         participante2 = new Participante("a", dataNascJoao, 12175988, "Leiria", 5, true, "a", pass1.toCharArray(), true, permissoes, false);
         adicionarParticipante(participante2);
+        
+        Viagem viagem1;
+        viagem1 = new Viagem(pass1, etapas, alojamentos, pass1);
+        viagens.add(viagem1);
     }
 
     
@@ -126,5 +129,14 @@ public class DadosAplicacao {
 
     public Participante getLogado() {
         return logado;
+    }
+
+    public Viagem getViagem(Viagem viagem) {
+        for (Viagem v : viagens) {
+            if (v.equals(viagem)) {
+                return v;
+            }
+        }
+        return null;
     }
 }

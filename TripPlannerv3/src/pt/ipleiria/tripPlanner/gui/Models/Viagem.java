@@ -7,9 +7,7 @@
 package pt.ipleiria.tripPlanner.gui.Models;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import pt.ipleiria.tripPlanner.gui.GestaoAlojamento.Alojamento;
-import pt.ipleiria.tripPlanner.gui.Models.Etapa;
 
 /**
  *
@@ -19,16 +17,45 @@ public class Viagem {
     String designacao;
     ArrayList<Etapa> etapas;
     ArrayList<Alojamento> alojamentos;
+    String tipoViagem;
+    ArrayList<Participante> participantes;
 
     public Viagem(String designacao, ArrayList<Etapa> etapas, ArrayList<Alojamento> alojamentos, String tipoViagem) {
         this.designacao = designacao;
         this.etapas = etapas;
         this.alojamentos = alojamentos;
-    }  
+        this.tipoViagem = tipoViagem;
+        
+    }
+
+    public Viagem(String designacao, ArrayList<Etapa> etapas, ArrayList<Alojamento> alojamentos, String tipoViagem, ArrayList<Participante> participantes) {
+        this.designacao = designacao;
+        this.etapas = etapas;
+        this.alojamentos = alojamentos;
+        this.tipoViagem = tipoViagem;
+        this.participantes = participantes;
+    }
+    
+    
 
     public String getDesignacao() {
         return designacao;
     }
-    
-    
+
+    public String getTipoViagem() {
+        return tipoViagem;
+    }
+
+    public ArrayList<Etapa> getEtapas() {
+        return etapas;
+    }
+
+    public ArrayList<Alojamento> getAlojamentos() {
+        return alojamentos;
+    }
+
+    public void setParticipantes(ArrayList<Participante> participantes) {
+        this.participantes = participantes;
+    }
+
 }

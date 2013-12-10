@@ -3,7 +3,6 @@ package pt.ipleiria.tripPlanner.gui.TripPlanner;
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.util.List;
 import javax.swing.JPanel;
 import pt.ipleiria.tripPlanner.gui.GestaoAlojamento.AdicionarQuarto;
 import pt.ipleiria.tripPlanner.gui.GestaoAlojamento.CriarEditarAlojamento;
@@ -86,6 +85,8 @@ import pt.ipleiria.tripPlanner.gui.events.VisualizarEtapasClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.VisualizarEtapasClicadoListener;
 import pt.ipleiria.tripPlanner.gui.events.VisualizarParticipantesClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.VisualizarParticipantesClicadoListener;
+import pt.ipleiria.tripPlanner.gui.events.VisualizarViagensClicadoEvent;
+import pt.ipleiria.tripPlanner.gui.events.VisualizarViagensClicadoListener;
 import pt.ipleiria.tripPlanner.gui.events.VoltarGestaoCenarioAlojamentoClicadoEvent;
 import pt.ipleiria.tripPlanner.gui.events.VoltarGestaoCenarioAlojamentoClicadoListener;
 import pt.ipleiria.tripPlanner.gui.events.VoltarMenuCenariosClicadoEvent;
@@ -94,7 +95,6 @@ import pt.ipleiria.tripPlanner.gui.events.VoltarMenuPrincipalEvent;
 import pt.ipleiria.tripPlanner.gui.events.VoltarMenuPrincipalListener;
 import pt.ipleiria.tripPlanner.gui.participantes.InserirEditarParticipante;
 import pt.ipleiria.tripPlanner.gui.participantes.MenuParticipantes;
-import pt.ipleiria.tripPlanner.gui.participantes.MostrarParticipante;
 import pt.ipleiria.tripPlanner.gui.participantes.MostrarParticipante;
 
 
@@ -110,7 +110,7 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
         AssociarEtapasClicadoListener, OkInserirEtapasClicadoListener, OkVisualizarEtapasClicadoListener,
         OkAssociarEtapasClicadoListener, GestaoCenarioAlojamentoClicadoListener, MenuCenariosClicadoListener,
         InserirCenarioAlojamentoClicadoListener, EditarCenarioAlojamentoClicadoListener, OkInserirCenarioAlojamentoClicadoListener,
-        OkEditarCenarioAlojamentoClicadoListener, VoltarGestaoCenarioAlojamentoClicadoListener, ConfirmarClicadoAlojamentoListener, VoltarMenuCenariosClicadoListener, TerminarSessaoClicadoListener, AdicionarQuartoClicadoListener, ConfirmarAdicionarQuartoClicadoListener, CancelarAdicionarQuartoClicadoListener, PrimeiroLoginEfetuadoListener {
+        OkEditarCenarioAlojamentoClicadoListener, VoltarGestaoCenarioAlojamentoClicadoListener, ConfirmarClicadoAlojamentoListener, VoltarMenuCenariosClicadoListener, TerminarSessaoClicadoListener, AdicionarQuartoClicadoListener, ConfirmarAdicionarQuartoClicadoListener, CancelarAdicionarQuartoClicadoListener, PrimeiroLoginEfetuadoListener, VisualizarViagensClicadoListener {
 
     private Login login;
     private MenuCenarios menuCenarios;
@@ -207,6 +207,7 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
         gestaodeAlojamentos.addVoltarMenuPrincipalListener(this);
 //        this.mostrarCenarioAlojamento.addOkInserirCenarioAlojamentoClicadoListener(this);
 //        this.compararCenarioAlojamento.addOkInserirCenarioAlojamentoClicadoListener(this);
+        gestaodeViagens.addVisualizarViagensClicadoListener(this);
 
         menuCenarios.addVoltarMenuPrincipalListener(this);
         menuPrincipal.addTerminarSessaoClicadoListener(this);
@@ -533,5 +534,17 @@ public class TripPlanner extends javax.swing.JFrame implements LoginEfetuadoList
         CardLayout cl = (CardLayout) this.jPanel1.getLayout();
         // dadosAcesso.receberParticipante(evento.getParticipante());
         cl.show(this.jPanel1, "primeiroLogin");
+    }
+
+    /* public void visualizarViagensClicado(VisualizarViagensClicadoEvent evt) {
+     CardLayout cl = (CardLayout) this.jPanel1.getLayout();
+     visualizarViagens.setDad(evt;
+     cl.show(this.jPanel1, "menuPrincipal");
+     }*/
+    @Override
+    public void visualizarViagensClicado(VisualizarViagensClicadoEvent evento) {
+        CardLayout cl = (CardLayout) this.jPanel1.getLayout();
+        visualizarViagens.setDados(evento.getViagem());
+        cl.show(this.jPanel1, "visualizarViagens");
     }
 }
